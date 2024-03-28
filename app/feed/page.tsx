@@ -1,10 +1,12 @@
-export default function Page(){
+export default function Feed(){
   return (
     <>
+      <div>Une navbar différente en fonction de si je suis connecté ou non</div>
       <h1>Page du feed</h1>
       <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Error dolor eveniet quidem accusantium voluptate ratione iusto tempore velit consequuntur illum itaque sit, deserunt libero incidunt aliquam neque! Error, deleniti? Ducimus?
+        page accessible si connecté ou non
       </div>
+      <div>Un filtre et une barre de recherche pour être plus précis</div>
     </>
   )
 }

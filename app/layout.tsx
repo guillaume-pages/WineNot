@@ -1,6 +1,7 @@
 import '@/app/ui/global.css';
-import { inter } from '@/app/ui/fonts';
+import { k2d } from '@/app/ui/fonts';
 import { Metadata } from 'next';
+import { SessionProvider } from 'next-auth/react';
  
 export const metadata: Metadata = {
   title: {
@@ -17,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${k2d.className} antialiased`}>{children}</body>
     </html>
   );
 }
