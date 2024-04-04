@@ -1,7 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import logo from '@/app/logo-grand.png'
-
 
 export default function Page() {
   return (
@@ -15,7 +12,7 @@ export default function Page() {
       <div>Une partie pricing</div>
       <div>Un call to action en bas identique à celui du haut</div>
       <button>
-        <Link href='/cave' >
+        <Link href='/cellar' >
         Cave
         </Link>
       </button>

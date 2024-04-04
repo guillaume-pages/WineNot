@@ -2,6 +2,7 @@ import '@/app/ui/global.css';
 import { k2d } from '@/app/ui/fonts';
 import { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
+import Navbar from './ui/navbar';
  
 export const metadata: Metadata = {
   title: {
@@ -18,7 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${k2d.className} antialiased`}>{children}</body>
+      <body className={`${k2d.className} antialiased`}>
+        <Navbar />
+        <div className='mt-3'>
+          {children}  
+        </div>
+        </body>
     </html>
   );
 }
