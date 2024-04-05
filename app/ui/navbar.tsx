@@ -34,15 +34,15 @@ export default function Navbar() {
         <nav aria-label="Global" className="hidden md:block">
           <ul className="flex items-center gap-6 text-sm">
             <li>
-              <Link className="text-gray-500 transition hover:text-gray-500/75" href="/cellar">Ma Cave</Link>
+              <Link className="text-gray-500 transition hover:text-gray-500/75" href="/cellar">MA CAVE</Link>
             </li>
 
             <li>
-              <Link className="text-gray-500 transition hover:text-gray-500/75" href="/feed"> Accueil </Link>
+              <Link className="text-gray-500 transition hover:text-gray-500/75" href="/feed"> ACCUEIL </Link>
             </li>
 
             <li>
-              <Link className="text-gray-500 transition hover:text-gray-500/75" href="/dashboard">Tableau de bord</Link>
+              <Link className="text-gray-500 transition hover:text-gray-500/75" href="/dashboard">TABLEAU DE BORD</Link>
             </li>
           </ul>
         </nav>
