@@ -13,7 +13,7 @@ export default function NavbarMobile() {
   const isConnected = true;
   return (
     <>
-      <div className="md:hidden flex w-full space-x-8 justify-center fixed bottom-0">
+      <div className="md:hidden flex w-full h-10 space-x-6 justify-center fixed bottom-0">
         <Image src={LogoPetit} height={36} width={46} alt="Compagny logo" />
         <PiWineThin size={36} />
         <PiHouseLineLight size={36} />
