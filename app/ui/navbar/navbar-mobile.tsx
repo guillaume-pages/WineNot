@@ -14,7 +14,7 @@ export default function NavbarMobile() {
   return (
     <>
       <div className="md:hidden flex w-full space-x-8 justify-center fixed bottom-0">
-        <Image src={LogoPetit} height={36} width={36} alt="Compagny logo" />
+        <Image src={LogoPetit} height={36} width={46} alt="Compagny logo" />
         <PiWineThin size={28} />
         <PiHouseLineLight size={30} />
         <PiChartLineUpThin size={32} />
