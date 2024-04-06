@@ -10,15 +10,15 @@ import { CiSettings } from "react-icons/ci";
 import LogoPetit from '@/app/logo-petit.png'
 
 export default function NavbarMobile() {
-  const isConnected = false;
+  const isConnected = true;
   return (
     <>
       <div className="md:hidden flex w-full space-x-8 justify-center fixed bottom-0">
         <Image src={LogoPetit} height={36} width={46} alt="Compagny logo" />
-        <PiWineThin size={28} />
-        <PiHouseLineLight size={30} />
-        <PiChartLineUpThin size={32} />
-        {isConnected ? <CiLogout size={34} /> : <CiLogin size={34} />}
+        <PiWineThin size={36} />
+        <PiHouseLineLight size={36} />
+        <PiChartLineUpThin size={36} />
+        {isConnected ? <CiLogout size={36} /> : <CiLogin size={36} />}
         <CiSettings size={36} />
       </div>
     </>
