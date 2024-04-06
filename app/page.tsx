@@ -11,11 +11,6 @@ export default function Page() {
       <div>Une partie avis</div>
       <div>Une partie pricing</div>
       <div>Un call to action en bas identique à celui du haut</div>
-      <button>
-        <Link href='/cellar' >
-        Cave
-        </Link>
-      </button>
     </main>
   );
 }
