@@ -1,68 +1,100 @@
 -- CreateTable
-CREATE TABLE "Post" (
-    "id" SERIAL NOT NULL,
-    "title" VARCHAR(255) NOT NULL,
-    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "content" TEXT,
-    "published" BOOLEAN NOT NULL DEFAULT false,
-    "authorId" INTEGER NOT NULL,
-
-    CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Profile" (
-    "id" SERIAL NOT NULL,
-    "bio" TEXT,
-    "userId" INTEGER NOT NULL,
-
-    CONSTRAINT "Profile_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "User" (
+CREATE TABLE "customers" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255),
-    "email" VARCHAR(255) NOT NULL,
+    "email" VARCHAR(255),
+    "image_url" VARCHAR(255),
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "customers_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Tag" (
+CREATE TABLE "invoices" (
     "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
+    "customer_id" INTEGER,
+    "amount" INTEGER,
+    "status" VARCHAR(255),
+    "date" DATE,
 
-    CONSTRAINT "Tag_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "invoices_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "_PostToTag" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL
+CREATE TABLE "revenue" (
+    "month" VARCHAR(4) NOT NULL,
+    "revenue" INTEGER,
+
+    CONSTRAINT "revenue_pkey" PRIMARY KEY ("month")
 );
 
--- CreateIndex
-CREATE UNIQUE INDEX "Profile_userId_key" ON "Profile"("userId");
+-- CreateTable
+CREATE TABLE "users" (
+    "user_id" INTEGER NOT NULL,
+    "firstname" VARCHAR NOT NULL,
+    "lastname" VARCHAR,
+    "mail" VARCHAR NOT NULL,
+    "password" VARCHAR NOT NULL,
+    "status" VARCHAR NOT NULL,
+    "phone" VARCHAR,
+    "created_at" TIMESTAMP(6),
+    "deleted_at" TIMESTAMP(6),
 
--- CreateIndex
-CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+    CONSTRAINT "users_pkey" PRIMARY KEY ("user_id")
+);
 
--- CreateIndex
-CREATE UNIQUE INDEX "_PostToTag_AB_unique" ON "_PostToTag"("A", "B");
+-- CreateTable
+CREATE TABLE "bottles" (
+    "bottle_id" INTEGER NOT NULL,
+    "cellar_id" INTEGER,
+    "bottle_name" VARCHAR NOT NULL,
+    "millesime" INTEGER NOT NULL,
+    "type_of_wine" VARCHAR NOT NULL,
+    "size" VARCHAR NOT NULL,
+    "grape_varieties" JSON NOT NULL,
+    "region" VARCHAR NOT NULL,
+    "eye_description" TEXT,
+    "nose_description" JSON,
+    "mouth_description" JSON,
+    "carafage" INTEGER,
+    "temperature" INTEGER,
+    "accompaniment" JSON,
+    "media" TEXT,
+    "price" INTEGER,
+    "price_visibility" INTEGER,
+    "global_description" TEXT,
+    "entry_date" TIMESTAMP(6) NOT NULL,
+    "potential_date" TIMESTAMP(6),
+    "quantity" INTEGER NOT NULL,
+    "global_visibility" INTEGER NOT NULL,
 
--- CreateIndex
-CREATE INDEX "_PostToTag_B_index" ON "_PostToTag"("B");
+    CONSTRAINT "bottles_pkey" PRIMARY KEY ("bottle_id")
+);
+
+-- CreateTable
+CREATE TABLE "cellars" (
+    "cellar_id" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(6),
+    "updated_at" TIMESTAMP(6),
+    "deleted_at" TIMESTAMP(6),
+
+    CONSTRAINT "cellars_pkey" PRIMARY KEY ("cellar_id")
+);
+
+-- CreateTable
+CREATE TABLE "users_cellars" (
+    "user_cellar_id" INTEGER NOT NULL,
+    "user_id" INTEGER,
+    "cellar_id" INTEGER,
+
+    CONSTRAINT "users_cellars_pkey" PRIMARY KEY ("user_cellar_id")
+);
 
 -- AddForeignKey
-ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "bottles" ADD CONSTRAINT "bottles_cellar_id_fkey" FOREIGN KEY ("cellar_id") REFERENCES "cellars"("cellar_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE "Profile" ADD CONSTRAINT "Profile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "users_cellars" ADD CONSTRAINT "users_cellars_cellar_id_fkey" FOREIGN KEY ("cellar_id") REFERENCES "cellars"("cellar_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE "_PostToTag" ADD CONSTRAINT "_PostToTag_A_fkey" FOREIGN KEY ("A") REFERENCES "Post"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_PostToTag" ADD CONSTRAINT "_PostToTag_B_fkey" FOREIGN KEY ("B") REFERENCES "Tag"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "users_cellars" ADD CONSTRAINT "users_cellars_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("user_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 

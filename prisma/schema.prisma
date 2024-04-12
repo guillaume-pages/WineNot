@@ -8,30 +8,77 @@ datasource db {
 }
 
 model customers {
-  id        Int    @id @default(autoincrement())
-  name      String @db.VarChar(255)
-  email     String @db.VarChar(255)
-  image_url String @db.VarChar(255)
+  id        Int     @id @default(autoincrement())
+  name      String? @db.VarChar(255)
+  email     String? @db.VarChar(255)
+  image_url String? @db.VarChar(255)
 }
 
 model invoices {
-  id          Int      @id @default(autoincrement())
-  customer_id Int      
-  amount      Int
-  status      String   @db.VarChar(255)
-  date        DateTime @db.Date
+  id          Int       @id @default(autoincrement())
+  customer_id Int?
+  amount      Int?
+  status      String?   @db.VarChar(255)
+  date        DateTime? @db.Date
 }
 
 model revenue {
-  month   String @unique @db.VarChar(4)
-  revenue Int
+  month   String @id @db.VarChar(4)
+  revenue Int?
 }
 
 model users {
-  id       Int    @id @default(autoincrement())
-  name     String @db.VarChar(255)
-  email    String @unique
-  password String
-  status   String @db.VarChar(255)
-  phone    String @db.VarChar(255)
+  user_id       Int             @id
+  firstname     String          @db.VarChar
+  lastname      String?         @db.VarChar
+  mail          String          @db.VarChar
+  password      String          @db.VarChar
+  status        String          @db.VarChar
+  phone         String?         @db.VarChar
+  created_at    DateTime?       @db.Timestamp(6)
+  deleted_at    DateTime?       @db.Timestamp(6)
+  users_cellars users_cellars[]
+}
+
+model bottles {
+  bottle_id          Int       @id
+  cellar_id          Int?
+  bottle_name        String    @db.VarChar
+  millesime          Int
+  type_of_wine       String    @db.VarChar
+  size               String    @db.VarChar
+  grape_varieties    Json      @db.Json
+  region             String    @db.VarChar
+  eye_description    String?
+  nose_description   Json?     @db.Json
+  mouth_description  Json?     @db.Json
+  carafage           Int?
+  temperature        Int?
+  accompaniment      Json?     @db.Json
+  media              String?
+  price              Int?
+  price_visibility   Int?
+  global_description String?
+  entry_date         DateTime  @db.Timestamp(6)
+  potential_date     DateTime? @db.Timestamp(6)
+  quantity           Int
+  global_visibility  Int
+  cellars            cellars?  @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model cellars {
+  cellar_id     Int             @id
+  created_at    DateTime?       @db.Timestamp(6)
+  updated_at    DateTime?       @db.Timestamp(6)
+  deleted_at    DateTime?       @db.Timestamp(6)
+  bottles       bottles[]
+  users_cellars users_cellars[]
+}
+
+model users_cellars {
+  user_cellar_id Int      @id
+  user_id        Int?
+  cellar_id      Int?
+  cellars        cellars? @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
+  users          users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
 }
