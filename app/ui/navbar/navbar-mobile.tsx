@@ -1,6 +1,8 @@
 'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { PiWineThin } from 'react-icons/pi';
 import { PiHouseLineLight } from 'react-icons/pi';
@@ -11,6 +13,14 @@ import { CiSettings } from 'react-icons/ci';
 import LogoPetit from '@/app/logo-petit.png';
 
 export default function NavbarMobile() {
+  const pathname = usePathname();
+
+  const isSigninOrLogin = pathname === '/signin' || pathname === '/login';
+
+  if (isSigninOrLogin) {
+    return null;
+  }
+  
   const isConnected = true;
   return (
     <>

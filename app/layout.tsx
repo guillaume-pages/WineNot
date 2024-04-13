@@ -1,9 +1,10 @@
-import '@/app/ui/global.css';
-import { k2d } from '@/app/ui/fonts';
 import { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
-import Navbar from './ui/navbar/navbar';
-import NavbarMobile from './ui/navbar/navbar-mobile';
+
+import '@/app/ui/global.css';
+import { k2d } from '@/app/ui/fonts';
+import Navbar from '@/app/ui/navbar/navbar';
+import NavbarMobile from '@/app/ui/navbar/navbar-mobile';
  
 export const metadata: Metadata = {
   title: {
@@ -13,17 +14,13 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={`${k2d.className} antialiased`}>
         <Navbar />
         <NavbarMobile />
-        <div className='mt-3'>
+        <div>
           {children}  
         </div>
         </body>
