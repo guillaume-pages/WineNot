@@ -1,7 +1,10 @@
 'use server';
 
-import { z } from 'zod';
+import { number, z } from 'zod';
 import { sql } from '@vercel/postgres';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 const CreateUserSchema = z.object({
   id: z.number(),
@@ -27,14 +30,20 @@ export async function createUser(formData: FormData) {
       phone: formData.get('phone'),
       status: formData.get('status'),
     });
-  const date = new Date().toISOString().split('T')[0];
+  const date = new Date();
 
   console.log(firstname, lastname, mail, password, phone, status, date);
 
-  await sql`
-    INSERT INTO users (firstname, lastname, mail, password, phone, status, created_at) 
-    VALUES (${firstname}, ${lastname}, ${mail}, ${password}, ${phone}, ${status}, ${date})
-    `;
+  await prisma.users.create({
+    data: {
+      firstname: firstname,
+      lastname: lastname,
+      mail: mail,
+      password: password,
+      phone: phone,
+      status: status,
+      created_at: date,
+    },
+  });
 
-    
 }

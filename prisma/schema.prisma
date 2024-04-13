@@ -27,21 +27,8 @@ model revenue {
   revenue Int?
 }
 
-model users {
-  user_id       Int             @id
-  firstname     String          @db.VarChar
-  lastname      String?         @db.VarChar
-  mail          String          @db.VarChar
-  password      String          @db.VarChar
-  status        String          @db.VarChar
-  phone         String?         @db.VarChar
-  created_at    DateTime?       @db.Timestamp(6)
-  deleted_at    DateTime?       @db.Timestamp(6)
-  users_cellars users_cellars[]
-}
-
 model bottles {
-  bottle_id          Int       @id
+  bottle_id          Int       @id @default(autoincrement())
   cellar_id          Int?
   bottle_name        String    @db.VarChar
   millesime          Int
@@ -67,7 +54,7 @@ model bottles {
 }
 
 model cellars {
-  cellar_id     Int             @id
+  cellar_id     Int             @id @default(autoincrement())
   created_at    DateTime?       @db.Timestamp(6)
   updated_at    DateTime?       @db.Timestamp(6)
   deleted_at    DateTime?       @db.Timestamp(6)
@@ -75,8 +62,21 @@ model cellars {
   users_cellars users_cellars[]
 }
 
+model users {
+  user_id       Int             @id @default(autoincrement())
+  firstname     String          @db.VarChar
+  lastname      String?         @db.VarChar
+  mail          String          @db.VarChar
+  password      String          @db.VarChar
+  status        String          @db.VarChar
+  phone         String?         @db.VarChar
+  created_at    DateTime?       @db.Timestamp(6)
+  deleted_at    DateTime?       @db.Timestamp(6)
+  users_cellars users_cellars[]
+}
+
 model users_cellars {
-  user_cellar_id Int      @id
+  user_cellar_id Int      @id @default(autoincrement())
   user_id        Int?
   cellar_id      Int?
   cellars        cellars? @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
