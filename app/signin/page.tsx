@@ -4,11 +4,10 @@ import React from 'react';
 import { useState } from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import logoPetit from '@/app/logo-petit.png';
-import bottleAndGlass from '@/app/bottle-and-glass.jpg';
 import bottles from '@/app/bottles.jpg';
-import wineCellar from '@/app/wine-cellar.jpg';
 
 import { FaRegEye } from 'react-icons/fa';
 import { FaRegEyeSlash } from 'react-icons/fa';
@@ -19,12 +18,34 @@ export default function Signin() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [status, setStatus] = useState('');
 
+
+  const [isPasswordValid, setIsPasswordValid] = useState('');
+  const [hasLowercase, setHasLowercase] = useState(false);
+  const [hasUppercase, setHasUppercase] = useState(false);
+  const [hasNumber, setHasNumber] = useState(false);
+  const [hasSpecialChar, setHasSpecialChar] = useState(false);
+  const [isMinLength, setIsMinLength] = useState(false);
+
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const handleStatusChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleStatusChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setStatus(e.target.value);
+  };
+
+  const handleIsPasswordValid = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    const password = e.target.value as string;
+    setHasLowercase(/[a-z]/.test(password));
+    setHasUppercase(/[A-Z]/.test(password));
+    setHasNumber(/\d/.test(password));
+    setHasSpecialChar(/[@$!%*?&,]/.test(password));
+    setIsMinLength(password.length >= 10);
+    setIsPasswordValid(e.target.value);
   };
 
   return (
@@ -33,45 +54,27 @@ export default function Signin() {
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
           <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
             <Image
-              alt="Des bouteilles de vin"
+              alt="Des bouteilles de vin - Photo de Markus Spiske sur Unsplash"
               src={bottles}
               layout="fill"
               objectFit="cover"
               className="absolute inset-0 h-full w-full object-cover opacity-80"
             ></Image>
-
-            <div className="hidden lg:relative lg:block lg:p-12">
-              <a className="block text-white" href="/">
-                <Image
-                  alt="Logo entreprise"
-                  src={logoPetit}
-                  className="h-16 w-16 object-cover"
-                ></Image>
-              </a>
-
-              <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                Bienvenue sur Cavavin
-              </h2>
-
-              <p className="mt-4 leading-relaxed text-white/90">
-                Vous n&apos;êtes plus qu&apos;à un pas de créer votre cave !
-              </p>
-            </div>
           </section>
 
           <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
             <div className="max-w-xl lg:max-w-3xl">
-              <div className="relative -mt-16 block lg:hidden">
-                <a
+              <div className="relative -mt-16 block">
+                <Link
                   className="size-16 sm:size-20 inline-flex items-center justify-center rounded-full bg-white text-blue-600"
                   href="/"
                 >
                   <Image
                     alt="Logo entreprise"
                     src={logoPetit}
-                    className="h-16 w-16 object-cover"
+                    className="h-16 w-16 object-cover pt-1"
                   ></Image>
-                </a>
+                </Link>
 
                 <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                   Bienvenue sur Cavavin !
@@ -96,6 +99,7 @@ export default function Signin() {
                     type="text"
                     id="FirstName"
                     name="first_name"
+                    required
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
@@ -130,17 +134,27 @@ export default function Signin() {
                     type="email"
                     id="Email"
                     name="email"
+                    required
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
                 {/* PASSWORD */}
-                <div className="col-span-6 sm:col-span-3">
+                <div className="col-span-6">
                   <label
                     htmlFor="Password"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Votre mot de passe
+                    <br />
+                    <span className="text-xs">
+                      doit contenir au moins :{' '}
+                      <span className={hasUppercase ? 'text-green-500' : undefined}>une majuscule</span>,{' '}
+                      <span className={hasLowercase ? 'text-green-500' : undefined}>une minuscule</span>,{' '}
+                      <span className={hasNumber ? 'text-green-500' : undefined}>un chiffre</span>,{' '}
+                      <span className={hasSpecialChar ? 'text-green-500' : undefined}>un caractère spécial</span> et{' '}
+                      <span className={isMinLength ? 'text-green-500' : undefined}>doit faire au moins 10 caractères</span>.
+                    </span>
                   </label>
 
                   <div className="relative">
@@ -148,6 +162,10 @@ export default function Signin() {
                       type={isPasswordVisible ? 'text' : 'password'}
                       id="Password"
                       name="password"
+                      onChange={handleIsPasswordValid}
+                      required
+                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,])[A-Za-z\d@$!%*?&,]{10,}$"
+                      title="Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un caractère spécial et être d'une longeur de 10 caractères minimum."
                       className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                     />
                     <button
@@ -178,7 +196,7 @@ export default function Signin() {
                 </div>
 
                 {/* STATUS */}
-                <div className="col-span-6">
+                <div className="col-span-6 sm:col-span-3">
                   <label
                     htmlFor="Status"
                     className="block text-sm font-medium text-gray-700"
@@ -191,6 +209,7 @@ export default function Signin() {
                     name="status"
                     value={status}
                     onChange={handleStatusChange}
+                    required
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   >
                     <option value="">Choisissez votre statut</option>
@@ -223,9 +242,9 @@ export default function Signin() {
                 <div className="col-span-6">
                   <p className="text-sm text-gray-500">
                     En créant un compte, vous acceptez nos{' '}
-                    <a href="#" className="text-gray-700 underline">
+                    <Link href="#" className="text-gray-700 underline">
                       conditions générales d&apos;utilisation
-                    </a>{' '}
+                    </Link>{' '}
                     et{' '}
                     <a href="#" className="text-gray-700 underline">
                       notre politique de confidentialité
@@ -242,9 +261,9 @@ export default function Signin() {
 
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     Vous avez déjà un compte ?{' '}
-                    <a href="/login" className="text-gray-700 underline">
+                    <Link href="/login" className="text-gray-700 underline">
                       Se connecter
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>
