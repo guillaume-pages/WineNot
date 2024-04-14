@@ -3,15 +3,18 @@
 import { number, z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
+
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,])[A-Za-z\d@$!%*?&,]{10,}$/;
 
 const CreateUserSchema = z.object({
   id: z.number(),
   firstname: z.string(),
   lastname: z.string(),
-  mail: z.string(),
-  password: z.string(),
+  mail: z.string().email(),
+  password: z.string().regex(passwordRegex),
   phone: z.string(),
   status: z.string(),
   created_at: z.date(),
@@ -34,12 +37,15 @@ export async function createUser(formData: FormData) {
 
   console.log(firstname, lastname, mail, password, phone, status, date);
 
+  // Hash the password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   await prisma.users.create({
     data: {
       firstname: firstname,
       lastname: lastname,
       mail: mail,
-      password: password,
+      password: hashedPassword,
       phone: phone,
       status: status,
       created_at: date,
