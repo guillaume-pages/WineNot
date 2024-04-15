@@ -21,7 +21,7 @@ export default function NavbarMobile() {
     return null;
   }
   
-  const isConnected = true;
+  const isConnected = false;
   return (
     <>
       <div className="fixed bottom-0 flex h-11 w-full justify-center space-x-6 py-1 bg-slate-50 md:hidden">
@@ -37,7 +37,16 @@ export default function NavbarMobile() {
         {/* <Link href="/dashboard">
           <PiChartLineUpThin size={36} />
         </Link> */}
-        {isConnected ? <CiLogout size={36} /> : <CiLogin size={36} />}
+        {isConnected ? 
+        <>
+          <CiLogout size={36} />
+        </> 
+        :
+        <>
+          <Link href="/signin">
+            <CiLogin size={36} />
+          </Link>
+        </>}
         <Link href="#">
           <CiSettings size={36} />
         </Link>
