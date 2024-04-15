@@ -23,7 +23,7 @@ model invoices {
 }
 
 model revenue {
-  month   String @id @db.VarChar(4)
+  month   String @id @db.VarChar(20)
   revenue Int?
 }
 
@@ -41,6 +41,7 @@ model bottles {
   mouth_description  Json?     @db.Json
   carafage           Int?
   temperature        Int?
+  degree             Int?
   accompaniment      Json?     @db.Json
   media              String?
   price              Int?
@@ -66,7 +67,7 @@ model users {
   user_id       Int             @id @default(autoincrement())
   firstname     String          @db.VarChar
   lastname      String?         @db.VarChar
-  mail          String          @db.VarChar
+  mail          String          @db.VarChar @unique
   password      String          @db.VarChar
   status        String          @db.VarChar
   phone         String?         @db.VarChar

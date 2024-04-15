@@ -1,20 +1,19 @@
 'use client';
 
-import React from 'react';
 import { useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
-import logoPetit from '@/app/logo-petit.png';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+
+import clsx from 'clsx';
+
 import bottles from '@/app/bottles.jpg';
+import logoPetit from '@/app/logo-petit.png';
+import { createUser } from '@/app/lib/user/user.post';
 
-import { FaRegEye } from 'react-icons/fa';
-import { FaRegEyeSlash } from 'react-icons/fa';
-
-import { createUser } from '../lib/user/user.post';
-
-export default function Signin() {
+export default function SigninPage() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [status, setStatus] = useState('');
 
@@ -25,6 +24,8 @@ export default function Signin() {
   const [hasNumber, setHasNumber] = useState(false);
   const [hasSpecialChar, setHasSpecialChar] = useState(false);
   const [isMinLength, setIsMinLength] = useState(false);
+
+  const [isSamePassword, setIsSamePassword] = useState('');
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -47,6 +48,12 @@ export default function Signin() {
     setIsMinLength(password.length >= 10);
     setIsPasswordValid(e.target.value);
   };
+
+  const handleIsSamePassword = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setIsSamePassword(e.target.value);
+  }
 
   return (
     <>
@@ -85,12 +92,12 @@ export default function Signin() {
                 </p>
               </div>
 
-              <form action={createUser} className="mt-8 grid grid-cols-6 gap-6">
+              <form action={createUser} className="mt-8 grid grid-cols-6 gap-4 md:gap-2">
                 {/* FIRST NAME */}
                 <div className="col-span-6 sm:col-span-3">
                   <label
                     htmlFor="FirstName"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-base font-medium text-gray-700"
                   >
                     Votre prénom
                   </label>
@@ -100,7 +107,7 @@ export default function Signin() {
                     id="FirstName"
                     name="first_name"
                     required
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-base text-gray-700 shadow-sm"
                   />
                 </div>
 
@@ -108,7 +115,7 @@ export default function Signin() {
                 <div className="col-span-6 sm:col-span-3">
                   <label
                     htmlFor="LastName"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-base font-medium text-gray-700"
                   >
                     Votre nom (optionnel)
                   </label>
@@ -117,7 +124,7 @@ export default function Signin() {
                     type="text"
                     id="LastName"
                     name="last_name"
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-base text-gray-700 shadow-sm"
                   />
                 </div>
 
@@ -125,7 +132,7 @@ export default function Signin() {
                 <div className="col-span-6">
                   <label
                     htmlFor="Email"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-base font-medium text-gray-700"
                   >
                     Votre mail
                   </label>
@@ -135,7 +142,7 @@ export default function Signin() {
                     id="Email"
                     name="email"
                     required
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-base text-gray-700 shadow-sm"
                   />
                 </div>
 
@@ -143,7 +150,7 @@ export default function Signin() {
                 <div className="col-span-6">
                   <label
                     htmlFor="Password"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-base font-medium text-gray-700"
                   >
                     Votre mot de passe
                     <br />
@@ -164,9 +171,41 @@ export default function Signin() {
                       name="password"
                       onChange={handleIsPasswordValid}
                       required
-                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,])[A-Za-z\d@$!%*?&,]{10,}$"
-                      title="Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un caractère spécial et être d'une longeur de 10 caractères minimum."
-                      className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$"
+                      title="Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un caractère spécial parmi (@$!%*?&,) et être d'une longeur de 10 caractères minimum."
+                      className="mt-1 w-full rounded-md border-gray-200 bg-white text-base text-gray-700 shadow-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={togglePasswordVisibility}
+                      className="absolute inset-y-0 right-0 px-3 py-2 text-gray-500"
+                    >
+                      {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* CONFIRM PASSWORD */}
+                <div className="col-span-6">
+                  <label
+                    htmlFor="ConfirmPassword"
+                    className="block text-base font-medium text-gray-700"
+                  >
+                    Veuillez confirmer votre mot de passe{isSamePassword.length < 1 ? '' : isSamePassword === isPasswordValid ? '' : ' (les mots de passe ne correspondent pas)'}
+                  </label>
+
+                  <div className="relative">
+                    <input
+                      type={isPasswordVisible ? 'text' : 'password'}
+                      id="ConfirmPassword"
+                      name="confirmPassword"
+                      onChange={handleIsSamePassword}
+                      required
+                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$"
+                      title="Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un caractère spécial parmi (@$!%*?&,) et être d'une longeur de 10 caractères minimum."
+                      className={clsx('mt-1 w-full rounded-md border-gray-200 bg-white text-base text-gray-700 shadow-sm', {
+                        'border-red-500': (isSamePassword.length < 1 ? '' : isSamePassword !== isPasswordValid),
+                      })}
                     />
                     <button
                       type="button"
@@ -182,7 +221,7 @@ export default function Signin() {
                 <div className="col-span-6 sm:col-span-3">
                   <label
                     htmlFor="Phone"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-base font-medium text-gray-700"
                   >
                     Votre numéro de téléphone (optionnel)
                   </label>
@@ -191,7 +230,7 @@ export default function Signin() {
                     type="text"
                     id="Phone"
                     name="phone"
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-base text-gray-700 shadow-sm"
                   />
                 </div>
 
@@ -199,7 +238,7 @@ export default function Signin() {
                 <div className="col-span-6 sm:col-span-3">
                   <label
                     htmlFor="Status"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-base font-medium text-gray-700"
                   >
                     Votre status
                   </label>
@@ -210,7 +249,7 @@ export default function Signin() {
                     value={status}
                     onChange={handleStatusChange}
                     required
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-base text-gray-700 shadow-sm"
                   >
                     <option value="">Choisissez votre statut</option>
                     <option value="particulier">Particulier</option>
@@ -230,7 +269,7 @@ export default function Signin() {
                       className="size-5 rounded-md border-gray-200 bg-white shadow-sm"
                     />
 
-                    <span className="text-sm text-gray-700">
+                    <span className="text-base text-gray-700">
                       Je souhaite recevoir des emails sur les événements, les
                       mises à jour de produits et les annonces de
                       l&apos;entreprise.
@@ -240,7 +279,7 @@ export default function Signin() {
 
                 {/* TERMS ACCEPT */}
                 <div className="col-span-6">
-                  <p className="text-sm text-gray-500">
+                  <p className="text-base text-gray-500">
                     En créant un compte, vous acceptez nos{' '}
                     <Link href="#" className="text-gray-700 underline">
                       conditions générales d&apos;utilisation
@@ -255,16 +294,15 @@ export default function Signin() {
 
                 {/* SUBMIT */}
                 <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                  <button className="inline-block shrink-0 rounded-md border border-orange-600 bg-orange-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-600 focus:outline-none focus:ring active:text-orange-500">
+                  <button className="inline-block shrink-0 rounded-md border border-[#280000] bg-[#b10f2e] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-600 focus:outline-none focus:ring active:text-orange-500">
                     Créer un compte
                   </button>
 
-                  <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                  <p className="mt-4 text-base text-gray-500 sm:mt-0">
                     Vous avez déjà un compte ?{' '}
-                    <Link href="/login" className="text-gray-700 underline">
+                    <Link href="/login" className="text-[#B10F2E] ml-1 font-bold">
                       Se connecter
                     </Link>
-                    .
                   </p>
                 </div>
               </form>
