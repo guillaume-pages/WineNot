@@ -16,7 +16,7 @@ import logoPetit from '@/app/logo-petit.png';
 import { createUser } from '@/app/lib/user/user.post';
 
 export default function SigninPage() {
-  const initialState = { message: null, errors: {} };
+  const initialState = { passwordError: null, messageCreateAccount: null, errors: {} };
   const [state, dispatch] = useFormState(createUser, initialState);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
