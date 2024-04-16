@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useFormState } from 'react-dom';
+
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +16,9 @@ import logoPetit from '@/app/logo-petit.png';
 import { createUser } from '@/app/lib/user/user.post';
 
 export default function SigninPage() {
+  const initialState = { message: null, errors: {} };
+  const [state, dispatch] = useFormState(createUser, initialState);
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [status, setStatus] = useState('');
 
@@ -92,7 +97,7 @@ export default function SigninPage() {
                 </p>
               </div>
 
-              <form action={createUser} className="mt-8 grid grid-cols-6 gap-4 md:gap-2">
+              <form action={dispatch} className="mt-8 grid grid-cols-6 gap-4 md:gap-2">
                 {/* FIRST NAME */}
                 <div className="col-span-6 sm:col-span-3">
                   <label
@@ -184,6 +189,9 @@ export default function SigninPage() {
                     </button>
                   </div>
                 </div>
+                <p className="col-span-6 text-red-500 font-bold">
+                  {state.passwordError}
+                </p>
 
                 {/* CONFIRM PASSWORD */}
                 <div className="col-span-6">
@@ -297,6 +305,9 @@ export default function SigninPage() {
                   <button className="inline-block shrink-0 rounded-md border border-[#280000] bg-[#b10f2e] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-600 focus:outline-none focus:ring active:text-orange-500">
                     Créer un compte
                   </button>
+                  <p>
+                    {state.messageCreateAccount}
+                  </p>
 
                   <p className="mt-4 text-base text-gray-500 sm:mt-0">
                     Vous avez déjà un compte ?{' '}

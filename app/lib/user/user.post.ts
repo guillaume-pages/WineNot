@@ -31,8 +31,14 @@ const CreateUserSchema = z.object({
 
 const CreateUser = CreateUserSchema.omit({ id: true, created_at: true });
 
+export type State = {
+  passwordError?: string | null;
+  messageCreateAccount?: string | null;
+}
+
 // Creation d'un compte utilisateur
-export async function createUser(formData: FormData) {
+export async function createUser(prevState: State, formData: FormData) {
+  
   const { firstname, lastname, mail, password, phone, status, confirmPassword } =
     CreateUser.parse({
       firstname: formData.get('first_name'),
@@ -47,8 +53,9 @@ export async function createUser(formData: FormData) {
 
   if (password !== confirmPassword) {
     console.error('Les mots de passe ne correspondent pas');
-    // Envoyer un message d'erreur au front
-    return;
+    return {
+      passwordError: 'Les mots de passe ne correspondent pas.',
+    };
   }
 
   console.log(firstname, lastname, mail, password, phone, status, date);
@@ -67,17 +74,12 @@ export async function createUser(formData: FormData) {
         created_at: date,
       },
     });
-    console.log('Compte utilisateur créé avec succès');
+    return {
+      messageCreateAccount: 'Compte utilisateur créé avec succès.',
+    };
   } catch (error) {
-    console.error(error);
+    return {
+      messageCreateAccount: 'Erreur lors de la création du compte utilisateur.',
+    };
   }
-
-  // Mettre en place un message de réussite de création de compte
-  // Envoyer le message au front
-  // Envoyer un message d'erreur si jamais la création de compte a échoué
-  // Envoyer le message d'erreur au front
-  
-  // revalidatePath('/signin');
-  // redirect('/login');
-
 }
