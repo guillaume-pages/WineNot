@@ -16,7 +16,7 @@ import logoPetit from '@/app/logo-petit.png';
 import { createUser } from '@/app/lib/user/user.post';
 
 export default function SigninPage() {
-  const initialState = { passwordError: null, messageCreateAccount: null, errors: {} };
+  const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createUser, initialState);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -190,7 +190,7 @@ export default function SigninPage() {
                   </div>
                 </div>
                 <p className="col-span-6 text-red-500 font-bold">
-                  {state.passwordError}
+                  {state.message}
                 </p>
 
                 {/* CONFIRM PASSWORD */}
@@ -306,7 +306,7 @@ export default function SigninPage() {
                     Créer un compte
                   </button>
                   <p>
-                    {state.messageCreateAccount}
+                    {state.message}
                   </p>
 
                   <p className="mt-4 text-base text-gray-500 sm:mt-0">
