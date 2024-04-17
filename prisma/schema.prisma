@@ -7,26 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model customers {
-  id        Int     @id @default(autoincrement())
-  name      String? @db.VarChar(255)
-  email     String? @db.VarChar(255)
-  image_url String? @db.VarChar(255)
-}
-
-model invoices {
-  id          Int       @id @default(autoincrement())
-  customer_id Int?
-  amount      Int?
-  status      String?   @db.VarChar(255)
-  date        DateTime? @db.Date
-}
-
-model revenue {
-  month   String @id @db.VarChar(20)
-  revenue Int?
-}
-
 model bottles {
   bottle_id          Int       @id @default(autoincrement())
   cellar_id          Int?
@@ -63,11 +43,33 @@ model cellars {
   users_cellars users_cellars[]
 }
 
+model customers {
+  customer_id Int        @id @default(autoincrement())
+  name        String?    @db.VarChar(255)
+  email       String?    @db.VarChar(255)
+  image_url   String?    @db.VarChar(255)
+  invoices    invoices[]
+}
+
+model invoices {
+  invoice_id  Int        @id @default(autoincrement())
+  customer_id Int?
+  amount      Int?
+  status      String?    @db.VarChar(255)
+  date        DateTime?  @db.Timestamp(6)
+  customers   customers? @relation(fields: [customer_id], references: [customer_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model revenue {
+  month   String @id @db.VarChar(20)
+  revenue Int?
+}
+
 model users {
   user_id       Int             @id @default(autoincrement())
   firstname     String          @db.VarChar
   lastname      String?         @db.VarChar
-  mail          String          @db.VarChar @unique
+  mail          String          @unique @db.VarChar
   password      String          @db.VarChar
   status        String          @db.VarChar
   phone         String?         @db.VarChar
