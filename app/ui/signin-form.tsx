@@ -279,7 +279,7 @@ export default function SigninForm() {
 
         {/* SUBMIT */}
         <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-          <button className="inline-block shrink-0 rounded-md border border-[#280000] bg-[#b10f2e] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-600 focus:outline-none focus:ring active:text-orange-500">
+          <button className="inline-block shrink-0 rounded-md border border-[#280000] bg-[#b10f2e] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#b10f2e] focus:outline-none focus:ring active:text-[#b10f2e]">
             Créer un compte
           </button>
           <p className="mt-4 text-base text-gray-500 sm:mt-0">
