@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
+import { useRouter } from 'next/router';
 
 const prisma = new PrismaClient();
 
@@ -34,8 +35,8 @@ const CreateUser = CreateUserSchema.omit({ id: true, created_at: true });
 export type State = {
   message?: string | null;
 }
-
 export async function createUser(prevState: State, formData: FormData) {
+
   const validatedFields = CreateUser.safeParse({
     firstname: formData.get('first_name'),
     lastname: formData.get('last_name'),
@@ -48,7 +49,7 @@ export async function createUser(prevState: State, formData: FormData) {
 
   if (!validatedFields.success) {
     return {
-      message: 'Champs manquants. Impossible de créer un compte utilisateur.',
+      message: 'Il y a un problème avec les champs du formulaire. Veuillez vérifier.',
     }
   }
 
@@ -80,12 +81,13 @@ export async function createUser(prevState: State, formData: FormData) {
       },
     });
     console.log('Compte utilisateur créé avec succès');
+   
     return {
-      message: 'Compte utilisateur créé avec succès.',
+      message: 'Compte utilisateur créé avec succès. Vous pouvez vous connecter.',
     };
   } catch (error) {
     return {
-      message: 'Erreur lors de la création du compte utilisateur.',
+      message: 'Erreur lors de la création du compte utilisateur. Veuillez réessayer.',
     };
   }
 }

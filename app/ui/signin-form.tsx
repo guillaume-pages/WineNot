@@ -8,11 +8,10 @@ import { useFormState } from 'react-dom';
 import Link from 'next/link';
 
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-
 import clsx from 'clsx';
 
 import { createUser } from '@/app/lib/user/user.post';
-import { error } from 'console';
+
 
 export default function SigninForm() {
   const initialState = { message: null, errors: {} };
@@ -248,7 +247,7 @@ export default function SigninForm() {
         </div>
 
         {/* MARKETING ACCEPT */}
-        <div className="col-span-6">
+        {/* <div className="col-span-6">
           <label htmlFor="MarketingAccept" className="flex gap-4">
             <input
               type="checkbox"
@@ -262,7 +261,7 @@ export default function SigninForm() {
               jour de produits et les annonces de l&apos;entreprise.
             </span>
           </label>
-        </div>
+        </div> */}
 
         {/* TERMS ACCEPT */}
         <div className="col-span-6">
@@ -290,6 +289,18 @@ export default function SigninForm() {
               Se connecter
             </Link>
           </p>
+        </div>
+        <div className="col-span-6">
+          {state.message && (
+            <p
+              className={clsx('mt-2 text-base', {
+                'text-green-500': state.message.includes('succès'),
+                'text-red-500': !state.message.includes('succès'),
+              })}
+            >
+              {state.message}
+            </p>
+          )}
         </div>
       </form>
     </>
