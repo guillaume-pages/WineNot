@@ -35,19 +35,25 @@ export type State = {
   message?: string | null;
 }
 
-// Creation d'un compte utilisateur
 export async function createUser(prevState: State, formData: FormData) {
+  const validatedFields = CreateUser.safeParse({
+    firstname: formData.get('first_name'),
+    lastname: formData.get('last_name'),
+    mail: formData.get('email'),
+    password: formData.get('password'),
+    confirmPassword: formData.get('confirmPassword'),
+    phone: formData.get('phone'),
+    status: formData.get('status'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      message: 'Champs manquants. Impossible de créer un compte utilisateur.',
+    }
+  }
+
+  const { firstname, lastname, mail, password, phone, status, confirmPassword } = validatedFields.data;
   
-  const { firstname, lastname, mail, password, phone, status, confirmPassword } =
-    CreateUser.parse({
-      firstname: formData.get('first_name'),
-      lastname: formData.get('last_name'),
-      mail: formData.get('email'),
-      password: formData.get('password'),
-      confirmPassword: formData.get('confirmPassword'),
-      phone: formData.get('phone'),
-      status: formData.get('status'),
-    });
   const date = new Date();
 
   if (password !== confirmPassword) {
@@ -73,6 +79,7 @@ export async function createUser(prevState: State, formData: FormData) {
         created_at: date,
       },
     });
+    console.log('Compte utilisateur créé avec succès');
     return {
       message: 'Compte utilisateur créé avec succès.',
     };
