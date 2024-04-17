@@ -64,8 +64,6 @@ export async function createUser(prevState: State, formData: FormData) {
     };
   }
 
-  console.log(firstname, lastname, mail, password, phone, status, date);
-
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
@@ -80,8 +78,7 @@ export async function createUser(prevState: State, formData: FormData) {
         created_at: date,
       },
     });
-    console.log('Compte utilisateur créé avec succès');
-   
+
     return {
       message: 'Compte utilisateur créé avec succès. Vous pouvez vous connecter.',
     };

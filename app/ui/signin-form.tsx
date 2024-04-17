@@ -16,7 +16,6 @@ import { createUser } from '@/app/lib/user/user.post';
 export default function SigninForm() {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createUser, initialState);
-  console.log(state)
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [status, setStatus] = useState('');
