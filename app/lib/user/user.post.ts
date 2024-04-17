@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
+import { useRouter } from 'next/router';
 
 const prisma = new PrismaClient();
 
@@ -31,27 +32,37 @@ const CreateUserSchema = z.object({
 
 const CreateUser = CreateUserSchema.omit({ id: true, created_at: true });
 
-// Creation d'un compte utilisateur
-export async function createUser(formData: FormData) {
-  const { firstname, lastname, mail, password, phone, status, confirmPassword } =
-    CreateUser.parse({
-      firstname: formData.get('first_name'),
-      lastname: formData.get('last_name'),
-      mail: formData.get('email'),
-      password: formData.get('password'),
-      confirmPassword: formData.get('confirmPassword'),
-      phone: formData.get('phone'),
-      status: formData.get('status'),
-    });
+export type State = {
+  message?: string | null;
+}
+export async function createUser(prevState: State, formData: FormData) {
+
+  const validatedFields = CreateUser.safeParse({
+    firstname: formData.get('first_name'),
+    lastname: formData.get('last_name'),
+    mail: formData.get('email'),
+    password: formData.get('password'),
+    confirmPassword: formData.get('confirmPassword'),
+    phone: formData.get('phone'),
+    status: formData.get('status'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      message: 'Il y a un problème avec les champs du formulaire. Veuillez vérifier.',
+    }
+  }
+
+  const { firstname, lastname, mail, password, phone, status, confirmPassword } = validatedFields.data;
+  
   const date = new Date();
 
   if (password !== confirmPassword) {
     console.error('Les mots de passe ne correspondent pas');
-    // Envoyer un message d'erreur au front
-    return;
+    return {
+      message: 'Les mots de passe ne correspondent pas.',
+    };
   }
-
-  console.log(firstname, lastname, mail, password, phone, status, date);
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -67,17 +78,13 @@ export async function createUser(formData: FormData) {
         created_at: date,
       },
     });
-    console.log('Compte utilisateur créé avec succès');
+
+    return {
+      message: 'Compte utilisateur créé avec succès. Vous pouvez vous connecter.',
+    };
   } catch (error) {
-    console.error(error);
+    return {
+      message: 'Erreur lors de la création du compte utilisateur. Veuillez réessayer.',
+    };
   }
-
-  // Mettre en place un message de réussite de création de compte
-  // Envoyer le message au front
-  // Envoyer un message d'erreur si jamais la création de compte a échoué
-  // Envoyer le message d'erreur au front
-  
-  // revalidatePath('/signin');
-  // redirect('/login');
-
 }

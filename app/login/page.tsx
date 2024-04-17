@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useFormState } from 'react-dom';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,6 +14,9 @@ import { createUser } from '@/app/lib/user/user.post';
 
  
 export default function LoginPage() {
+  const initialState = { message: null };
+  const [state, dispatch] = useFormState(createUser, initialState);
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [status, setStatus] = useState('');
 
@@ -83,7 +87,7 @@ export default function LoginPage() {
                 </p>
               </div>
 
-              <form action={createUser} className="mt-8 grid grid-cols-6 gap-6">
+              <form action="#" className="mt-8 grid grid-cols-6 gap-6">
                 {/* EMAIL */}
                 <div className="col-span-6">
                   <label
