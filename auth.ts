@@ -5,11 +5,32 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import type { User } from './app/lib/definitions';
 import bcrypt from 'bcrypt';
+import { PrismaClient } from '@prisma/client';
 
-async function getUser(email: string): Promise<User | undefined>{
+const prisma = new PrismaClient();
+
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$/;
+
+async function getUser(email: string): Promise<User | null> {
   try {
-    const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-    return user.rows[0];
+    const user = await prisma.users.findUnique({
+      where: {
+        mail: email,
+      },
+    });
+    if (user) {
+      return {
+        id: user.user_id.toString(),
+        firstname: user.firstname,
+        lastname: user.lastname ?? '',
+        mail: user.mail,
+        password: user.password,
+        status: user.status,
+        phone: user.phone ?? '',
+      };
+    } else {
+      return null;
+    }
   } catch (error) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
@@ -22,13 +43,14 @@ export const { auth, signIn, signOut } = NextAuth({
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z
-        .object({ email: z.string().email(), password: z.string().min(6) })
+        .object({ email: z.string().email(), password: z.string().regex(passwordRegex)})
         .safeParse(credentials);
+        console.log(parsedCredentials)
 
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
           const user = await getUser(email);
-          console.log(user)
+          console.log('user', user)
           if (!user) return null;
           const passwordsMatch = await bcrypt.compare(password, user.password);
 
