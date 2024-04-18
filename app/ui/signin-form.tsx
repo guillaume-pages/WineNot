@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useState } from 'react';
 import { useFormState } from 'react-dom';
@@ -9,9 +9,21 @@ import Link from 'next/link';
 
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import clsx from 'clsx';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { createUser } from '@/app/lib/user/user.post';
 
+const notifySucces = (msg: string) =>
+  toast.success(msg, {
+    duration: 4000,
+    position: 'top-right',
+  });
+
+const notifyError = (msg: string) =>
+  toast.error(msg, {
+    duration: 4000,
+    position: 'top-right',
+  });
 
 export default function SigninForm() {
   const initialState = { message: null, errors: {} };
@@ -57,8 +69,20 @@ export default function SigninForm() {
     setIsSamePassword(e.target.value);
   };
 
+  useEffect(() => {
+    if (state.message) {
+      let msg = state.message;
+      if (msg.includes('succès')) {
+        notifySucces(msg);
+      } else {
+        notifyError(msg);
+      }
+    }
+  }, [state.message]);
+
   return (
     <>
+      <Toaster />
       <form action={dispatch} className="mt-8 grid grid-cols-6 gap-4 md:gap-2">
         {/* FIRST NAME */}
         <div className="col-span-6 sm:col-span-3">
