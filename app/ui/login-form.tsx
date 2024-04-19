@@ -74,7 +74,7 @@ export default function LoginForm() {
             <input
               type={isPasswordVisible ? 'text' : 'password'}
               id="Password"
-              name="password"
+              name="pw"
               required
               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,])[A-Za-z\d@$!%*?&,]{10,}$"
               title="Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un caractère spécial parmi (@$!%*?&,) et être d'une longeur de 10 caractères minimum."
