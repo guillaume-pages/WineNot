@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
-import { SessionProvider } from 'next-auth/react';
 
 import '@/app/ui/global.css';
 import { k2d } from '@/app/ui/fonts';
 import Navbar from '@/app/ui/navbar/navbar';
 import NavbarMobile from '@/app/ui/navbar/navbar-mobile';
+
+import { auth } from '@/auth';
  
 export const metadata: Metadata = {
   title: {
