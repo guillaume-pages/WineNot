@@ -19,7 +19,7 @@ import moyenLogo from '@/app/logo-moyen.png';
 export default function Navbar() {
   const pathname = usePathname();
 
-  const isSigninOrLogin = pathname === '/signin' || pathname === '/login';
+  const isSigninOrLogin = pathname === '/login' || pathname === '/register';
 
   if (isSigninOrLogin) {
     return null;

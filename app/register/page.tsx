@@ -6,9 +6,9 @@ import Link from 'next/link';
 import bottles from '@/app/bottles.jpg';
 import logoPetit from '@/app/logo-petit.png';
 
-import SigninForm from '@/app/ui/signin-form';
+import { RegisterForm } from './register-form';
 
-export default function SigninPage() {
+export default function Register() {
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function SigninPage() {
                   Vous n&apos;êtes plus qu&apos;à un pas de créer votre cave !
                 </p>
               </div>
-              <SigninForm />
+              <RegisterForm />
             </div>
           </main>
         </div>
@@ -54,3 +54,4 @@ export default function SigninPage() {
     </>
   );
 }
+

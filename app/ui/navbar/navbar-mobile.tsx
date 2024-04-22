@@ -15,7 +15,7 @@ import LogoPetit from '@/app/logo-petit.png';
 export default function NavbarMobile() {
   const pathname = usePathname();
 
-  const isSigninOrLogin = pathname === '/signin' || pathname === '/login';
+  const isSigninOrLogin = pathname === '/login' || pathname === '/register';
 
   if (isSigninOrLogin) {
     return null;
