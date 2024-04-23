@@ -13,61 +13,127 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id            String    @id @default(uuid())
-  name          String
+model users {
+  user_id       String    @id @default(uuid())
+  firstname     String
+  lastname      String?
   email         String?   @unique
   password      String?
   emailVerified DateTime? @map("email_verified")
   image         String?
+  status        String?
+  phone         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  sessions      Session[]
-
-  @@map("users")
+  accounts      accounts[]
+  sessions      sessions[]
+  users_cellars users_cellars[]
 }
 
-model Account {
-  id                String   @id @default(cuid())
-  userId            String   @map("user_id")
-  type              String?
-  provider          String
-  providerAccountId String   @map("provider_account_id")
-  token_type        String?
-  refresh_token     String?  @db.Text
-  access_token      String?  @db.Text
-  expires_at        Int?
-  scope             String?
-  id_token          String?  @db.Text
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
+model cellars {
+  cellar_id     String          @id @default(uuid())
+  created_at    DateTime?       @db.Timestamp(6)
+  updated_at    DateTime?       @db.Timestamp(6)
+  deleted_at    DateTime?       @db.Timestamp(6)
+  bottles       bottles[]
+  users_cellars users_cellars[]
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  userId       String?  @map("user_id")
+model bottles {
+  bottle_id          String    @id @default(uuid())
+  cellar_id          String?
+  bottle_name        String    @db.VarChar
+  millesime          Int
+  type_of_wine       String    @db.VarChar
+  size               String    @db.VarChar
+  grape_varieties    Json      @db.Json
+  region             String    @db.VarChar
+  eye_description    String?
+  nose_description   Json?     @db.Json
+  mouth_description  Json?     @db.Json
+  carafage           Int?
+  temperature        Int?
+  degree             Int?
+  accompaniment      Json?     @db.Json
+  media              String?
+  price              Int?
+  price_visibility   Int?
+  global_description String?
+  entry_date         DateTime  @db.Timestamp(6)
+  potential_date     DateTime? @db.Timestamp(6)
+  quantity           Int
+  global_visibility  Int
+  cellars            cellars?  @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users_cellars {
+  user_cellar_id  String    @id @default(uuid())
+  user_id         String
+  cellar_id       String
+  cellars         cellars? @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
+  users           users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model accounts {
+  account_id            String   @id @default(uuid())
+  user_id               String   
+  type                  String?
+  provider              String
+  provider_account_id   String
+  token_type            String?
+  refresh_token         String?  @db.Text
+  access_token          String?  @db.Text
+  expires_at            Int?
+  scope                 String?
+  id_token              String?  @db.Text
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
+  @@unique([provider, provider_account_id])
+}
+
+model sessions {
+  session_id   String   @id @default(uuid())
+  user_id      String?  
   sessionToken String   @unique @map("session_token") @db.Text
   accessToken  String?  @map("access_token") @db.Text
   expires      DateTime
-  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         users?    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  @@map("sessions")
 }
 
-model VerificationRequest {
-  id         String   @id @default(cuid())
-  identifier String
-  token      String   @unique
-  expires    DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+model verification_request {
+  verification_request_id   String   @id @default(uuid())
+  identifier                String
+  token                     String   @unique
+  expires                   DateTime
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
 
   @@unique([identifier, token])
+}
+
+model customers {
+  customer_id String     @id @default(uuid())
+  name        String?    @db.VarChar(255)
+  email       String?    @db.VarChar(255)
+  image_url   String?    @db.VarChar(255)
+  invoices    invoices[]
+}
+
+model invoices {
+  invoice_id  String     @id @default(uuid())
+  customer_id String?
+  amount      Int?
+  status      String?    @db.VarChar(255)
+  date        DateTime?  @db.Timestamp(6)
+  customers   customers? @relation(fields: [customer_id], references: [customer_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model revenue {
+  month   String @id @db.VarChar(20)
+  revenue Int?
 }

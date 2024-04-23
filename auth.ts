@@ -90,11 +90,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
+        console.log('credentials', credentials.email);
         if (!credentials?.email || !credentials.password) {
           return null;
         }
 
-        const user = await prisma.user.findUnique({
+        const user = await prisma.users.findUnique({
           where: {
             email: String(credentials.email),
           },
@@ -108,9 +109,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         return {
-          id: user.id,
+          id: user.user_id,
           email: user.email,
-          name: user.name,
+          name: user.firstname,
           randomKey: 'Hey cool',
         };
       },
