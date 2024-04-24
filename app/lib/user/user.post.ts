@@ -40,7 +40,7 @@ export async function createUser(prevState: State, formData: FormData) {
   const validatedFields = CreateUser.safeParse({
     firstname: formData.get('first_name'),
     lastname: formData.get('last_name'),
-    mail: formData.get('email'),
+    email: formData.get('email'),
     password: formData.get('password'),
     confirmPassword: formData.get('confirmPassword'),
     phone: formData.get('phone'),
@@ -71,11 +71,11 @@ export async function createUser(prevState: State, formData: FormData) {
       data: {
         firstname: firstname,
         lastname: lastname,
-        mail: mail,
+        email: mail,
         password: hashedPassword,
         phone: phone,
         status: status,
-        created_at: date,
+        createdAt: date,
       },
     });
 
