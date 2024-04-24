@@ -78,7 +78,7 @@ export default function Navbar() {
                 <div className="hidden sm:flex">
                   <Link
                     className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-orange-600"
-                    href="/signin"
+                    href="/register"
                   >
                     S&apos;inscrire
                   </Link>

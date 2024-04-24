@@ -43,7 +43,7 @@ export default function NavbarMobile() {
         </> 
         :
         <>
-          <Link href="/signin">
+          <Link href="/register">
             <CiLogin size={36} />
           </Link>
         </>}
