@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
-import { SessionProvider } from 'next-auth/react';
+
+import { Toaster } from "react-hot-toast";
+import { SessionProvider } from "next-auth/react";
 
 import '@/app/ui/global.css';
 import { k2d } from '@/app/ui/fonts';
 import Navbar from '@/app/ui/navbar/navbar';
 import NavbarMobile from '@/app/ui/navbar/navbar-mobile';
- 
+
 export const metadata: Metadata = {
   title: {
     template: '%s | Cavavin',
@@ -18,11 +20,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${k2d.className} antialiased`}>
-        <Navbar />
-        <NavbarMobile />
-        <div>
-          {children}  
-        </div>
+        <SessionProvider>
+          <Toaster />
+          <Navbar />
+          <NavbarMobile />
+            {children}  
+        </SessionProvider>
         </body>
     </html>
   );

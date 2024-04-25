@@ -3,6 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+
+import DisconnectButton from './disconnectButton';
 
 import moyenLogo from '@/app/logo-moyen.png';
 
@@ -18,8 +21,9 @@ import moyenLogo from '@/app/logo-moyen.png';
 
 export default function Navbar() {
   const pathname = usePathname();
-
-  const isSigninOrLogin = pathname === '/signin' || pathname === '/login';
+  const { data } = useSession();
+  const user = data?.user;
+  const isSigninOrLogin = pathname === '/login' || pathname === '/register';
 
   if (isSigninOrLogin) {
     return null;
@@ -67,23 +71,31 @@ export default function Navbar() {
             </nav>
 
             <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
-                <Link
-                  className="rounded-md bg-orange-400 px-5 py-2.5 text-sm font-medium text-black shadow"
-                  href="/login"
-                >
-                  Se connecter
-                </Link>
-
-                <div className="hidden sm:flex">
+              {!user && (
+                <div className="sm:flex sm:gap-4">
                   <Link
-                    className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-orange-600"
-                    href="/signin"
+                    className="rounded-md bg-orange-400 px-5 py-2.5 text-sm font-medium text-black shadow"
+                    href="/login"
                   >
-                    S&apos;inscrire
+                    Se connecter
                   </Link>
+
+                  <div className="hidden sm:flex">
+                    <Link
+                      className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-orange-600"
+                      href="/register"
+                    >
+                      S&apos;inscrire
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              )}
+              {user && (
+                <>
+                  <span>Connecté</span>
+                  <DisconnectButton />
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -1,3 +1,9 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,9 +13,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model users {
+  user_id       String    @id @default(uuid())
+  firstname     String
+  lastname      String?
+  email         String?   @unique
+  password      String?
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  status        String?
+  phone         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      accounts[]
+  sessions      sessions[]
+  users_cellars users_cellars[]
+}
+
+model cellars {
+  cellar_id     String          @id @default(uuid())
+  created_at    DateTime?       @db.Timestamp(6)
+  updated_at    DateTime?       @db.Timestamp(6)
+  deleted_at    DateTime?       @db.Timestamp(6)
+  bottles       bottles[]
+  users_cellars users_cellars[]
+}
+
 model bottles {
-  bottle_id          Int       @id @default(autoincrement())
-  cellar_id          Int?
+  bottle_id          String    @id @default(uuid())
+  cellar_id          String?
   bottle_name        String    @db.VarChar
   millesime          Int
   type_of_wine       String    @db.VarChar
@@ -34,17 +66,58 @@ model bottles {
   cellars            cellars?  @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model cellars {
-  cellar_id     Int             @id @default(autoincrement())
-  created_at    DateTime?       @db.Timestamp(6)
-  updated_at    DateTime?       @db.Timestamp(6)
-  deleted_at    DateTime?       @db.Timestamp(6)
-  bottles       bottles[]
-  users_cellars users_cellars[]
+model users_cellars {
+  user_cellar_id  String    @id @default(uuid())
+  user_id         String
+  cellar_id       String
+  cellars         cellars? @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
+  users           users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model accounts {
+  account_id            String   @id @default(uuid())
+  user_id               String   
+  type                  String?
+  provider              String
+  provider_account_id   String
+  token_type            String?
+  refresh_token         String?  @db.Text
+  access_token          String?  @db.Text
+  expires_at            Int?
+  scope                 String?
+  id_token              String?  @db.Text
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
+  @@unique([provider, provider_account_id])
+}
+
+model sessions {
+  session_id   String   @id @default(uuid())
+  user_id      String?  
+  sessionToken String   @unique @map("session_token") @db.Text
+  accessToken  String?  @map("access_token") @db.Text
+  expires      DateTime
+  user         users?    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+}
+
+model verification_request {
+  verification_request_id   String   @id @default(uuid())
+  identifier                String
+  token                     String   @unique
+  expires                   DateTime
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+
+  @@unique([identifier, token])
 }
 
 model customers {
-  customer_id Int        @id @default(autoincrement())
+  customer_id String     @id @default(uuid())
   name        String?    @db.VarChar(255)
   email       String?    @db.VarChar(255)
   image_url   String?    @db.VarChar(255)
@@ -52,8 +125,8 @@ model customers {
 }
 
 model invoices {
-  invoice_id  Int        @id @default(autoincrement())
-  customer_id Int?
+  invoice_id  String     @id @default(uuid())
+  customer_id String?
   amount      Int?
   status      String?    @db.VarChar(255)
   date        DateTime?  @db.Timestamp(6)
@@ -63,25 +136,4 @@ model invoices {
 model revenue {
   month   String @id @db.VarChar(20)
   revenue Int?
-}
-
-model users {
-  user_id       Int             @id @default(autoincrement())
-  firstname     String          @db.VarChar
-  lastname      String?         @db.VarChar
-  mail          String          @unique @db.VarChar
-  password      String          @db.VarChar
-  status        String          @db.VarChar
-  phone         String?         @db.VarChar
-  created_at    DateTime?       @db.Timestamp(6)
-  deleted_at    DateTime?       @db.Timestamp(6)
-  users_cellars users_cellars[]
-}
-
-model users_cellars {
-  user_cellar_id Int      @id @default(autoincrement())
-  user_id        Int?
-  cellar_id      Int?
-  cellars        cellars? @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
-  users          users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
 }
