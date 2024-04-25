@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 import { PiWineThin } from 'react-icons/pi';
 import { PiHouseLineLight } from 'react-icons/pi';
@@ -11,9 +12,15 @@ import { CiLogin } from 'react-icons/ci';
 import { CiLogout } from 'react-icons/ci';
 import { CiSettings } from 'react-icons/ci';
 import LogoPetit from '@/app/logo-petit.png';
+import DisconnectButton from './disconnectButton';
+
 
 export default function NavbarMobile() {
   const pathname = usePathname();
+  const { data } = useSession();
+  const user = data?.user;
+
+  const isConnected = user ? true : false;
 
   const isSigninOrLogin = pathname === '/login' || pathname === '/register';
 
@@ -21,7 +28,6 @@ export default function NavbarMobile() {
     return null;
   }
   
-  const isConnected = false;
   return (
     <>
       <div className="fixed bottom-0 flex h-11 w-full justify-center space-x-6 py-1 bg-slate-50 md:hidden">
@@ -39,11 +45,11 @@ export default function NavbarMobile() {
         </Link> */}
         {isConnected ? 
         <>
-          <CiLogout size={36} />
+          <DisconnectButton />
         </> 
         :
         <>
-          <Link href="/register">
+          <Link href="/login">
             <CiLogin size={36} />
           </Link>
         </>}

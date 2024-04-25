@@ -73,20 +73,20 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               {!user && (
                 <div className="sm:flex sm:gap-4">
+                  
+                  <Link
+                      className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-orange-600"
+                      href="/register"
+                    >
+                      S&apos;inscrire
+                    </Link>
+                  <div className="hidden sm:flex">
                   <Link
                     className="rounded-md bg-orange-400 px-5 py-2.5 text-sm font-medium text-black shadow"
                     href="/login"
                   >
                     Se connecter
                   </Link>
-
-                  <div className="hidden sm:flex">
-                    <Link
-                      className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-orange-600"
-                      href="/register"
-                    >
-                      S&apos;inscrire
-                    </Link>
                   </div>
                 </div>
               )}
