@@ -5,8 +5,9 @@ import Link from 'next/link';
 
 import bottles from '@/app/bottles.jpg';
 import logoPetit from '@/app/logo-petit.png';
-import LoginForm from '../ui/login-form';
- 
+import { LoginForm } from '@/app/login/login-form'
+import { Suspense } from 'react';
+
 export default function LoginPage() {
   return (
     <>
@@ -44,9 +45,9 @@ export default function LoginPage() {
                   Heureux de vous revoir, reprenez où vous en étiez !
                 </p>
               </div>
-
-              <LoginForm />
-              
+              <Suspense fallback={<>Chargement...</>}>
+                <LoginForm />
+              </Suspense>
             </div>
           </main>
         </div>
