@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,17 +8,17 @@ datasource db {
 }
 
 model users {
-  user_id       String    @id @default(uuid())
+  email         String?         @unique
+  password      String?
+  emailVerified DateTime?       @map("email_verified")
+  image         String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  phone         String?
+  status        String?
+  user_id       String          @id @default(uuid())
   firstname     String
   lastname      String?
-  email         String?   @unique
-  password      String?
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  status        String?
-  phone         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
   accounts      accounts[]
   sessions      sessions[]
   users_cellars users_cellars[]
@@ -67,51 +61,50 @@ model bottles {
 }
 
 model users_cellars {
-  user_cellar_id  String    @id @default(uuid())
-  user_id         String
-  cellar_id       String
-  cellars         cellars? @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
-  users           users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  user_cellar_id String  @id @default(uuid())
+  user_id        String
+  cellar_id      String
+  cellars        cellars @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
+  users          users   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model accounts {
-  account_id            String   @id @default(uuid())
-  user_id               String   
-  type                  String?
-  provider              String
-  provider_account_id   String
-  token_type            String?
-  refresh_token         String?  @db.Text
-  access_token          String?  @db.Text
-  expires_at            Int?
-  scope                 String?
-  id_token              String?  @db.Text
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
-  user                  users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  user_id             String
+  type                String?
+  provider            String
+  provider_account_id String
+  token_type          String?
+  refresh_token       String?
+  access_token        String?
+  expires_at          Int?
+  scope               String?
+  id_token            String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  account_id          String   @id @default(uuid())
+  user                users    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
   @@unique([provider, provider_account_id])
 }
 
 model sessions {
-  session_id   String   @id @default(uuid())
-  user_id      String?  
-  sessionToken String   @unique @map("session_token") @db.Text
-  accessToken  String?  @map("access_token") @db.Text
+  user_id      String?
+  sessionToken String   @unique @map("session_token")
+  accessToken  String?  @map("access_token")
   expires      DateTime
-  user         users?    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-
+  session_id   String   @id @default(uuid())
+  user         users?   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
 
 model verification_request {
-  verification_request_id   String   @id @default(uuid())
-  identifier                String
-  token                     String   @unique
-  expires                   DateTime
-  createdAt                 DateTime @default(now())
-  updatedAt                 DateTime @updatedAt
+  identifier              String
+  token                   String   @unique
+  expires                 DateTime
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  verification_request_id String   @id @default(uuid())
 
   @@unique([identifier, token])
 }
