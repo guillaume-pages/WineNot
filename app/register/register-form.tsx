@@ -13,24 +13,24 @@ import Link from 'next/link';
 const createUserSchema = object({
   firstname: string({ required_error: 'Votre prénom est requis' }).min(
     1,
-    'Name is required',
+    'Votre prénom est requis',
   ),
   lastname: string().optional(),
-  email: string({ required_error: 'Email is required' })
-    .min(1, 'Email is required')
-    .email('Invalid email'),
+  email: string({ required_error: "L'email est requis" })
+    .min(1, "L'email est requis" )
+    .email('Email invalide'),
   photo: string().optional(),
-  password: string({ required_error: 'Password is required' })
-    .min(1, 'Password is required')
-    .min(8, 'Password must be more than 8 characters')
-    .max(32, 'Password must be less than 32 characters'),
+  password: string({ required_error: 'Mot de passe requis' })
+    .min(1, 'Mot de passe requis')
+    .min(8, 'Le mot de passe doit faire plus de 10 caractères')
+    .max(50, 'Le mot de passe doit faire moins de 50 caractères'),
   passwordConfirm: string({
-    required_error: 'Please confirm your password',
-  }).min(1, 'Please confirm your password'),
+    required_error: 'Merci de confirmer votre mot de passe',
+  }).min(1, 'Merci de confirmer votre mot de passe'),
   phone: string().optional(),
 }).refine((data) => data.password === data.passwordConfirm, {
   path: ['passwordConfirm'],
-  message: 'Passwords do not match',
+  message: 'Les mots de passe ne correspondent pas',
 });
 
 type CreateUserInput = TypeOf<typeof createUserSchema>;
@@ -260,12 +260,12 @@ export const RegisterForm = () => {
           htmlFor="phone"
           className="block text-base font-medium text-gray-700"
         >
-          Votre numéro de téléphone (optionnel)
+          Téléphone (optionnel)
         </label>
         <input
           type="text"
           {...register('phone')}
-          placeholder="Veuillez entrer votre numéro de téléphone"
+          placeholder="0612345678"
           className={`${input_style}`}
         />
         {errors['phone'] && (
