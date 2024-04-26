@@ -62,7 +62,7 @@ export const RegisterForm = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const [isPasswordValid, setIsPasswordValid] = useState('');
+  const [, setIsPasswordValid] = useState('');
   const [hasLowercase, setHasLowercase] = useState(false);
   const [hasUppercase, setHasUppercase] = useState(false);
   const [hasNumber, setHasNumber] = useState(false);

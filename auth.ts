@@ -10,9 +10,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.NEXT_PUBLIC_SECRET,
   session: { strategy: 'jwt' },
   adapter: PrismaAdapter(prisma),
-  // pages: {
-  //   signIn: "/login",
-  // },
+  pages: {
+    signIn: "/login",
+  },
   providers: [
     // github,
     // google,
@@ -50,7 +50,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           id: user.user_id,
           email: user.email,
           name: user.firstname,
-          randomKey: 'Hey cool',
         };
       },
     }),

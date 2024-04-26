@@ -1,7 +1,7 @@
 import { signOut } from  'next-auth/react';
 import { CiLogout } from 'react-icons/ci';
 
-export default function disconnectButton() {
+export default function DisconnectButton() {
 
   const handleDisconnect = async () => {
     await signOut();
