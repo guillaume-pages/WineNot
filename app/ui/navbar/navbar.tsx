@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import DisconnectButton from './disconnectButton';
+import Avatar from '../components/avatar';
 
 import moyenLogo from '@/app/logo-moyen.png';
 
@@ -56,14 +57,19 @@ export default function Navbar() {
                     ACCUEIL{' '}
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="/cellar"
-                  >
-                    MA CAVE
-                  </Link>
-                </li>
+                {user && (
+                  <>
+                    <li>
+                    <Link
+                      className="text-gray-500 transition hover:text-gray-500/75"
+                      href="/cellar"
+                    >
+                      MA CAVE
+                    </Link>
+                  </li>
+                  </>
+                )}
+                
                 {/* <li>
                 <Link className="text-gray-500 transition hover:text-gray-500/75" href="/dashboard">TABLEAU DE BORD</Link>
               </li> */}
@@ -92,7 +98,9 @@ export default function Navbar() {
               )}
               {user && (
                 <>
-                  <span>Connecté</span>
+                  <div>
+                    <Avatar />
+                  </div>
                   <DisconnectButton />
                 </>
               )}
