@@ -5,16 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
-import DisconnectButton from './disconnectButton';
-import Avatar from '../components/avatar';
-
 import moyenLogo from '@/app/logo-moyen.png';
-
-// // TODO: ajout d'un affichage d'une bulle avatar quand le user est connecté
-// // et à la place du bouton de connexion, un bouton de déconnexion et non affichage de l'inscription
-// // la bulle renverra vers le profil du user
-
-// // TODO: affichage de ma cave et profile uniquement si le user est connecté
+import DropDownAvatar from '../components/dropDownAvatar';
 
 // // TODO: affichage de tableau de bord si le user est un professionnel
 
@@ -106,10 +98,13 @@ export default function Navbar() {
               )}
               {user && (
                 <>
-                  <div>
-                    <Avatar />
+                  <DropDownAvatar />
+                  {/* <div>
+                    <button onClick={() => (console.log("clicked"))}>
+                      <Avatar />
+                    </button>
                   </div>
-                  <DisconnectButton />
+                  <DisconnectButton /> */}
                 </>
               )}
             </div>

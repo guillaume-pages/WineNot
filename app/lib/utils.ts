@@ -1,5 +1,9 @@
 import { Revenue } from './definitions';
+import { signOut } from  'next-auth/react';
 
+export const handleDisconnect = async () => {
+  await signOut();
+}
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
     style: 'currency',
