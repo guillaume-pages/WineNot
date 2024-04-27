@@ -1,7 +1,20 @@
 "use client";
 import { createContext, useState, useEffect } from 'react';
 
-export const ThemeContext = createContext();
+type ThemeContextType = {
+  theme: string;
+  setTheme: (value: string) => void;
+  changeTheme: (value: string) => void; // Add this line
+};
+
+// Provide a default value for the context
+const defaultThemeContextValue: ThemeContextType = {
+  theme: 'light',
+  setTheme: () => {},
+  changeTheme: () => {}, // And this line
+};
+
+export const ThemeContext = createContext<ThemeContextType>(defaultThemeContextValue);
 
 export const ThemeProvider = ({children}: any) => {
   const [theme, setTheme] = useState("light");
@@ -24,6 +37,6 @@ export const ThemeProvider = ({children}: any) => {
   }
 
   return (
-    <ThemeContext.Provider value={{theme, changeTheme}}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{theme, changeTheme, setTheme}}>{children}</ThemeContext.Provider>
   )
 } 
