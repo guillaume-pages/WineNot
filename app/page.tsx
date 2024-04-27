@@ -21,6 +21,8 @@ export default function Page() {
       <div>Un call to action en bas identique à celui du haut</div>
       {user && <div>Je suis connecté en tant que {user.email} </div>}
       {!user && <div>Je ne suis pas connecté </div>}
+      <button className="btn">Button</button>
+      <button className="btn btn-primary">Button</button>
     </main>
   );
 }

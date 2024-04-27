@@ -67,6 +67,14 @@ export default function Navbar() {
                       MA CAVE
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      className="text-gray-500 transition hover:text-gray-500/75"
+                      href="/profile"
+                    >
+                      MON PROFIL
+                    </Link>
+                  </li>
                   </>
                 )}
                 

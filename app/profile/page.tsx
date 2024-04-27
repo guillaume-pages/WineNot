@@ -1,6 +1,7 @@
 import { auth } from '@/auth';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
+import ChoosingTheme from '../ui/components/choosingTheme';
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -25,6 +26,9 @@ export default async function ProfilePage() {
         <p className='mb-3'>ID: {user.id}</p>
         <p className='mb-3'>Name: {user.name}</p>
         <p className='mb-3'>Email: {user.email}</p>
+      </div>
+      <div>
+        <ChoosingTheme />
       </div>
     </div>
   );
