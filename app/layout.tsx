@@ -34,7 +34,9 @@ export default function RootLayout({
               <Toaster />
               <Navbar />
               <NavbarMobile />
-              {children}
+              <div >
+                {children}
+              </div>
             </ClientThemeWrapper>
           </ThemeProvider>
         </SessionProvider>

@@ -14,12 +14,12 @@ export default function Avatar() {
     //   </div>
     // </div>
     <div className="avatar">
-      <div className="mask mask-squircle">
+      <div className="w-9 rounded-full">
         <Image
           alt='Avatar'
           width={36}
           height={36}
-          src="/images/default.png"
+          src="/images/photo.jpeg"
           />
       </div>
     </div>

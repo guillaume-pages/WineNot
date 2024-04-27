@@ -4,14 +4,13 @@ import { createContext, useState, useEffect } from 'react';
 type ThemeContextType = {
   theme: string;
   setTheme: (value: string) => void;
-  changeTheme: (value: string) => void; // Add this line
+  changeTheme: (value: string) => void;
 };
 
-// Provide a default value for the context
 const defaultThemeContextValue: ThemeContextType = {
   theme: 'light',
   setTheme: () => {},
-  changeTheme: () => {}, // And this line
+  changeTheme: () => {},
 };
 
 export const ThemeContext = createContext<ThemeContextType>(defaultThemeContextValue);
@@ -24,12 +23,11 @@ export const ThemeProvider = ({children}: any) => {
     setIsMounted(true);
     const storedTheme = localStorage.getItem("theme") || "light";
     setTheme(storedTheme)
-
   }, [])
 
-  if(!isMounted) {
-    return <>Veuillez patienter...</>
-  }
+  // if(!isMounted) {
+  //   return <>Veuillez patienter...</>
+  // }
 
   const changeTheme = (theme: string) => {
     setTheme(theme);

@@ -5,13 +5,14 @@ import Link from 'next/link';
 
 import bottles from '@/app/bottles.jpg';
 import logoPetit from '@/app/logo-petit.png';
-import { LoginForm } from '@/app/login/login-form'
+import { LoginFormOld } from '@/app/login/login-form-old'
+import { LoginForm } from './login-form';
 import { Suspense } from 'react';
 
 export default function LoginPage() {
   return (
     <>
-      <section className="bg-white">
+      <section>
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
           <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
             <Image
