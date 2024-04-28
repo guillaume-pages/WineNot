@@ -2,24 +2,13 @@ import Image from 'next/image';
 
 export default function Avatar() {
   return (
-    // <div className="flex items-center">
-    //   <div className="relative w-10 h-10 rounded-full overflow-hidden">
-    //     <Image
-    //       alt="Avatar"
-    //       className="w-full h-full object-cover"
-    //       src="/images/default.png"
-    //       width={20}
-    //       height={20}
-    //     />
-    //   </div>
-    // </div>
     <div className="avatar">
       <div className="w-9 rounded-full">
         <Image
           alt='Avatar'
-          width={36}
-          height={36}
-          src="/images/photo.jpeg"
+          width={512}
+          height={512}
+          src="/images/Ellipse-6.png"
           />
       </div>
     </div>
