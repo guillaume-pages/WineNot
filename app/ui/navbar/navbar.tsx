@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import moyenLogo from '@/app/logo-moyen.png';
-import DropDownAvatar from '../components/dropDownAvatar';
+import DropDownAvatar from '../components/dropdown-avatar';
 
 // // TODO: affichage de tableau de bord si le user est un professionnel
 
@@ -23,7 +23,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="bg-white">
+    <header className="bg-white hidden md:block">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
@@ -59,14 +59,6 @@ export default function Navbar() {
                       MA CAVE
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      className="text-gray-500 transition hover:text-gray-500/75"
-                      href="/profile"
-                    >
-                      MON PROFIL
-                    </Link>
-                  </li>
                   </>
                 )}
                 
@@ -99,12 +91,6 @@ export default function Navbar() {
               {user && (
                 <>
                   <DropDownAvatar />
-                  {/* <div>
-                    <button onClick={() => (console.log("clicked"))}>
-                      <Avatar />
-                    </button>
-                  </div>
-                  <DisconnectButton /> */}
                 </>
               )}
             </div>

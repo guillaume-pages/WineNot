@@ -1,5 +1,5 @@
 import React from 'react';
-import DisconnectButton from '../navbar/disconnectButton';
+import DisconnectButton from '../navbar/disconnect-button';
 import Link from 'next/link';
 import Avatar from './avatar';
 import { handleDisconnect } from '@/app/lib/utils';
@@ -19,7 +19,9 @@ export default function DropDownAvatar() {
             <Link href="/profile">Mon profil</Link>
           </li>
           <li>
-            <span onClick={handleDisconnect}>Se déconnecter <DisconnectButton /></span>
+            <span onClick={handleDisconnect}>
+              Se déconnecter <DisconnectButton />
+            </span>
           </li>
         </ul>
       </div>
