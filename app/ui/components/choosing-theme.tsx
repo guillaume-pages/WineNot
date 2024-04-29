@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '@/app/context/ThemeContext';
 
 export default function ChoosingTheme() {
-  const { changeTheme } = useContext(ThemeContext);
+  const { changeTheme, theme } = useContext(ThemeContext);
 
   const themeLight = [
     'acid',
@@ -46,7 +46,7 @@ export default function ChoosingTheme() {
   return (
     <>
       <div className='mx-auto'>
-        <p>Choisissez un thème clair ou sombre parmi ces choix</p>
+        <p>Choisissez un thème clair ou sombre parmi ces choix.<br /> Votre thème actuel est : {theme}.</p>
         <div className='flex justify-center'>
           <div className="dropdown mb-72">
             <div tabIndex={0} role="button" className="btn m-1">

@@ -3,9 +3,10 @@ import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 
 export default function UserInfoDisplayPhone() {
-  const { data } = useSession();
-  const user = data?.user;
+  const { data: session } = useSession();
+  const user = session?.user;
   console.log(user)
+  console.log(session)
 
   return (
     <>
