@@ -12,12 +12,12 @@ const prisma = new PrismaClient();
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$/;
 
 const CreateUserSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   firstname: z.string({
     required_error: 'Votre nom est requis.',
   }),
   lastname: z.string(),
-  mail: z.string({
+  email: z.string({
     required_error: 'Votre adresse email est requise.',
     invalid_type_error: 'Veuillez entrer une adresse email valide.',
   }).email(),
@@ -38,8 +38,8 @@ export type State = {
 export async function createUser(prevState: State, formData: FormData) {
 
   const validatedFields = CreateUser.safeParse({
-    firstname: formData.get('first_name'),
-    lastname: formData.get('last_name'),
+    firstname: formData.get('firstname'),
+    lastname: formData.get('lastname'),
     email: formData.get('email'),
     password: formData.get('password'),
     confirmPassword: formData.get('confirmPassword'),
@@ -53,7 +53,7 @@ export async function createUser(prevState: State, formData: FormData) {
     }
   }
 
-  const { firstname, lastname, mail, password, phone, status, confirmPassword } = validatedFields.data;
+  const { firstname, lastname, email, password, phone, status, confirmPassword } = validatedFields.data;
   
   const date = new Date();
 
@@ -71,7 +71,7 @@ export async function createUser(prevState: State, formData: FormData) {
       data: {
         firstname: firstname,
         lastname: lastname,
-        email: mail,
+        email: email,
         password: hashedPassword,
         phone: phone,
         status: status,

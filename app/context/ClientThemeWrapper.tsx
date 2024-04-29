@@ -6,5 +6,6 @@ import { ThemeContext } from "./ThemeContext";
 export default function ClientThemeWrapper({children}: any) {
   const { theme } = useContext(ThemeContext);
 
-  return <div data-theme={theme} className="h-auto min-h-screen">{children}</div>
+  return (
+  <div data-theme={theme} className="h-auto">{children}</div>)
 }

@@ -45,10 +45,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
+        console.log('user', user);
         return {
           id: user.user_id,
           email: user.email,
-          name: user.firstname,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          phone: user.phone,
+          status: user.status,
         };
       },
     }),
@@ -68,7 +72,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return true;
     },
-    session: ({ session, token }) => {
+    session: async ({ session, token, user }) => {
+      console.log('user', user);
+      console.log('session', session);
       return {
         ...session,
         user: {
@@ -79,6 +85,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       };
     },
     jwt: ({ token, user }) => {
+      console.log('user jwt', user);
       if (user) {
         const u = user as unknown as any;
         return {
