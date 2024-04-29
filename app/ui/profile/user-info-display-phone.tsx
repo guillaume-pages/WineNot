@@ -5,12 +5,10 @@ import { useSession } from 'next-auth/react';
 export default function UserInfoDisplayPhone() {
   const { data: session } = useSession();
   const user = session?.user;
-  console.log(user)
-  console.log(session)
 
   return (
     <>
-          <div className="flex justify-center pb-4 pt-6">
+      <div className="flex flex-col items-center pb-4 pt-6">
         <div className="avatar">
           <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
             <Image
@@ -21,8 +19,8 @@ export default function UserInfoDisplayPhone() {
             />
           </div>
         </div>
+        <h1 className='pt-4 text-2xl'>{user?.name}</h1>
       </div>
-
     </>
-  )
+  );
 }

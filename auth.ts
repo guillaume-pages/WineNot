@@ -45,14 +45,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
-        console.log('user', user);
         return {
           id: user.user_id,
           email: user.email,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          phone: user.phone,
-          status: user.status,
+          name: user.firstname
         };
       },
     }),
@@ -73,8 +69,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return true;
     },
     session: async ({ session, token, user }) => {
-      console.log('user', user);
-      console.log('session', session);
       return {
         ...session,
         user: {
