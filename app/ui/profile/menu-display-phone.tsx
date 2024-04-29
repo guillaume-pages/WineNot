@@ -5,11 +5,12 @@ import { FiChevronRight } from 'react-icons/fi';
 import { RiAccountCircleLine } from 'react-icons/ri';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
+import { HiOutlinePaintBrush } from 'react-icons/hi2';
 
 export default function MenuDisplayPhone() {
   return (
     <>
-      <div className="mx-auto grid w-5/6 grid-cols-3 grid-rows-4 gap-4">
+      <div className="mx-auto grid w-5/6 grid-cols-3 grid-rows-5 gap-4">
         {/* Ligne 1 - Mon compte */}
         <div className="col-span-2 row-start-1 flex items-center gap-2">
           <RiAccountCircleLine className="text-2xl" />
@@ -42,6 +43,16 @@ export default function MenuDisplayPhone() {
         </div>
         <div className="col-start-3 row-start-4 flex items-center gap-2">
           <Link href="/profile/help">
+            <FiChevronRight className="text-base" />
+          </Link>
+        </div>
+        {/* Ligne 5 - préférences de thèmes */}
+        <div className="col-span-2 row-start-5 flex items-center gap-2">
+          <HiOutlinePaintBrush className="text-2xl" />
+          <h3 className="text-lg font-semibold">Thèmes</h3>
+        </div>
+        <div className="col-start-3 row-start-5 flex items-center gap-2">
+          <Link href="/profile/preferences">
             <FiChevronRight className="text-base" />
           </Link>
         </div>

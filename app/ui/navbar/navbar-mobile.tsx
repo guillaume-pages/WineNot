@@ -13,7 +13,7 @@ import { CiLogout } from 'react-icons/ci';
 import { CiSettings } from 'react-icons/ci';
 import LogoPetit from '@/app/logo-petit.png';
 import DisconnectButton from './disconnect-button';
-import Avatar from '../components/avatar';
+import Avatar from '../profile/avatar';
 
 export default function NavbarMobile() {
   const pathname = usePathname();

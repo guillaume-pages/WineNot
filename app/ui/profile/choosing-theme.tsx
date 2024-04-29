@@ -46,9 +46,10 @@ export default function ChoosingTheme() {
   return (
     <>
       <div className='mx-auto'>
-        <p>Choisissez un thème clair ou sombre parmi ces choix.<br /> Votre thème actuel est : {theme}.</p>
+        <p className='text-center'>Choisissez un thème clair ou sombre parmi ces choix.<br /> Votre thème actuel est : <span className='text-primary font-bold'>{theme}</span>.</p>
+        <hr className="mx-auto my-4 w-5/6 border-neutral-300" />
         <div className='flex justify-center'>
-          <div className="dropdown mb-72">
+          <div className="dropdown mb-72 ">
             <div tabIndex={0} role="button" className="btn m-1">
               Theme clair
               <svg
