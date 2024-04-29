@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 import bottles from '@/app/bottles.jpg';
 import logoPetit from '@/app/logo-petit.png';
-import { LoginFormOld } from '@/app/login/login-form-old'
 import { LoginForm } from './login-form';
 import { Suspense } from 'react';
 
