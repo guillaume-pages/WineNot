@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import moyenLogo from '@/app/logo-moyen.png';
-import DropDownAvatar from '../components/dropdown-avatar';
+import DropDownAvatar from '../profile/dropdown-avatar';
 
 // // TODO: affichage de tableau de bord si le user est un professionnel
 
@@ -23,7 +23,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="bg-white hidden md:block">
+    <header className="hidden bg-white md:block">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
@@ -52,16 +52,16 @@ export default function Navbar() {
                 {user && (
                   <>
                     <li>
-                    <Link
-                      className="text-gray-500 transition hover:text-gray-500/75"
-                      href="/cellar"
-                    >
-                      MA CAVE
-                    </Link>
-                  </li>
+                      <Link
+                        className="text-gray-500 transition hover:text-gray-500/75"
+                        href="/cellar"
+                      >
+                        MA CAVE
+                      </Link>
+                    </li>
                   </>
                 )}
-                
+
                 {/* <li>
                 <Link className="text-gray-500 transition hover:text-gray-500/75" href="/dashboard">TABLEAU DE BORD</Link>
               </li> */}
@@ -71,20 +71,19 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               {!user && (
                 <div className="sm:flex sm:gap-4">
-                  
                   <Link
-                      className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-orange-600"
-                      href="/register"
-                    >
-                      S&apos;inscrire
-                    </Link>
-                  <div className="hidden sm:flex">
-                  <Link
-                    className="rounded-md bg-orange-400 px-5 py-2.5 text-sm font-medium text-black shadow"
-                    href="/login"
+                    className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-orange-600"
+                    href="/register"
                   >
-                    Se connecter
+                    S&apos;inscrire
                   </Link>
+                  <div className="hidden sm:flex">
+                    <Link
+                      className="rounded-md bg-orange-400 px-5 py-2.5 text-sm font-medium text-black shadow"
+                      href="/login"
+                    >
+                      Se connecter
+                    </Link>
                   </div>
                 </div>
               )}

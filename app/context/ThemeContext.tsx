@@ -17,17 +17,13 @@ export const ThemeContext = createContext<ThemeContextType>(defaultThemeContextV
 
 export const ThemeProvider = ({children}: any) => {
   const [theme, setTheme] = useState("light");
-  const [isMounted, setIsMounted] = useState(false)
+  const [, setIsMounted] = useState(false)
 
   useEffect(() => {
     setIsMounted(true);
     const storedTheme = localStorage.getItem("theme") || "light";
     setTheme(storedTheme)
   }, [])
-
-  // if(!isMounted) {
-  //   return <>Veuillez patienter...</>
-  // }
 
   const changeTheme = (theme: string) => {
     setTheme(theme);

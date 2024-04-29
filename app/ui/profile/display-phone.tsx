@@ -1,4 +1,4 @@
-import ChoosingTheme from '../components/choosing-theme';
+import ChoosingTheme from './choosing-theme';
 import MenuDisplayPhone from './menu-display-phone';
 import UserInfoDisplayPhone from './user-info-display-phone';
 
@@ -9,11 +9,7 @@ export default function DisplayPhone() {
       <UserInfoDisplayPhone />
       {/* MENU SETTINGS */}
       <hr className="mx-auto my-4 w-5/6 border-neutral-300" />
-        <MenuDisplayPhone />
-      
-      <div className="flex pt-6">
-        <ChoosingTheme />
-      </div>
+      <MenuDisplayPhone />
     </div>
   );
 }
