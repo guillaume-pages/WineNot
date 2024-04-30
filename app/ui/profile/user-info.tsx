@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
+import { RiAccountCircleLine } from 'react-icons/ri';
 
 export default function UserInfoDisplayPhone() {
   const { data: session } = useSession();
@@ -20,6 +21,10 @@ export default function UserInfoDisplayPhone() {
           </div>
         </div>
         <h1 className='pt-4 text-2xl'>{user?.name}</h1>
+        <div className='flex items-center gap-4 pt-4'>
+          <RiAccountCircleLine className="text-2xl" />
+          <h3 className="text-lg font-semibold">Mon compte</h3>
+        </div>
       </div>
     </>
   );
