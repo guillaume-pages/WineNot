@@ -23,7 +23,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="hidden bg-white md:block">
+    <header className="hidden bg-white sm:block">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
@@ -37,8 +37,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="md:flex md:items-center md:gap-12">
-            <nav aria-label="Global" className="hidden md:flex">
+          <div className="sm:flex sm:items-center md:gap-12">
+            <nav aria-label="Global" className="hidden sm:flex">
               <ul className="flex items-center gap-6 text-sm">
                 <li>
                   <Link

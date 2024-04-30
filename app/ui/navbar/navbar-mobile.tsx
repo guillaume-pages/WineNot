@@ -30,7 +30,7 @@ export default function NavbarMobile() {
 
   return (
     <>
-      <div className="fixed bottom-0 flex h-11 w-full justify-center space-x-6 bg-slate-50 py-1 md:hidden">
+      <div className="fixed bottom-0 flex h-11 w-full justify-center space-x-6 bg-slate-50 py-1 sm:hidden">
         <Link href="/">
           <Image src={LogoPetit} height={36} width={46} alt="Compagny logo" />
         </Link>
@@ -46,6 +46,9 @@ export default function NavbarMobile() {
         {isConnected ? (
           <>
             <DisconnectButton />
+            <Link href="/profile">
+              <Avatar />
+            </Link>
           </>
         ) : (
           <>
@@ -54,9 +57,6 @@ export default function NavbarMobile() {
             </Link>
           </>
         )}
-        <Link href="/profile">
-          <Avatar />
-        </Link>
       </div>
     </>
   );
