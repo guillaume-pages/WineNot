@@ -79,7 +79,7 @@ export const LoginForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-error">{error}</p>}
         <div className="mb-6">
           <input
             type="email"
@@ -88,7 +88,7 @@ export const LoginForm = () => {
             className="input input-bordered w-full"
           />
           {errors['email'] && (
-            <span className="block pt-1 text-xs text-red-500">
+            <span className="block pt-1 text-xs text-error">
               {errors['email']?.message as string}
             </span>
           )}
@@ -110,7 +110,7 @@ export const LoginForm = () => {
             </button>
           </div>
           {errors['password'] && (
-            <span className="block pt-1 text-xs text-red-500">
+            <span className="block pt-1 text-xs text-error">
               {errors['password']?.message as string}
             </span>
           )}
@@ -123,7 +123,7 @@ export const LoginForm = () => {
           >
             {submitting ? 'Connexion...' : 'Se connecter'}
           </button>
-          <p className="mt-4 text-base text-gray-500 sm:mt-0">
+          <p className="mt-4 text-base sm:mt-0">
           Vous n&apos;avez pas encore de compte ?{' '}
           <Link href="/register" className="ml-1 font-bold text-primary">
             S&apos;inscrire

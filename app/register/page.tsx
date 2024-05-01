@@ -7,9 +7,9 @@ import bottles from '@/app/bottles.jpg';
 import logoPetit from '@/app/logo-petit.png';
 
 import RegisterForm from './register-form';
+import { FaArrowLeftLong } from 'react-icons/fa6';
 
 export default function Register() {
-
   return (
     <>
       <section>
@@ -25,6 +25,9 @@ export default function Register() {
           </section>
 
           <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
+            <Link href="/" className="absolute left-4 top-4">
+              <FaArrowLeftLong className="text-3xl text-slate-200" />
+            </Link>
             <div className="max-w-xl lg:max-w-3xl">
               <div className="relative -mt-16 block">
                 <Link
@@ -54,4 +57,3 @@ export default function Register() {
     </>
   );
 }
-

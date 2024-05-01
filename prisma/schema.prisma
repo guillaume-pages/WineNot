@@ -29,13 +29,12 @@ model cellars {
   created_at    DateTime?       @db.Timestamp(6)
   updated_at    DateTime?       @db.Timestamp(6)
   deleted_at    DateTime?       @db.Timestamp(6)
-  bottles       bottles[]
+  bottles       Int[]
   users_cellars users_cellars[]
 }
 
 model bottles {
   bottle_id          String    @id @default(uuid())
-  cellar_id          String?
   bottle_name        String    @db.VarChar
   millesime          Int
   type_of_wine       String    @db.VarChar
@@ -57,7 +56,6 @@ model bottles {
   potential_date     DateTime? @db.Timestamp(6)
   quantity           Int
   global_visibility  Int
-  cellars            cellars?  @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model users_cellars {
