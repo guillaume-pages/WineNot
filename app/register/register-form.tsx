@@ -11,7 +11,7 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import clsx from 'clsx';
 import toast, { Toaster } from 'react-hot-toast';
 
-import { createUser } from '@/app/lib/user/user.post';
+import { createUser } from '@/app/lib/user/user.create';
 
 const notifySucces = (msg: string) =>
   toast.success(msg, {

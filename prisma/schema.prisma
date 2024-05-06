@@ -26,6 +26,7 @@ model users {
 
 model cellars {
   cellar_id     String          @id @default(uuid())
+  cellar_name   String?          @db.VarChar
   created_at    DateTime?       @db.Timestamp(6)
   updated_at    DateTime?       @db.Timestamp(6)
   deleted_at    DateTime?       @db.Timestamp(6)
