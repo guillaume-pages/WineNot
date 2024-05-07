@@ -1,36 +1,21 @@
-'use client';
-
-import Link from 'next/link';
-import NoCellar from '../ui/cellar/no-cellar';
-import { useSession } from 'next-auth/react';
-import { createCellar } from '../lib/cellar/cellar.create';
-import { useFormState } from 'react-dom';
+import ModalAddCellar from "../ui/cellar/modal-add-cellar";
 
 export default function Cellar() {
-  const { data: session } = useSession();
-  const user = session?.user;
-  const initialState = { message: null, errors: {} };
-  const [state, dispatch] = useFormState(createCellar, initialState);
 
   return (
     <>
-      <form className="mt-4 flex flex-col items-center" action={dispatch}>
-        <input
-          type="text"
-          placeholder="Nom de la cave"
-          name="cellar_name"
-          className="w-80 rounded-md border border-neutral-300 p-2"
-        />
-        <input 
-          type="hidden"
-          name="user_id"
-          value={user && user.id}
-        />
-        <button className="mt-2 w-80 rounded-md bg-primary p-2 text-white">
-          Créer une cave
-        </button>
-      </form>
-      <div>{state.message && <p className="text-red-500">{state.message}</p>}</div>
+      <section className="flex flex-col mx-auto border border-neutral rounded-md max-w-7xl">
+        <div className="border-b border-neutral">
+          <select>
+            <option value="1">Cave 1</option>
+            <option value="2">Cave 2</option>
+            <option value="3">Cave 3</option>
+            <option value="4">Cave 4</option>
+          </select>
+          <ModalAddCellar />
+        </div>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae dolore maiores asperiores numquam corrupti. Non odit eius minus! Vitae, aliquam mollitia. Qui reprehenderit unde dolor.
+      </section>
     </>
   );
 }
