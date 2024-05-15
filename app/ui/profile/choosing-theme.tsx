@@ -1,7 +1,5 @@
 'use client';
 
-import { useContext } from 'react';
-import { ThemeContext } from '@/app/context/ThemeContext';
 import { ChoosingTheme } from '@/components/choosing-theme';
 
 export default function PagePreference() {
