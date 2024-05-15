@@ -1,15 +1,22 @@
 'use client';
 
-import React, { useEffect } from 'react';
-
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 
 import Link from 'next/link';
 
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import clsx from 'clsx';
 import toast, { Toaster } from 'react-hot-toast';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
 
 import { createUser } from '@/app/lib/user/user.create';
 
@@ -30,43 +37,9 @@ export default function RegisterForm() {
   const [state, dispatch] = useFormState(createUser, initialState);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [status, setStatus] = useState('');
-
-  const [isPasswordValid, setIsPasswordValid] = useState('');
-  const [hasLowercase, setHasLowercase] = useState(false);
-  const [hasUppercase, setHasUppercase] = useState(false);
-  const [hasNumber, setHasNumber] = useState(false);
-  const [hasSpecialChar, setHasSpecialChar] = useState(false);
-  const [isMinLength, setIsMinLength] = useState(false);
-
-  const [isSamePassword, setIsSamePassword] = useState('');
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
-  };
-
-  const handleStatusChange = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setStatus(e.target.value);
-  };
-
-  const handleIsPasswordValid = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    const password = e.target.value as string;
-    setHasLowercase(/[a-z]/.test(password));
-    setHasUppercase(/[A-Z]/.test(password));
-    setHasNumber(/\d/.test(password));
-    setHasSpecialChar(/[@$!%*?&,]/.test(password));
-    setIsMinLength(password.length >= 10);
-    setIsPasswordValid(e.target.value);
-  };
-
-  const handleIsSamePassword = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setIsSamePassword(e.target.value);
   };
 
   useEffect(() => {
@@ -86,13 +59,10 @@ export default function RegisterForm() {
       <form action={dispatch} className="mt-8 grid grid-cols-6 gap-4 md:gap-2">
         {/* FIRST NAME */}
         <div className="col-span-6 sm:col-span-3">
-          <label
-            htmlFor="FirstName"
-            className="block text-base font-medium "
-          >
+          <Label htmlFor="FirstName" className="block text-base font-medium ">
             Votre prénom
-          </label>
-          <input
+          </Label>
+          <Input
             type="text"
             id="FirstName"
             name="firstname"
@@ -103,13 +73,10 @@ export default function RegisterForm() {
 
         {/* LAST NAME */}
         <div className="col-span-6 sm:col-span-3">
-          <label
-            htmlFor="LastName"
-            className="block text-base font-medium "
-          >
+          <Label htmlFor="LastName" className="block text-base font-medium ">
             Votre nom (optionnel)
-          </label>
-          <input
+          </Label>
+          <Input
             type="text"
             id="LastName"
             name="lastname"
@@ -119,13 +86,10 @@ export default function RegisterForm() {
 
         {/* EMAIL */}
         <div className="col-span-6">
-          <label
-            htmlFor="Email"
-            className="block text-base font-medium "
-          >
+          <Label htmlFor="Email" className="block text-base font-medium ">
             Votre mail
-          </label>
-          <input
+          </Label>
+          <Input
             type="email"
             id="Email"
             name="email"
@@ -136,42 +100,20 @@ export default function RegisterForm() {
 
         {/* PASSWORD */}
         <div className="col-span-6">
-          <label
-            htmlFor="Password"
-            className="block text-base font-medium "
-          >
+          <Label htmlFor="Password" className="block text-base font-medium ">
             Votre mot de passe
             <br />
             <span className="text-xs">
-              doit contenir au moins :{' '}
-              <span className={hasUppercase ? 'text-success' : undefined}>
-                une majuscule
-              </span>
-              ,{' '}
-              <span className={hasLowercase ? 'text-success' : undefined}>
-                une minuscule
-              </span>
-              ,{' '}
-              <span className={hasNumber ? 'text-success' : undefined}>
-                un chiffre
-              </span>
-              ,{' '}
-              <span className={hasSpecialChar ? 'text-success' : undefined}>
-                un caractère spécial
-              </span>{' '}
-              et{' '}
-              <span className={isMinLength ? 'text-success' : undefined}>
-                doit faire au moins 10 caractères
-              </span>
-              .
+              doit contenir au moins : une majuscule, une minuscule, un
+              chiffre, un caractère spécial et doit faire au moins 10
+              caractères.
             </span>
-          </label>
+          </Label>
           <div className="relative">
-            <input
+            <Input
               type={isPasswordVisible ? 'text' : 'password'}
               id="Password"
               name="password"
-              onChange={handleIsPasswordValid}
               required
               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$"
               title="Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un caractère spécial parmi (@$!%*?&,) et être d'une longeur de 10 caractères minimum."
@@ -189,35 +131,21 @@ export default function RegisterForm() {
 
         {/* CONFIRM PASSWORD */}
         <div className="col-span-6">
-          <label
+          <Label
             htmlFor="ConfirmPassword"
             className="block text-base font-medium "
           >
             Veuillez confirmer votre mot de passe
-            {isSamePassword.length < 1
-              ? ''
-              : isSamePassword === isPasswordValid
-              ? ''
-              : ' (les mots de passe ne correspondent pas)'}
-          </label>
+          </Label>
           <div className="relative">
-            <input
+            <Input
               type={isPasswordVisible ? 'text' : 'password'}
               id="ConfirmPassword"
               name="confirmPassword"
-              onChange={handleIsSamePassword}
               required
               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$"
               title="Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un caractère spécial parmi (@$!%*?&,) et être d'une longeur de 10 caractères minimum."
-              className={clsx(
-                'mt-1 w-full rounded-md  text-base  shadow-sm',
-                {
-                  'border-red-500':
-                    isSamePassword.length < 1
-                      ? ''
-                      : isSamePassword !== isPasswordValid,
-                },
-              )}
+              className="mt-1 w-full rounded-md  text-base  shadow-sm"
             />
             <button
               type="button"
@@ -231,13 +159,10 @@ export default function RegisterForm() {
 
         {/* PHONE */}
         <div className="col-span-6 sm:col-span-3">
-          <label
-            htmlFor="Phone"
-            className="block text-base font-medium "
-          >
+          <Label htmlFor="Phone" className="block text-base font-medium ">
             Votre numéro de téléphone (optionnel)
-          </label>
-          <input
+          </Label>
+          <Input
             type="text"
             id="Phone"
             name="phone"
@@ -247,33 +172,30 @@ export default function RegisterForm() {
 
         {/* STATUS */}
         <div className="col-span-6 sm:col-span-3">
-          <label
-            htmlFor="Status"
-            className="block text-base font-medium "
-          >
+          <Label htmlFor="Status" className="block text-base font-medium ">
             Votre status
-          </label>
-          <select
-            id="Status"
-            name="status"
-            value={status}
-            onChange={handleStatusChange}
-            required
-            className="mt-1 w-full rounded-md  text-base  shadow-sm"
-          >
-            <option value="">Choisissez votre statut</option>
-            <option value="particulier">Particulier</option>
-            <option value="caviste">Caviste</option>
-            <option value="vigneron">Vigneron</option>
-            <option value="restaurateur">Restaurateur</option>
-          </select>
+          </Label>
+          <Select name="status" required>
+            <SelectTrigger
+              className="mt-1 w-full rounded-md text-base shadow-sm"
+              id="Status"
+            >
+              <SelectValue placeholder="Choisissez votre statut" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="particulier">Particulier</SelectItem>
+              <SelectItem value="caviste">Caviste</SelectItem>
+              <SelectItem value="Vigneron">Vigneron</SelectItem>
+              <SelectItem value="restaurateur">Restaurateur</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* MARKETING ACCEPT */}
         {/* 
         <div className="col-span-6">
-          <label htmlFor="MarketingAccept" className="flex gap-4">
-            <input
+          <Label htmlFor="MarketingAccept" className="flex gap-4">
+            <Input
               type="checkbox"
               id="MarketingAccept"
               name="marketing_accept"
@@ -284,7 +206,7 @@ export default function RegisterForm() {
               Je souhaite recevoir des emails sur les événements, les mises à
               jour de produits et les annonces de l&apos;entreprise.
             </span>
-          </label>
+          </Label>
         </div> */}
 
         {/* TERMS ACCEPT */}
@@ -304,27 +226,15 @@ export default function RegisterForm() {
 
         {/* SUBMIT */}
         <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-          <button className="btn btn-primary rounded-md border border-neutral px-12 py-3 text-sm font-medium focus:outline-none focus:ring">
+          <Button className="rounded-md border border-neutral px-12 py-3 text-sm font-medium focus:outline-none focus:ring">
             Créer un compte
-          </button>
+          </Button>
           <p className="mt-4 text-base sm:mt-0">
             Vous avez déjà un compte ?{' '}
             <Link href="/login" className="ml-1 font-bold text-primary">
               Se connecter
             </Link>
           </p>
-        </div>
-        <div className="col-span-6">
-          {state.message && (
-            <p
-              className={clsx('mt-2 text-base', {
-                'text-success': state.message.includes('succès'),
-                'text-error': !state.message.includes('succès'),
-              })}
-            >
-              {state.message}
-            </p>
-          )}
         </div>
       </form>
     </>
