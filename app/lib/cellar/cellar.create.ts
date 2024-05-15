@@ -2,6 +2,7 @@
 
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
+import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 
@@ -18,39 +19,6 @@ export const createCellar = async (prevState: State, formData: FormData ) => {
   const cellarName = formData.get('cellar_name') as string;
   const user_id = formData.get('user_id') as string;
 
-  // const validationResult = FormDataSchema.safeParse({
-  //   cellar_name: cellarName,
-  //   user_id: user_id,
-  // });
-
-  // console.log(validationResult);
-  // console.log(validationResult.data);
-  // console.log(validationResult.cellar_name);
-  // console.log(validationResult.user_id);
-
-  // try {    
-  //   const newCellar = await prisma.cellars.create({
-  //     data: {
-  //       cellar_name: cellarName,
-  //       created_at: new Date(),
-  //     },
-  //   });
-
-  //   await prisma.users_cellars.create({
-  //     data: {
-  //       user_id: user_id,
-  //       cellar_id: newCellar.cellar_id,
-  //     },
-  //   });
-
-  //   return {
-  //     message: 'Votre cave a été créée avec succès.',
-  //   };
-  // } catch (error) {
-  //   return {
-  //     message: 'Erreur lors de la création de la cave. Veuillez réessayer.',
-  //   };
-  // }
   const validationResult = FormDataSchema.safeParse({
     cellar_name: cellarName,
     user_id: user_id,
@@ -58,10 +26,7 @@ export const createCellar = async (prevState: State, formData: FormData ) => {
   
   if (validationResult.success) {
     const { cellar_name, user_id } = validationResult.data;
-  
-    console.log(cellar_name);
-    console.log(user_id);
-  
+    
     try {    
       const newCellar = await prisma.cellars.create({
         data: {
@@ -76,6 +41,8 @@ export const createCellar = async (prevState: State, formData: FormData ) => {
           cellar_id: newCellar.cellar_id,
         },
       });
+
+      revalidatePath('/cellar');
   
       return {
         message: 'Votre cave a été créée avec succès.',
@@ -91,5 +58,4 @@ export const createCellar = async (prevState: State, formData: FormData ) => {
       message: 'Données de formulaire invalides. Veuillez vérifier vos entrées.',
     };
   }
-  
 };

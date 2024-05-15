@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import moyenLogo from '@/app/logo-moyen.png';
-import DropDownAvatar from '../profile/dropdown-avatar';
+import AvatarDisplay from '../profile/display-avatar';
+import { ChoosingTheme } from '@/components/choosing-theme';
 
 // // TODO: affichage de tableau de bord si le user est un professionnel
 
@@ -23,7 +24,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="hidden bg-white sm:block">
+    <header className="hidden sm:block">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
@@ -42,7 +43,7 @@ export default function Navbar() {
               <ul className="flex items-center gap-6 text-sm">
                 <li>
                   <Link
-                    className="text-gray-500 transition hover:text-gray-500/75"
+                    className="transition hover:text-gray-500/75"
                     href="/feed"
                   >
                     {' '}
@@ -53,7 +54,7 @@ export default function Navbar() {
                   <>
                     <li>
                       <Link
-                        className="text-gray-500 transition hover:text-gray-500/75"
+                        className="transition hover:text-gray-500/75"
                         href="/cellar"
                       >
                         MA CAVE
@@ -63,7 +64,7 @@ export default function Navbar() {
                 )}
 
                 {/* <li>
-                <Link className="text-gray-500 transition hover:text-gray-500/75" href="/dashboard">TABLEAU DE BORD</Link>
+                <Link className="transition hover:text-gray-500/75" href="/dashboard">TABLEAU DE BORD</Link>
               </li> */}
               </ul>
             </nav>
@@ -89,9 +90,12 @@ export default function Navbar() {
               )}
               {user && (
                 <>
-                  <DropDownAvatar />
+                  <Link href="/profile">
+                    <AvatarDisplay />
+                  </Link>
                 </>
               )}
+              <ChoosingTheme />
             </div>
           </div>
         </div>

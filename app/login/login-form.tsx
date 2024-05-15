@@ -9,6 +9,10 @@ import { signIn } from 'next-auth/react';
 import { TypeOf, object, string } from 'zod';
 import Link from 'next/link';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+
 
 const loginUserSchema = object({
   email: string({ required_error: "L'email est requis" })
@@ -55,16 +59,16 @@ export const LoginForm = () => {
       setSubmitting(false);
 
       if (!res?.error) {
-        toast.success('Vous êtes connecté');
+        toast.success('Vous êtes connecté', { duration: 4000, position: 'top-right' });
         router.push(callbackUrl);
       } else {
         reset({ password: '' });
         const message = 'Mot de passe ou email incorrect';
-        toast.error(message);
+        toast.error(message, { duration: 2500, position: 'top-right' });
         setError(message);
       }
     } catch (error: any) {
-      toast.error(error.message);
+      toast.error(error.message, { duration: 4000, position: 'top-right' });
       setError(error.message);
     } finally {
       setSubmitting(false);
@@ -81,11 +85,11 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         {error && <p className="text-error">{error}</p>}
         <div className="mb-6">
-          <input
+          <Input
             type="email"
             {...register('email')}
             placeholder="Votre email"
-            className="input input-bordered w-full"
+            className="w-full"
           />
           {errors['email'] && (
             <span className="block pt-1 text-xs text-error">
@@ -95,11 +99,11 @@ export const LoginForm = () => {
         </div>
         <div className='mb-6'>
           <div className="relative">
-            <input
+            <Input
               type={isPasswordVisible ? 'text' : 'password'}
               {...register('password')}
               placeholder="Votre mot de passe"
-              className="input input-bordered w-full"
+              className="Input Input-bordered w-full"
             />
             <button
               type="button"
@@ -116,13 +120,13 @@ export const LoginForm = () => {
           )}
         </div>
         <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-          <button
+          <Button
             type="submit"
             className="btn btn-primary w-36"
             disabled={submitting}
           >
             {submitting ? 'Connexion...' : 'Se connecter'}
-          </button>
+          </Button>
           <p className="mt-4 text-base sm:mt-0">
           Vous n&apos;avez pas encore de compte ?{' '}
           <Link href="/register" className="ml-1 font-bold text-primary">

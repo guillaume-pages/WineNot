@@ -13,7 +13,8 @@ import { CiLogout } from 'react-icons/ci';
 import { CiSettings } from 'react-icons/ci';
 import LogoPetit from '@/app/logo-petit.png';
 import DisconnectButton from './disconnect-button';
-import Avatar from '../profile/avatar';
+import Avatar from '../profile/display-avatar';
+import AvatarDisplay from '../profile/display-avatar';
 
 export default function NavbarMobile() {
   const pathname = usePathname();
@@ -30,7 +31,7 @@ export default function NavbarMobile() {
 
   return (
     <>
-      <div className="fixed bottom-0 flex h-11 w-full justify-center space-x-6 bg-slate-50 py-1 sm:hidden">
+      <div className="fixed bottom-0 flex h-11 w-full justify-center space-x-6 py-1 sm:hidden">
         <Link href="/">
           <Image src={LogoPetit} height={36} width={46} alt="Compagny logo" />
         </Link>
@@ -45,9 +46,8 @@ export default function NavbarMobile() {
         </Link> */}
         {isConnected ? (
           <>
-            <DisconnectButton />
             <Link href="/profile">
-              <Avatar />
+              <AvatarDisplay />
             </Link>
           </>
         ) : (

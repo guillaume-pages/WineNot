@@ -7,8 +7,7 @@ import '@/app/ui/global.css';
 import { k2d } from '@/app/ui/fonts';
 import Navbar from '@/app/ui/navbar/navbar';
 import NavbarMobile from '@/app/ui/navbar/navbar-mobile';
-import { ThemeProvider } from './context/ThemeContext';
-import ClientThemeWrapper from './context/ClientThemeWrapper';
+import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: {
@@ -29,13 +28,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${k2d.className} antialiased`}>
         <SessionProvider>
-          <ThemeProvider>
-            <ClientThemeWrapper>
-              <Toaster />
-              <Navbar />
-              <NavbarMobile />
-                {children}
-            </ClientThemeWrapper>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Toaster />
+            <Navbar />
+            <NavbarMobile />
+            {children}
           </ThemeProvider>
         </SessionProvider>
       </body>
