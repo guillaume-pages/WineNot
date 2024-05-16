@@ -1,9 +1,7 @@
-'use server';
-
 import { PrismaClient } from '@prisma/client';
-import { z } from 'zod';
-import { revalidatePath } from 'next/cache';
 import { auth } from '@/auth';
+import type { Cellar } from '@/types/cellar.type';
+
 
 const prisma = new PrismaClient();
 
@@ -13,14 +11,20 @@ export const getCellars = async () => {
 
   const id = session?.user?.id;
 
-  const userCellars = await prisma.users_cellars.findMany({
-    where: {
-      user_id: id,
-    },
-    include: {
-      cellars: true,
-    },
-  });
+  try {
+    const userCellars = await prisma.users_cellars.findMany({
+      where: {
+        user_id: id,
+      },
+      include: {
+        cellars: true,
+      },
+    });
+
+    return userCellars as Cellar[];
   
-  return userCellars;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
