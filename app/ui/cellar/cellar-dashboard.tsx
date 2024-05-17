@@ -1,9 +1,11 @@
 'use client';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 
 import type { Cellar } from '@/types/cellar.type';
 import PopoverAddCellar from '@/app/ui/cellar/popover-add-cellar';
-
+import DisplayCellar from './display-cellar';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -19,8 +21,6 @@ interface SelectCellarProps {
 }
 
 export default function CellarDashboard({ cellars }: SelectCellarProps) {
-  // const [activeCellar, setActiveCellar] = useState(cellars[0].cellars.cellar_name || '');
-  // const [cellarId, setCellarId] = useState(cellars[0].cellars.cellar_id || '');
   const defaultCellar =
     cellars.length > 0
       ? cellars[0]
@@ -69,8 +69,9 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
 
   return (
     <>
-      <section className="mx-auto flex max-w-7xl flex-col rounded-md border">
-        <div className="flex space-x-4 border-b px-4 py-2">
+      <section className="mx-auto flex flex-col sm:max-w-7xl sm:rounded-md sm:border">
+        {/* Selecteur et ajout */}
+        <div className="flex space-x-4 px-4 pb-2 pt-6 sm:border-b">
           <Select onValueChange={handleValueChange}>
             <SelectTrigger className="w-[220px]">
               <SelectValue
@@ -96,42 +97,26 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
           </Select>
           <PopoverAddCellar />
         </div>
-        {cellars.length >= 1 ? (
-          <div className="flex px-4 py-2">
-            Vous consultez la cave : {activeCellarData?.cellars.cellar_name}
-          </div>
-        ) : (
-          <div className="flex px-4 py-2">Veuillez créer une cave</div>
-        )}
-
-        {/* <div>
-          <p>user_cellar_id : {cellars[0].user_cellar_id}</p>
-          <p>user_id : {cellars[0].user_id}</p>
-          <p>cellar_id : {cellars[0].cellars.cellar_id}</p>
-          <p>cellar_name : {cellars[0].cellars.cellar_name}</p>
-          <p>created_at : {cellars[0].cellars.created_at.toISOString()}</p>
-          <p>updated_at : {cellars[0].cellars.updated_at?.toISOString()}</p>
-          <p>deleted_at : {cellars[0].cellars.deleted_at?.toISOString()}</p>
-          <p>bottles : {cellars[0].cellars.bottles}</p>
-        </div> */}
-        {activeCellarData && (
-          <div>
-            <p>user_cellar_id : {activeCellarData.user_cellar_id}</p>
-            <p>user_id : {activeCellarData.user_id}</p>
-            <p>cellar_id : {activeCellarData.cellars.cellar_id}</p>
-            <p>cellar_name : {activeCellarData.cellars.cellar_name}</p>
-            <p>
-              created_at : {activeCellarData.cellars.created_at.toISOString()}
-            </p>
-            <p>
-              updated_at : {activeCellarData.cellars.updated_at?.toISOString()}
-            </p>
-            <p>
-              deleted_at : {activeCellarData.cellars.deleted_at?.toISOString()}
-            </p>
-            <p>bottles : {activeCellarData.cellars.bottles}</p>
-          </div>
-        )}
+        {/* Display de la partie cav */}
+        <div className="px-4 pb-14">
+          {cellars.length >= 1 ? (
+            <div className="flex py-2">
+              Vous consultez la cave : {activeCellarData?.cellars.cellar_name}
+            </div>
+          ) : (
+            <div className="flex py-2">Veuillez créer une cave</div>
+          )}
+          {activeCellarData && (
+            <>
+              <Button>
+                <Link
+                  href={`/cellar/add/${activeCellarData.cellars.cellar_id}`}
+                >Ajouter une bouteille</Link>
+              </Button>
+              <DisplayCellar cellar={activeCellarData} />
+            </>
+          )}
+        </div>
       </section>
     </>
   );

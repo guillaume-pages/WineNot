@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 
 export const getCellars = async () => {
   const session = await auth();
-  console.log(session);
 
   const id = session?.user?.id;
 
