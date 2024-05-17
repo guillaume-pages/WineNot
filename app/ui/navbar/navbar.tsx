@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import moyenLogo from '@/app/logo-moyen.png';
 import AvatarDisplay from '../profile/display-avatar';
 import { ChoosingTheme } from '@/components/choosing-theme';
+import { Button } from '@/components/ui/button';
 
 // // TODO: affichage de tableau de bord si le user est un professionnel
 
@@ -72,20 +73,22 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               {!user && (
                 <div className="sm:flex sm:gap-4">
-                  <Link
-                    className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-orange-600"
-                    href="/register"
-                  >
-                    S&apos;inscrire
-                  </Link>
-                  <div className="hidden sm:flex">
+                  <Button variant={'secondary'}>
                     <Link
-                      className="rounded-md bg-orange-400 px-5 py-2.5 text-sm font-medium text-black shadow"
+                      className="rounded-md text-sm font-medium"
+                      href="/register"
+                    >
+                      S&apos;inscrire
+                    </Link>
+                  </Button>
+                  <Button className="hidden sm:flex">
+                    <Link
+                      className="rounded-md text-sm font-medium"
                       href="/login"
                     >
                       Se connecter
                     </Link>
-                  </div>
+                  </Button>
                 </div>
               )}
               {user && (

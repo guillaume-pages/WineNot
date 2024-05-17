@@ -9,11 +9,7 @@ import { PiWineThin } from 'react-icons/pi';
 import { PiHouseLineLight } from 'react-icons/pi';
 import { PiChartLineUpThin } from 'react-icons/pi';
 import { CiLogin } from 'react-icons/ci';
-import { CiLogout } from 'react-icons/ci';
-import { CiSettings } from 'react-icons/ci';
 import LogoPetit from '@/app/logo-petit.png';
-import DisconnectButton from './disconnect-button';
-import Avatar from '../profile/display-avatar';
 import AvatarDisplay from '../profile/display-avatar';
 
 export default function NavbarMobile() {
@@ -31,7 +27,7 @@ export default function NavbarMobile() {
 
   return (
     <>
-      <div className="fixed bottom-0 flex h-11 w-full justify-center space-x-6 py-1 sm:hidden">
+      <div className="fixed bottom-0 flex h-12 w-full justify-center space-x-6 py-1 bg-accent border-t-[1px] border-accent-foreground sm:hidden">
         <Link href="/">
           <Image src={LogoPetit} height={36} width={46} alt="Compagny logo" />
         </Link>
