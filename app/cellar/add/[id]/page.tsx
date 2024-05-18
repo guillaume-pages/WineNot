@@ -139,12 +139,12 @@ export default function AddBottle() {
                 <div className='flex items-center space-x-2'>
                   <Label htmlFor='complexity'>Complexité</Label>
                   <Slider onValueChange={(e) => handleSliderComplexity(e)} defaultValue={sliderComplexity} max={100} step={1} />
-                  <span className='w-[76px]'>{sliderComplexity} %</span>
+                  <span className='w-[76px] text-xs'>{sliderComplexity} %</span>
                 </div>
-                <Label htmlFor='spicy'>Epicé</Label>
-                <div className='flex'>
+                <div className='flex items-center space-x-2'>
+                  <Label htmlFor='spicy'>Epicé</Label>
                   <Slider onValueChange={(e) => handleSliderSpicy(e)} defaultValue={sliderSpicy} max={100} step={1} />
-                  <span className='w-16 pl-2'>{sliderSpicy} %</span>
+                  <span className='w-[76px] text-sm'>{sliderSpicy} %</span>
                 </div>
                 <Label htmlFor='fruit'>Fruité</Label>
                 <div className='flex'>
