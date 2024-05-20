@@ -53,7 +53,6 @@ export const createCellar = async (prevState: State, formData: FormData ) => {
       };
     }
   } else {
-    console.log(validationResult.error.errors); // Afficher les erreurs de validation
     return {
       message: 'Données de formulaire invalides. Veuillez vérifier vos entrées.',
     };
