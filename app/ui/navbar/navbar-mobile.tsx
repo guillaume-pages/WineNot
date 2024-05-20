@@ -27,7 +27,7 @@ export default function NavbarMobile() {
 
   return (
     <>
-      <div className="fixed bottom-0 flex h-12 w-full justify-center space-x-6 py-1 bg-accent border-t-[1px] border-accent-foreground sm:hidden">
+      <div className="fixed bottom-0 z-10 flex h-12 w-full justify-center space-x-6 py-1 bg-accent border-t-[1px] border-accent-foreground sm:hidden">
         <Link href="/">
           <Image src={LogoPetit} height={36} width={46} alt="Compagny logo" />
         </Link>
