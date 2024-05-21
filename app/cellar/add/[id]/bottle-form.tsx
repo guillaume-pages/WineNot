@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from "@/components/ui/textarea"
 
 const notifySucces = (msg: string) =>
   toast.success(msg, {
@@ -117,7 +118,7 @@ export default function BottleForm() {
             type="number"
             id="millesime"
             name="millesime"
-            placeholder="Millésime"
+            placeholder="ex: 2019"
             className="mt-1 w-full rounded-md text-base shadow-sm"
           />
         </div>
@@ -130,7 +131,7 @@ export default function BottleForm() {
               className="mt-1 w-full rounded-md text-base shadow-sm"
               id="type_of_wine"
             >
-              <SelectValue />
+              <SelectValue placeholder="Rouge, Blanc..." />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="rouge">Rouge</SelectItem>
@@ -145,13 +146,30 @@ export default function BottleForm() {
           <Label className="pb-2" htmlFor="size">
             Taille
           </Label>
-          <Input
-            type="text"
-            id="size"
-            name="size"
-            placeholder="Taille"
-            className="mt-1 w-full rounded-md text-base shadow-sm"
-          />
+          <Select name="size" required>
+            <SelectTrigger
+              className="mt-1 w-full rounded-md text-base shadow-sm"
+              id="size"
+            >
+              <SelectValue placeholder="Standard, Magnum..." />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="standard">Standard 75 cl</SelectItem>
+              <SelectItem value="magnum">Magnum 1.5 L</SelectItem>
+              <SelectItem value="jéroboam">Jéroboam 3 L</SelectItem>
+              <SelectItem value="réhoboam">Réhoboam 4.5 L</SelectItem>
+              <SelectItem value="mathusalem">Mathusalem 6 L</SelectItem>
+              <SelectItem value="salmanazar">Salmanazar 9 L</SelectItem>
+              <SelectItem value="balthazar">Balthazar 12 L</SelectItem>
+              <SelectItem value="nabuchodonosor">Nabuchodonosor 15 L</SelectItem>
+              <SelectItem value="melchior">Melchior 18 L</SelectItem>
+              <SelectItem value="solomon">Solomon 20 L</SelectItem>
+              <SelectItem value="souverain">Souverain 25 L</SelectItem>
+              <SelectItem value="primat">Primat 27 L</SelectItem>
+              <SelectItem value="melchiesedech">Melchiesedech 30 L</SelectItem>
+            </SelectContent>
+          </Select>
+
         </div>
         <div className="flex flex-col">
           <Label className="pb-2" htmlFor="grape_varieties">
@@ -181,12 +199,11 @@ export default function BottleForm() {
           <Label className="pb-2" htmlFor="eye_description">
             Description visuelle
           </Label>
-          <Input
-            type="text"
-            id="eye_description"
-            name="eye_description"
-            placeholder="Description visuelle"
-            className="mt-1 w-full rounded-md text-base shadow-sm"
+          <Textarea
+            id='eye_description'
+            name='eye_description'
+            placeholder='Description visuelle'
+            className='mt-1 w-full rounded-md text-base shadow-sm'
           />
         </div>
         <div className="flex flex-col">
