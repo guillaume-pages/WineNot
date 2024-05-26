@@ -34,6 +34,14 @@ const defaultValues: BottleContextType = {
   setCarafage: () => {},
   temperature: '',
   setTemperature: () => {},
+  accompaniments: [],
+  setAccompaniment: () => {},
+  bottlePrice: undefined,
+  setBottlePrice: () => {},
+  visibilityPrice: 0,
+  setVisibilityPrice: () => {},
+  bottleGlobalDescription: '',
+  setBottleGlobalDescription: () => {},
 };
 
 export const BottleContext = createContext<BottleContextType>(defaultValues);
@@ -73,6 +81,16 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   const [carafage, setCarafage] = useState<string>('');
   const [temperature, setTemperature] = useState<string>('');
 
+  // Value for accompaniment
+  const [accompaniments, setAccompaniment] = useState<string[]>([]);
+
+  // Value for bottle price
+  const [bottlePrice, setBottlePrice] = useState<number>();
+  const [visibilityPrice, setVisibilityPrice] = useState<number>(0);
+
+  // Value for global description
+  const [bottleGlobalDescription, setBottleGlobalDescription] = useState('');
+
   // Values to send to the API
 
   const dataToSend = {
@@ -92,6 +110,10 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
     sliderTanin,
     carafage,
     temperature,
+    accompaniments,
+    bottlePrice,
+    visibilityPrice,
+    bottleGlobalDescription,
   };
 
   console.log(dataToSend);
@@ -131,6 +153,13 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
         setCarafage,
         temperature,
         setTemperature,
+        accompaniments,
+        setAccompaniment,
+        bottlePrice,
+        setBottlePrice,
+        visibilityPrice,
+        setVisibilityPrice,
+        setBottleGlobalDescription
       }}
     >
       {children}

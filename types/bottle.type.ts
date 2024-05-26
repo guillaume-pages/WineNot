@@ -58,4 +58,12 @@ export interface BottleContextType {
   setCarafage: (value: string) => void;
   temperature: string;
   setTemperature: (value: string) => void;
+  accompaniments: string[];
+  setAccompaniment: (value: string[]) => void;
+  bottlePrice: number | undefined;
+  setBottlePrice: (value: number | undefined) => void;
+  visibilityPrice: number;
+  setVisibilityPrice: (value: number) => void;
+  bottleGlobalDescription: string;
+  setBottleGlobalDescription: (value: string) => void;
 }

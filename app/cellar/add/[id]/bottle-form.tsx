@@ -13,6 +13,8 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Service } from '@/app/ui/bottle/service';
+import { Accompaniment } from '@/app/ui/bottle/accompaniment';
+import { BottlePrice } from '@/app/ui/bottle/bottle-price';
 
 export default function BottleForm() {
   const {
@@ -22,8 +24,8 @@ export default function BottleForm() {
     setBottleMillesime,
     bottleRegion,
     setBottleRegion,
-    bottleEyeDescription,
     setBottleEyeDescription,
+    setBottleGlobalDescription,
   } = useContext(BottleContext);
 
   return (
@@ -67,6 +69,20 @@ export default function BottleForm() {
       <AddNoseDescription />
       <FormSlider />
       <Service />
+      <Accompaniment />
+      <BottlePrice />
+      <div className="flex flex-col">
+        <Label className="pb-4 pt-2" htmlFor="global_description">
+          Description globale
+        </Label>
+        <Textarea
+          id="eye_description"
+          name="eye_description"
+          placeholder="eg: Ce type de vin est idéal pour les amateurs de rouges corsés..."
+          className="w-full rounded-md text-base shadow-sm"
+          onChange={(e) => setBottleGlobalDescription(e.target.value)}
+        />
+      </div>
     </div>
   );
 }

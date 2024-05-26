@@ -304,6 +304,7 @@ export default function BottleForm() {
             className="mt-1 w-full rounded-md text-base shadow-sm"
           />
         </div>
+
         <div className="flex flex-col">
           <Label className="pb-4 pt-2" htmlFor="accompaniment">
             Accompagnement
@@ -328,6 +329,17 @@ export default function BottleForm() {
             className="mt-1 w-full rounded-md text-base shadow-sm"
           />
         </div>
+
+
+
+
+
+
+
+
+
+
+
         <div className="flex flex-col">
           <Label className="pb-4 pt-2" htmlFor="price">
             Prix

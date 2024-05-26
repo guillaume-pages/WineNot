@@ -13,7 +13,6 @@ import {
 
 export const SelectSizeWine = () => {
   const { bottleSize, setBottleSize } = useContext(BottleContext);
-  const [sizeToDisplay, setSizeToDisplay] = useState('');
 
   return (
     <div className="flex flex-col">
