@@ -66,4 +66,14 @@ export interface BottleContextType {
   setVisibilityPrice: (value: number) => void;
   bottleGlobalDescription: string;
   setBottleGlobalDescription: (value: string) => void;
+  bottleEntryDate: Date;
+  setBottleEntryDate: (value: Date) => void;
+  bottlePotentialDate: Date;
+  setBottlePotentialDate: (value: Date) => void;
+  bottleQuantity: number;
+  setBottleQuantity: (value: number) => void;
+  globalVisibility: number;
+  setGlobalVisibility: (value: number) => void;
+  bottleMedia: string;
+  setBottleMedia: (value: string) => void;
 }

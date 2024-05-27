@@ -42,6 +42,16 @@ const defaultValues: BottleContextType = {
   setVisibilityPrice: () => {},
   bottleGlobalDescription: '',
   setBottleGlobalDescription: () => {},
+  bottleEntryDate: new Date(),
+  setBottleEntryDate: () => {},
+  bottlePotentialDate: new Date(),
+  setBottlePotentialDate: () => {},
+  bottleQuantity: (1),
+  setBottleQuantity: () => {},
+  globalVisibility: 0,
+  setGlobalVisibility: () => {},
+  bottleMedia: '',
+  setBottleMedia: () => {},
 };
 
 export const BottleContext = createContext<BottleContextType>(defaultValues);
@@ -91,6 +101,19 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   // Value for global description
   const [bottleGlobalDescription, setBottleGlobalDescription] = useState('');
 
+  // Value for entry date and potential date
+  const [bottleEntryDate, setBottleEntryDate] = useState<Date>(new Date());
+  const [bottlePotentialDate, setBottlePotentialDate] = useState<Date>(new Date());
+
+  // Value for bottle quantity
+  const [bottleQuantity, setBottleQuantity] = useState<number>(6);
+
+  // Value for global visibility
+  const [globalVisibility, setGlobalVisibility] = useState<number>(0);
+
+  // Value for bottle media
+  const [bottleMedia, setBottleMedia] = useState<string>('');
+
   // Values to send to the API
 
   const dataToSend = {
@@ -114,9 +137,14 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
     bottlePrice,
     visibilityPrice,
     bottleGlobalDescription,
+    bottleEntryDate,
+    bottlePotentialDate,
+    bottleQuantity,
+    globalVisibility,
+    bottleMedia,
   };
 
-  console.log(dataToSend);
+  console.log("data to send", dataToSend);
 
   return (
     <BottleContext.Provider
@@ -159,7 +187,18 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
         setBottlePrice,
         visibilityPrice,
         setVisibilityPrice,
-        setBottleGlobalDescription
+        bottleGlobalDescription,
+        setBottleGlobalDescription,
+        bottleEntryDate,
+        setBottleEntryDate,
+        bottlePotentialDate,
+        setBottlePotentialDate,
+        bottleQuantity,
+        setBottleQuantity,
+        globalVisibility,
+        setGlobalVisibility,
+        bottleMedia,
+        setBottleMedia,
       }}
     >
       {children}
