@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body className={`${k2d.className} antialiased`}>
         <SessionProvider>
           <ThemeProvider
