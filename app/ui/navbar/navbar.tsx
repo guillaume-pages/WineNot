@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
-import moyenLogo from '@/app/logo-moyen.png';
+import logoPetit from '@/app/logo-petit.png';
 import AvatarDisplay from '../profile/display-avatar';
 import { ChoosingTheme } from '@/components/choosing-theme';
 import { Button } from '@/components/ui/button';
@@ -31,7 +31,7 @@ export default function Navbar() {
           <div className="flex-1 md:flex md:items-center md:gap-12">
             <Link href="/">
               <Image
-                src={moyenLogo}
+                src={logoPetit}
                 alt="Logo entreprise Cavavin"
                 width={64}
                 height={64}

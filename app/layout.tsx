@@ -11,8 +11,8 @@ import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Cavavin',
-    default: 'Cavavin',
+    template: '%s | Wine Not',
+    default: 'Wine Not',
   },
   description:
     'Venez créer votre cave à vin, échangez avec des passionnés et retrouvez votre caviste préféré au même endroit',
