@@ -42,7 +42,7 @@ export default function Register() {
                 </Link>
 
                 <h1 className="mt-2 text-2xl font-bold sm:text-3xl md:text-4xl">
-                  Bienvenue sur Cavavin !
+                  Bienvenue sur Wine Not !
                 </h1>
 
                 <p className="mt-4">

@@ -10,8 +10,6 @@ export default function AddBottle() {
   const params = useParams<{ id: string }>();
   const cellarId = params.id;
 
-  
-
   return (
     <>
       <h1 className="pt-4 text-center text-2xl font-bold">
@@ -21,7 +19,7 @@ export default function AddBottle() {
         <div className="w-4/5">
           {/* <BottleFormmmmm /> */}
           <BottleProvider>
-            <BottleForm />
+            <BottleForm cellarId={cellarId} />
           </BottleProvider>
         </div>
       </div>

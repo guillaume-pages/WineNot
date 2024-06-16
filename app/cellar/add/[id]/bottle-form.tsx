@@ -18,7 +18,8 @@ import { BottlePrice } from '@/app/ui/bottle/bottle-price';
 import { DatesBottle } from '@/app/ui/bottle/dates-bottle';
 import { GlobalVisibility } from '@/app/ui/bottle/global-visibility';
 
-export default function BottleForm() {
+export default function BottleForm({cellarId} : {cellarId: string}) {
+  console.log(cellarId)
   const {
     bottleName,
     setBottleName,
