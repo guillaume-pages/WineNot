@@ -11,7 +11,7 @@ export const GlobalVisibility = () => {
   return (
     <div className="flex flex-col">
           <Label className="pb-4 pt-2" htmlFor="price">
-            Visibilité du prix
+            Visibilité la bouteille
           </Label>
           <div>
             <Button

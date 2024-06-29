@@ -1,20 +1,19 @@
 // types.ts
 
 export interface Bottle {
-  bottle_id: string;
   bottle_name: string;
   millesime: number;
   type_of_wine: string;
   size: string;
-  grape_varieties: Record<string, any>;
+  grape_varieties?: string[];
   region: string;
   eye_description?: string;
-  nose_description?: Record<string, any>;
-  mouth_description?: Record<string, any>;
+  nose_description?: string[];
+  mouth_description?: number[];
   carafage?: number;
   temperature?: number;
   degree?: number;
-  accompaniment?: Record<string, any>;
+  accompaniment?: string[];
   media?: string;
   price?: number;
   price_visibility?: number;
@@ -28,12 +27,14 @@ export interface Bottle {
 export interface BottleContextType {
   bottleName: string;
   setBottleName: (value: string) => void;
-  bottleMillesime: string;
-  setBottleMillesime: (value: string) => void;
+  bottleMillesime: number;
+  setBottleMillesime: (value: number) => void;
   wineType: string;
   setWineType: (value: string) => void;
   bottleSize: string;
   setBottleSize: (value: string) => void;
+  bottleDegree: number;
+  setBottleDegree: (value: number) => void;
   grapeVarieties: string[];
   setGrapeVarieties: (value: string[]) => void;
   bottleRegion: string;
@@ -54,10 +55,10 @@ export interface BottleContextType {
   setSliderWood: (value: number[]) => void;
   sliderTanin: number[];
   setSliderTanin: (value: number[]) => void;
-  carafage: string;
-  setCarafage: (value: string) => void;
-  temperature: string;
-  setTemperature: (value: string) => void;
+  carafage: number;
+  setCarafage: (value: number) => void;
+  temperature: number;
+  setTemperature: (value: number) => void;
   accompaniments: string[];
   setAccompaniment: (value: string[]) => void;
   bottlePrice: number | undefined;
@@ -76,4 +77,6 @@ export interface BottleContextType {
   setGlobalVisibility: (value: number) => void;
   bottleMedia: string;
   setBottleMedia: (value: string) => void;
+  bottleData: Bottle;
+  resetBottleData: () => void;
 }

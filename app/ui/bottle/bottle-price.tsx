@@ -22,9 +22,13 @@ export const BottlePrice = () => {
               type="number"
               placeholder="eg: 10 €"
               value={bottlePrice}
-              onChange={(e) =>
-                setBottlePrice(e.target.value as unknown as number)
-              }
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                setBottlePrice(isNaN(value) ? 10 : value);
+              }}
+              step="0.1"
+              min="0"
+              max="10000000"
             />
           </div>
         </div>

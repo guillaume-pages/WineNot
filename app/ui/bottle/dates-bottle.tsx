@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { fr } from 'date-fns/locale';
+
 import { BottleContext } from '@/app/context/BottleContext';
 
 import { Label } from '@/components/ui/label';
@@ -25,7 +27,7 @@ export const DatesBottle = () => {
 
   return (
     <div className="flex flex-col">
-      <div className='flex flex-col'>
+      <div className="flex flex-col">
         <Label className="pb-4 pt-2" htmlFor="dates">
           Date d&apos;entrée dans la cave
         </Label>
@@ -41,7 +43,7 @@ export const DatesBottle = () => {
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {bottleEntryDate ? (
-                  format(bottleEntryDate, 'PPP')
+                  format(bottleEntryDate, 'dd MMMM yyyy', { locale: fr })
                 ) : (
                   <span>Choisissez une date</span>
                 )}
@@ -50,6 +52,7 @@ export const DatesBottle = () => {
             <PopoverContent className="w-auto p-0">
               <Calendar
                 mode="single"
+                locale={fr}
                 selected={bottleEntryDate || new Date()}
                 onSelect={(date) => setBottleEntryDate(date || new Date())}
                 initialFocus
@@ -58,7 +61,7 @@ export const DatesBottle = () => {
           </Popover>
         </div>
       </div>
-      <div className='flex flex-col'>
+      <div className="flex flex-col">
         <Label className="pb-4 pt-2" htmlFor="dates">
           Date de potentiel de garde
         </Label>
@@ -74,7 +77,7 @@ export const DatesBottle = () => {
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {bottlePotentialDate ? (
-                  format(bottlePotentialDate, 'PPP')
+                  format(bottlePotentialDate, 'dd MMMM yyyy', { locale: fr })
                 ) : (
                   <span>Choisissez une date</span>
                 )}
@@ -83,6 +86,7 @@ export const DatesBottle = () => {
             <PopoverContent className="w-auto p-0">
               <Calendar
                 mode="single"
+                locale={fr}
                 selected={bottlePotentialDate || new Date()}
                 onSelect={(date) => setBottlePotentialDate(date || new Date())}
                 initialFocus

@@ -1,15 +1,17 @@
 import React, { createContext, useState, ReactNode, FC } from 'react';
-import { BottleContextType } from '@/types/bottle.type';
+import { BottleContextType, Bottle } from '@/types/bottle.type';
 
 const defaultValues: BottleContextType = {
   bottleName: '',
   setBottleName: () => {},
-  bottleMillesime: '',
+  bottleMillesime: 2024,
   setBottleMillesime: () => {},
   wineType: '',
   setWineType: () => {},
   bottleSize: '',
   setBottleSize: () => {},
+  bottleDegree: 10,
+  setBottleDegree: () => {},
   grapeVarieties: [],
   setGrapeVarieties: () => {},
   bottleRegion: '',
@@ -18,21 +20,21 @@ const defaultValues: BottleContextType = {
   setBottleEyeDescription: () => {},
   bottleNoseDescription: [],
   setBottleNoseDescription: () => {},
-  sliderPower: [70],
+  sliderPower: [10],
   setSliderPower: () => {},
-  sliderComplexity: [37],
+  sliderComplexity: [10],
   setSliderComplexity: () => {},
-  sliderSpicy: [43],
+  sliderSpicy: [10],
   setSliderSpicy: () => {},
-  sliderFruit: [25],
+  sliderFruit: [10],
   setSliderFruit: () => {},
-  sliderWood: [65],
+  sliderWood: [10],
   setSliderWood: () => {},
-  sliderTanin: [88],
+  sliderTanin: [10],
   setSliderTanin: () => {},
-  carafage: '',
+  carafage: 30,
   setCarafage: () => {},
-  temperature: '',
+  temperature: 16,
   setTemperature: () => {},
   accompaniments: [],
   setAccompaniment: () => {},
@@ -52,6 +54,8 @@ const defaultValues: BottleContextType = {
   setGlobalVisibility: () => {},
   bottleMedia: '',
   setBottleMedia: () => {},
+  bottleData: {} as Bottle,
+  resetBottleData: () => {},
 };
 
 export const BottleContext = createContext<BottleContextType>(defaultValues);
@@ -63,9 +67,10 @@ interface BottleProviderProps {
 export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   // Values for bottleName, bottleYear, type of wine, size
   const [bottleName, setBottleName] = useState('');
-  const [bottleMillesime, setBottleMillesime] = useState('');
+  const [bottleMillesime, setBottleMillesime] = useState(2024);
   const [wineType, setWineType] = useState('');
   const [bottleSize, setBottleSize] = useState('');
+  const [bottleDegree, setBottleDegree] = useState(10);
 
   // Value for grape varieties
   const [grapeVarieties, setGrapeVarieties] = useState<string[]>([]);
@@ -88,8 +93,8 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   const [sliderTanin, setSliderTanin] = useState([88]);
 
   // Values for service : carafage and temperature
-  const [carafage, setCarafage] = useState<string>('');
-  const [temperature, setTemperature] = useState<string>('');
+  const [carafage, setCarafage] = useState<number>(30);
+  const [temperature, setTemperature] = useState<number>(16);
 
   // Value for accompaniment
   const [accompaniments, setAccompaniment] = useState<string[]>([]);
@@ -114,37 +119,65 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   // Value for bottle media
   const [bottleMedia, setBottleMedia] = useState<string>('');
 
-  // Values to send to the API
+  const bottleData: Bottle = {
+  bottle_name: bottleName,
+  millesime: bottleMillesime,
+  type_of_wine: wineType,
+  size: bottleSize,
+  degree: bottleDegree,
+  grape_varieties: grapeVarieties,
+  region: bottleRegion,
+  eye_description: bottleEyeDescription,
+  nose_description: bottleNoseDescription,
+  mouth_description: [
+    sliderPower[0],
+    sliderComplexity[0],
+    sliderSpicy[0],
+    sliderFruit[0],
+    sliderWood[0],
+    sliderTanin[0],
+  ],
+  carafage: carafage,
+  temperature: temperature,
+  accompaniment: accompaniments,
+  media: bottleMedia,
+  price: bottlePrice,
+  price_visibility: visibilityPrice,
+  global_description: bottleGlobalDescription,
+  entry_date: bottleEntryDate,
+  potential_date: bottlePotentialDate,
+  quantity: bottleQuantity,
+  global_visibility: globalVisibility,
+};
 
-  const dataToSend = {
-    bottleName,
-    bottleMillesime,
-    wineType,
-    bottleSize,
-    grapeVarieties,
-    bottleRegion,
-    bottleEyeDescription,
-    bottleNoseDescription,
-    sliderPower,
-    sliderComplexity,
-    sliderSpicy,
-    sliderFruit,
-    sliderWood,
-    sliderTanin,
-    carafage,
-    temperature,
-    accompaniments,
-    bottlePrice,
-    visibilityPrice,
-    bottleGlobalDescription,
-    bottleEntryDate,
-    bottlePotentialDate,
-    bottleQuantity,
-    globalVisibility,
-    bottleMedia,
-  };
-
-  console.log("data to send", dataToSend);
+const resetBottleData = () => {
+  setBottleName('');
+  setBottleMillesime(2024);
+  setWineType('');
+  setBottleSize('');
+  setBottleDegree(10);
+  setGrapeVarieties([]);
+  setBottleRegion('');
+  setBottleEyeDescription('');
+  setBottleNoseDescription([]);
+  setSliderPower([70]);
+  setSliderComplexity([37]);
+  setSliderSpicy([43]);
+  setSliderFruit([25]);
+  setSliderWood([65]);
+  setSliderTanin([88]);
+  setCarafage(30);
+  setTemperature(16);
+  setAccompaniment([]);
+  setBottlePrice(undefined);
+  setVisibilityPrice(0);
+  setBottleGlobalDescription('');
+  setBottleEntryDate(new Date());
+  setBottlePotentialDate(new Date());
+  setBottleQuantity(6);
+  setGlobalVisibility(0);
+  setBottleMedia('');
+}
 
   return (
     <BottleContext.Provider
@@ -157,6 +190,8 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
         setWineType,
         bottleSize,
         setBottleSize,
+        bottleDegree,
+        setBottleDegree,
         grapeVarieties,
         setGrapeVarieties,
         bottleRegion,
@@ -199,6 +234,8 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
         setGlobalVisibility,
         bottleMedia,
         setBottleMedia,
+        bottleData,
+        resetBottleData,
       }}
     >
       {children}

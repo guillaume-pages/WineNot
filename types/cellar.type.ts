@@ -8,6 +8,6 @@ export type Cellar = {
     created_at: Date;
     updated_at: Date | null;
     deleted_at: Date | null;
-    bottles: number[];
+    bottles: string[];
   };
 };
