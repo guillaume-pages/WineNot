@@ -73,11 +73,11 @@ export const Service = () => {
       <Label className="pb-4 pt-2" htmlFor="service">
         Service
       </Label>
-      <div className="flex space-x-4">
-        <div className="flex space-x-4">
+      <div className="flex space-x-2">
+        <div className="flex space-x-2">
           <Image src={carafe} alt="Carafe" />
           <div className="self-end">
-            <Select onValueChange={(value) => setCarafage(value)}>
+            <Select onValueChange={(value) => setCarafage(parseInt(value))}>
               <SelectTrigger>
                 <SelectValue placeholder="... min">{carafage} min</SelectValue>
               </SelectTrigger>
@@ -91,13 +91,13 @@ export const Service = () => {
             </Select>
           </div>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex space-x-2">
           <Image src={thermometer} alt="thermomètre" />
           <div className="self-end">
-            <Select onValueChange={(value) => setTemperature(value)}>
+            <Select onValueChange={(value) => setTemperature(parseInt(value))}>
               <SelectTrigger>
                 <SelectValue placeholder="... °C">
-                  {temperature} min
+                  {temperature} °C
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>

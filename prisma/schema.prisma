@@ -30,7 +30,7 @@ model cellars {
   created_at    DateTime?       @db.Timestamp(6)
   updated_at    DateTime?       @db.Timestamp(6)
   deleted_at    DateTime?       @db.Timestamp(6)
-  bottles       Int[]
+  bottles       String[]
   users_cellars users_cellars[]
 }
 
@@ -47,10 +47,10 @@ model bottles {
   mouth_description  Json?     @db.Json
   carafage           Int?
   temperature        Int?
-  degree             Int?
+  degree             Float?
   accompaniment      Json?     @db.Json
   media              String?
-  price              Int?
+  price              Float?
   price_visibility   Int?
   global_description String?
   entry_date         DateTime  @db.Timestamp(6)

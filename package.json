@@ -32,7 +32,7 @@
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@tailwindcss/forms": "^0.5.7",
     "@types/node": "20.5.7",
-    "@vercel/postgres": "^0.5.1",
+    "@vercel/postgres": "^0.9.0",
     "autoprefixer": "10.4.15",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -57,6 +57,7 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2",
     "use-debounce": "^10.0.0",
+    "uuid": "^10.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -64,9 +65,11 @@
     "@testing-library/react": "^15.0.7",
     "@types/bcrypt": "^5.0.1",
     "@types/bcryptjs": "^2.4.6",
+    "@types/jest": "^29.5.12",
     "@types/lodash": "^4.17.4",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.14",
+    "@types/uuid": "^10.0.0",
     "@vercel/style-guide": "^5.0.1",
     "daisyui": "^4.10.2",
     "dotenv": "^16.3.1",
@@ -78,6 +81,7 @@
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "0.5.4",
     "prisma": "^5.13.0",
+    "ts-jest": "^29.1.5",
     "ts-node": "^10.9.2"
   },
   "engines": {

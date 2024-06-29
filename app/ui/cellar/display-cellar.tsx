@@ -12,7 +12,7 @@ export default function DisplayCellar({ cellar }: { cellar: Cellar }) {
         <p>created_at : {cellar.cellars.created_at.toISOString()}</p>
         <p>updated_at : {cellar.cellars.updated_at?.toISOString()}</p>
         <p>deleted_at : {cellar.cellars.deleted_at?.toISOString()}</p>
-        <p>bottles : {cellar.cellars.bottles}</p>
+        <p>bottles : {cellar.cellars.bottles.map((b, i) => <p key={i}>{b}</p>)}</p>
         {cellar.cellars.bottles.length > 0 ? <div><DisplayBottle /></div> : <div>Vous n&apos;avez pas encore de bouteilles</div> }
       </div>
     </div>
