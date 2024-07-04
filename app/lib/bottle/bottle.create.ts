@@ -44,6 +44,7 @@ export const createBottle = async (data: any) => {
       data: {
         ...bottleData,
         grape_varieties: grape_varieties || [],
+        cellar_id: cellar_id,
       },
     });
 

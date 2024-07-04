@@ -8,8 +8,8 @@ datasource db {
 }
 
 model users {
-  email         String?         @unique
-  password      String?
+  email         String         @unique
+  password      String
   emailVerified DateTime?       @map("email_verified")
   image         String?
   createdAt     DateTime        @default(now())
@@ -26,7 +26,7 @@ model users {
 
 model cellars {
   cellar_id     String          @id @default(uuid())
-  cellar_name   String?          @db.VarChar
+  cellar_name   String?         @db.VarChar
   created_at    DateTime?       @db.Timestamp(6)
   updated_at    DateTime?       @db.Timestamp(6)
   deleted_at    DateTime?       @db.Timestamp(6)
@@ -57,6 +57,7 @@ model bottles {
   potential_date     DateTime? @db.Timestamp(6)
   quantity           Int
   global_visibility  Int
+  cellar_id          String
 }
 
 model users_cellars {

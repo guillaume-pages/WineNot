@@ -1,6 +1,7 @@
 // types.ts
 
 export interface Bottle {
+  id?: string;
   bottle_name: string;
   millesime: number;
   type_of_wine: string;
@@ -22,6 +23,7 @@ export interface Bottle {
   potential_date?: Date;
   quantity: number;
   global_visibility: number;
+  cellar_id: string;
 }
 
 export interface BottleContextType {

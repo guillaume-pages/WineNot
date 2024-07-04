@@ -78,3 +78,9 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+export const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions  = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('fr-FR', options).format(date);
+};
