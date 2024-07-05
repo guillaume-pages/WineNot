@@ -148,6 +148,7 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   potential_date: bottlePotentialDate,
   quantity: bottleQuantity,
   global_visibility: globalVisibility,
+  cellar_id: '',
 };
 
 const resetBottleData = () => {
