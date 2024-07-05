@@ -1,5 +1,6 @@
 import { Bottle } from '@/types/bottle.type';
 import { formatDate } from '@/app/lib/utils';
+import clsx from 'clsx';
 
 import {
   Accordion,
@@ -7,6 +8,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Label } from '@/components/ui/label';
+import { PriceVisibilityDisplay } from './price-visibility-display';
 
 export default function DisplayBottle({ bottle }: { bottle: Bottle }) {
   console.log('bottle', bottle);
@@ -62,29 +65,31 @@ export default function DisplayBottle({ bottle }: { bottle: Bottle }) {
       <div>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
-            <AccordionTrigger>{bottle_name} {millesime}</AccordionTrigger>
+            <AccordionTrigger className="text-left">
+              {bottle_name} {millesime}
+            </AccordionTrigger>
             <AccordionContent>
               <ul>
-                <li>{type_of_wine}</li>
-                <li>{size}</li>
-                <li>{degree}</li>
-                <li>{grape_varieties}</li>
-                <li>{region}</li>
-                <li>{eye_description}</li>
-                <li>{nose_description}</li>
-                <li>{mouth_description}</li>
-                <li>{carafage}</li>
-                <li>{temperature}</li>
-                <li>{accompaniment}</li>
-                <li>{price}</li>
-                <li>{price_visibility}</li>
-                <li>{global_description}</li>
-                <li>{formatDate(entry_date.toString())}</li>
+                <li>Type de vin : {type_of_wine}</li>
+                <li>Taille de la bouteille : {size}</li>
+                <li>Degré d&apos;alcool : {degree}</li>
+                <li>Cépaes : {grape_varieties}</li>
+                <li>Région : {region}</li>
+                <li>Description visuelle : {eye_description}</li>
+                <li>Description olfactive : {nose_description}</li>
+                <li>Description gustative {mouth_description}</li>
+                <li>Service : carafage {carafage} min</li>
+                <li>Service : température {temperature} °C</li>
+                <li>Accompagnement : {accompaniment}</li>
+                <li>Prix de la bouteille : {price}</li>
+                <PriceVisibilityDisplay price_visibility={price_visibility} />
+                <li>Description globale : {global_description}</li>
+                <li>Date d&apos;entrée dans la cave : {formatDate(entry_date.toString())}</li>
                 <li>
-                  {potential_date ? formatDate(potential_date?.toString()) : ''}
+                  {potential_date ? `Date de potentiel de garde : ${formatDate(potential_date?.toString())}` : ''}
                 </li>
-                <li>{quantity}</li>
-                <li>{global_visibility}</li>
+                <li>Nombre de bouteille(s) : {quantity}</li>
+                <li>Visibilité globale de la bouteille : {global_visibility}</li>
                 <li>{media}</li>
               </ul>
             </AccordionContent>

@@ -1,5 +1,5 @@
 import type { Cellar } from '@/types/cellar.type';
-import DisplayBottle from '../bottle/display-bottle';
+import DisplayBottle from '../bottle/displayBottle/display-bottle';
 import { formatDate } from '@/app/lib/utils';
 import { map } from 'lodash';
 
@@ -14,12 +14,12 @@ export default function DisplayCellar({ cellar }: { cellar: Cellar }) {
   console.log('bottles', bottles)
   return (
     <div>
-      <span>
+      {/* <span>
         Cave créé le{' '}
         {cellar?.cellars?.created_at
           ? formatDate(cellar.cellars.created_at.toString())
           : ''}
-      </span>
+      </span> */}
       {bottles.length > 0 ? (
         bottles.map((bottle) => (
           <DisplayBottle key={bottle.id} bottle={bottle} />
