@@ -1,6 +1,5 @@
 import { Bottle } from '@/types/bottle.type';
 import { formatDate } from '@/app/lib/utils';
-import clsx from 'clsx';
 
 import {
   Accordion,
@@ -10,6 +9,7 @@ import {
 } from '@/components/ui/accordion';
 import { Label } from '@/components/ui/label';
 import { PriceVisibilityDisplay } from './price-visibility-display';
+import { DisplayWineType } from './display-wine-type';
 
 export default function DisplayBottle({ bottle }: { bottle: Bottle }) {
   console.log('bottle', bottle);
@@ -71,6 +71,7 @@ export default function DisplayBottle({ bottle }: { bottle: Bottle }) {
             <AccordionContent>
               <ul>
                 <li>Type de vin : {type_of_wine}</li>
+                <DisplayWineType typeOfWine={type_of_wine} />
                 <li>Taille de la bouteille : {size}</li>
                 <li>Degré d&apos;alcool : {degree}</li>
                 <li>Cépaes : {grape_varieties}</li>

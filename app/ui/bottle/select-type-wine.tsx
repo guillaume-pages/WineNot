@@ -26,6 +26,7 @@ export const SelectTypeWine = () => {
           <SelectItem value="Rosé">Rosé</SelectItem>
           <SelectItem value="Champagne">Champagne</SelectItem>
           <SelectItem value="Crémant">Crémant</SelectItem>
+          <SelectItem value="Autre">Autre</SelectItem>
         </SelectContent>
       </Select>
     </div>
