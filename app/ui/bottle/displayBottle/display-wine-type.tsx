@@ -7,6 +7,13 @@ import other from '@/public/images/bottles/bouteille-autre.png';
 
 import Image, { StaticImageData } from 'next/image';
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+
 type DisplayWineTypeProps = {
   typeOfWine: string;
 };
@@ -27,12 +34,21 @@ const wineTypeMapper: WineTypeMapper = {
 export const DisplayWineType = ({ typeOfWine }: DisplayWineTypeProps) => {
   return (
     <>
-      <Image
-        src={wineTypeMapper[typeOfWine]}
-        alt={typeOfWine}
-        width={50}
-        height={50}
-      />
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <Image
+              src={wineTypeMapper[typeOfWine]}
+              alt={typeOfWine}
+              width={50}
+              height={50}
+            />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{typeOfWine}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </>
   );
 };

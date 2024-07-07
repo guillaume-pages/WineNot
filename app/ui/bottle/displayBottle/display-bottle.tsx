@@ -10,6 +10,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { PriceVisibilityDisplay } from './price-visibility-display';
 import { DisplayWineType } from './display-wine-type';
+import { DisplayMouth } from './display-mouth';
 
 export default function DisplayBottle({ bottle }: { bottle: Bottle }) {
   console.log('bottle', bottle);
@@ -39,46 +40,21 @@ export default function DisplayBottle({ bottle }: { bottle: Bottle }) {
 
   return (
     <>
-      {/* <div className="border">
-        <h1>{bottle_name}</h1>
-        <p>{millesime}</p>
-        <p>{type_of_wine}</p>
-        <p>{size}</p>
-        <p>{degree}</p>
-        <p>{grape_varieties}</p>
-        <p>{region}</p>
-        <p>{eye_description}</p>
-        <p>{nose_description}</p>
-        <p>{mouth_description}</p>
-        <p>{carafage}</p>
-        <p>{temperature}</p>
-        <p>{accompaniment}</p>
-        <p>{price}</p>
-        <p>{price_visibility}</p>
-        <p>{global_description}</p>
-        <p>{formatDate(entry_date.toString())}</p>
-        <p>{potential_date ? formatDate(potential_date?.toString()) : ''}</p>
-        <p>{quantity}</p>
-        <p>{global_visibility}</p>
-        <p>{media}</p>
-      </div> */}
       <div>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-left">
-              {bottle_name} {millesime}
+              {bottle_name} {millesime}, {region}
             </AccordionTrigger>
             <AccordionContent>
               <ul>
-                <li>Type de vin : {type_of_wine}</li>
                 <DisplayWineType typeOfWine={type_of_wine} />
                 <li>Taille de la bouteille : {size}</li>
                 <li>Degré d&apos;alcool : {degree}</li>
-                <li>Cépaes : {grape_varieties}</li>
-                <li>Région : {region}</li>
+                <li>Cépages : {grape_varieties}</li>
                 <li>Description visuelle : {eye_description}</li>
                 <li>Description olfactive : {nose_description}</li>
-                <li>Description gustative {mouth_description}</li>
+                <DisplayMouth mouthDescription={mouth_description} />
                 <li>Service : carafage {carafage} min</li>
                 <li>Service : température {temperature} °C</li>
                 <li>Accompagnement : {accompaniment}</li>
