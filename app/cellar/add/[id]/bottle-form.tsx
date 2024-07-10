@@ -44,8 +44,6 @@ export default function BottleForm({cellarId} : {cellarId: string}) {
 
   const handleAddBottle = async () => {
     setLoading(true);
-    console.log("data to send", bottleData);
-    console.log("cellarId", cellarId);
 
     const data = {
       ...bottleData,
@@ -53,7 +51,6 @@ export default function BottleForm({cellarId} : {cellarId: string}) {
     }
     try {
     const res = await createBottle(data);
-    console.log(res);
     setLoading(false);
     toast.success(res.message, {
       duration: 4000,
