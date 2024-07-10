@@ -63,7 +63,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
   );
 
   return (
-    <section className="mx-auto flex flex-col sm:max-w-7xl sm:rounded-md sm:border">
+    <section className="mx-auto flex flex-col sm:max-w-5xl sm:rounded-md sm:border">
       <div className="flex space-x-4 px-4 pb-2 pt-6 sm:border-b">
         <Select onValueChange={handleValueChange}>
           <SelectTrigger className="w-[220px]">
