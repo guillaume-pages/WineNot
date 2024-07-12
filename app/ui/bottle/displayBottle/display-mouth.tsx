@@ -1,9 +1,11 @@
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
+import { Progress } from "@/components/ui/progress"
+
 
 const SliderItem = ({ label, value }: { label: string; value: number }) => (
   <div className="flex items-center space-x-2">
-    <Slider className="w-[185px]" defaultValue={[value]} max={100} step={1} disabled/>
+    <Progress className='w-40' value={value} />
     <Label className="text-xs">{label}</Label>
     <span className="w-[40px] text-xs">{`${value} %`}</span>
   </div>

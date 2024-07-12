@@ -1,7 +1,6 @@
 'use server';
 
 import { PrismaClient } from '@prisma/client';
-import { th } from 'date-fns/locale';
 import { z } from 'zod';
 
 const prisma = new PrismaClient();
