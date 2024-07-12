@@ -1,7 +1,7 @@
 // types.ts
 
 export interface Bottle {
-  id?: string;
+  bottle_id?: string;
   bottle_name: string;
   millesime: number;
   type_of_wine: string;

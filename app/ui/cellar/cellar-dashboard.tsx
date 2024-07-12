@@ -20,6 +20,8 @@ interface SelectCellarProps {
 }
 
 export default function CellarDashboard({ cellars }: SelectCellarProps) {
+
+  const [bottles, setBottles] = useState();
   const defaultCellar =
     cellars.length > 0
       ? cellars[0]
