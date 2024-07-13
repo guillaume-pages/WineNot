@@ -5,9 +5,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const deleteBottle = async (bottle_id: string) => {
-  console.log('tu arrives ici ?');
 
-  console.log(bottle_id);
   try {
     await prisma.bottles.delete({
       where: {

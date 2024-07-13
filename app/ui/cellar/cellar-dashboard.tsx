@@ -21,7 +21,6 @@ interface SelectCellarProps {
 
 export default function CellarDashboard({ cellars }: SelectCellarProps) {
 
-  const [bottles, setBottles] = useState();
   const defaultCellar =
     cellars.length > 0
       ? cellars[0]
@@ -40,7 +39,6 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
 
   const [activeCellar, setActiveCellar] = useState<string | null>(defaultCellar.cellars.cellar_name || null);
   const [cellarId, setCellarId] = useState<string | null>(defaultCellar.cellars.cellar_id || null);
-  console.log('activeCellar', activeCellar);
 
   useEffect(() => {
     const selectedCellar = cellars.find((cellar: Cellar) => {
@@ -65,7 +63,6 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
     [cellars],
   );
 
-  console.log('activeCellarData', activeCellarData);
 
 
   return (
