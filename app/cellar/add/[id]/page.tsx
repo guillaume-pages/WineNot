@@ -11,18 +11,17 @@ export default function AddBottle() {
   const cellarId = params.id;
 
   return (
-    <>
+    <section className='sm:max-w-5xl sm:rounded-md lg:border sm:mx-auto'>
       <h1 className="pt-4 text-center text-2xl font-bold">
         Création d&apos;une bouteille
       </h1>
       <div className="flex justify-center pb-14">
         <div className="w-4/5">
-          {/* <BottleFormmmmm /> */}
           <BottleProvider>
             <BottleForm cellarId={cellarId} />
           </BottleProvider>
         </div>
       </div>
-    </>
+    </section>
   );
 }

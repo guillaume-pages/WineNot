@@ -26,7 +26,7 @@ const wineTypeMapper: WineTypeMapper = {
   Champagne: champagne,
   Rouge: redWine,
   Blanc: whiteWine,
-  Rose: roseWine,
+  Rosé: roseWine,
   Crémant: cremant,
   Autre: other,
 };

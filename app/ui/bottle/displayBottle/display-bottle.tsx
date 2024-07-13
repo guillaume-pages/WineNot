@@ -28,8 +28,6 @@ export default function DisplayBottle({ bottle, onDelete }: { bottle: Bottle, on
     onDelete(bottle.bottle_id!);
   };
 
-  console.log(bottle.bottle_id);
-
   return (
     <div>
       <Accordion type="single" collapsible className="w-full">
