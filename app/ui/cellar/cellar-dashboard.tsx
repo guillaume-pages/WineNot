@@ -40,6 +40,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
 
   const [activeCellar, setActiveCellar] = useState<string | null>(defaultCellar.cellars.cellar_name || null);
   const [cellarId, setCellarId] = useState<string | null>(defaultCellar.cellars.cellar_id || null);
+  console.log('activeCellar', activeCellar);
 
   useEffect(() => {
     const selectedCellar = cellars.find((cellar: Cellar) => {
@@ -63,6 +64,9 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
     () => cellars.map((cellar: Cellar) => cellar.cellars.cellar_name),
     [cellars],
   );
+
+  console.log('activeCellarData', activeCellarData);
+
 
   return (
     <section className="mx-auto flex flex-col sm:max-w-5xl sm:rounded-md sm:border">
