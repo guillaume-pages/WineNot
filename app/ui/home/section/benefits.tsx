@@ -1,34 +1,36 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Icon } from '@/app/ui/icon';
-import { icons } from 'lucide-react';
+import { GrCubes } from "react-icons/gr";
+import { FaChartLine } from "react-icons/fa6";
+import { CiWallet } from "react-icons/ci";
+import { TbSparkles } from "react-icons/tb";
 
 interface BenefitsProps {
-  icon: string;
+  icon: React.ElementType;
   title: string;
   description: string;
 }
 
 const benefitList: BenefitsProps[] = [
   {
-    icon: 'Blocks',
+    icon: GrCubes,
     title: 'Build Brand Trust',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur dolores.',
   },
   {
-    icon: 'LineChart',
+    icon: FaChartLine,
     title: 'More Leads',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam, natus consectetur.',
   },
   {
-    icon: 'Wallet',
+    icon: CiWallet,
     title: 'Higher Conversions',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consectetur. A odio velit cum aliquam',
   },
   {
-    icon: 'Sparkle',
+    icon: TbSparkles,
     title: 'Test Marketing Ideas',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur dolores.',
@@ -56,15 +58,14 @@ export const BenefitsSection = () => {
         </div>
 
         <div className="grid w-full gap-4 lg:grid-cols-2">
-          {benefitList.map(({ icon, title, description }, index) => (
+          {benefitList.map(({ icon: IconComponent, title, description }, index) => (
             <Card
               key={title}
               className="group/number bg-muted/50 transition-all delay-75 hover:bg-background dark:bg-card"
             >
               <CardHeader>
                 <div className="flex justify-between">
-                  <Icon
-                    name={icon as keyof typeof icons}
+                  <IconComponent
                     size={32}
                     color="hsl(var(--primary))"
                     className="mb-6 text-primary"
