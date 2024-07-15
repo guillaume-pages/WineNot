@@ -29,7 +29,7 @@ export const HeroSection = () => {
           <p className="mx-auto max-w-screen-sm text-xl text-muted-foreground">
             {`Wine not est plus qu'un outil, c'est une communauté de passionnés.
             Avec Wine Not, vous pourrez non seulement suivre votre cave mais aussi
-            celle de vos amis et de votre caviste, vigneron préféré.`}
+            celle de vos amis et de votre caviste ou vigneron préféré.`}
           </p>
 
           <div className="space-y-4 md:space-x-4 md:space-y-0">
