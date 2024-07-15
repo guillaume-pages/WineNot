@@ -1,16 +1,20 @@
 'use client';
-import Link from 'next/link';
+
 import { useSession } from 'next-auth/react';
+import { HeroSection } from './ui/home/section/hero';
+import { About } from './ui/home/section/about';
 
 export default function Page() {
   const { data } = useSession();
   
   const user = data?.user;
 
- 
+
 
   return (
     <main>
+      <HeroSection />
+      <About />
       <div>Un call to action en haut</div>
       <div>Cette page sera la landing page</div>
       <div>Une partie qui doit créer le besoin/répondre à la problématique</div>
