@@ -1,5 +1,5 @@
-import MenuDisplayPhone from '../../components/account/menu-display';
-import UserInfoDisplayPhone from '../../components/account/user-info';
+import MenuDisplayPhone from '@/components/account/menu-display';
+import UserInfoDisplayPhone from '@/components/account/user-info';
 
 export default async function ProfilePage() {
   return (

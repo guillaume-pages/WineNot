@@ -4,9 +4,9 @@ import { Toaster } from 'react-hot-toast';
 import { SessionProvider } from 'next-auth/react';
 
 import '@/app/ui/global.css';
-import { k2d } from '@/app/ui/fonts';
-import Navbar from '@/app/ui/navbar/navbar';
-import NavbarMobile from '@/app/ui/navbar/navbar-mobile';
+import { k2d } from '@/components/fonts';
+import Navbar from '@/components/navbar/navbar';
+import NavbarMobile from '@/components/navbar/navbar-mobile';
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {

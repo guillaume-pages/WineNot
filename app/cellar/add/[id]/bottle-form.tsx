@@ -5,18 +5,18 @@ import { BottleContext } from '@/app/context/BottleContext';
 
 import { createBottle } from '@/app/lib/bottle/bottle.create';
 
-import { Accompaniment } from '@/app/ui/bottle/accompaniment';
-import { AddGrapeVarieties } from '@/app/ui/bottle/add-grape-varieties';
-import { AddNoseDescription } from '@/app/ui/bottle/nose-description';
-import { BottlePrice } from '@/app/ui/bottle/bottle-price';
-import { DatesBottle } from '@/app/ui/bottle/dates-bottle';
-import { FormSlider } from '@/app/ui/bottle/form-slider';
-import { GlobalVisibility } from '@/app/ui/bottle/global-visibility';
-import { Reset } from '@/app/ui/bottle/reset';
-import { SelectMillesime } from '@/app/ui/bottle/select-millesime';
-import { SelectSizeWine } from '@/app/ui/bottle/select-size-wine';
-import { SelectTypeWine } from '@/app/ui/bottle/select-type-wine';
-import { Service } from '@/app/ui/bottle/service';
+import { Accompaniment } from '@/components/bottle/accompaniment';
+import { AddGrapeVarieties } from '@/components/bottle/add-grape-varieties';
+import { AddNoseDescription } from '@/components/bottle/nose-description';
+import { BottlePrice } from '@/components/bottle/bottle-price';
+import { DatesBottle } from '@/components/bottle/dates-bottle';
+import { FormSlider } from '@/components/bottle/form-slider';
+import { GlobalVisibility } from '@/components/bottle/global-visibility';
+import { Reset } from '@/components/bottle/reset';
+import { SelectMillesime } from '@/components/bottle/select-millesime';
+import { SelectSizeWine } from '@/components/bottle/select-size-wine';
+import { SelectTypeWine } from '@/components/bottle/select-type-wine';
+import { Service } from '@/components/bottle/service';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -83,7 +83,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
     <div className="flex flex-col">
       <Toaster />
       <Reset />
-      <div className='sm:flex sm:space-x-20 md:space-x-6 sm:mx-auto'>
+      <div className="sm:mx-auto sm:flex sm:space-x-20 md:space-x-6">
         <div className="sm:flex sm:flex-col">
           <div className="flex flex-col">
             <Label className="pb-4 pt-2">Nom de la bouteille</Label>
