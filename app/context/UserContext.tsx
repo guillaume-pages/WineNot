@@ -47,8 +47,6 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
     }
   }, [data?.user?.id, updateUserContext]);
 
-  console.log('UserContext:', user);
-
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

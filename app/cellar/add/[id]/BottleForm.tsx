@@ -5,7 +5,7 @@ import { BottleContext } from '@/app/context/BottleContext';
 
 import { createBottle } from '@/app/lib/bottle/bottle.create';
 
-import { Accompaniment } from '@/components/bottle/Accompaniment';
+import { Accompaniment } from '@/components/bottle/accompaniment';
 import { AddGrapeVarieties } from '@/components/bottle/AddGrapeVarieties';
 import { AddNoseDescription } from '@/components/bottle/NoseDescription';
 import { BottlePrice } from '@/components/bottle/BottlePrice';
