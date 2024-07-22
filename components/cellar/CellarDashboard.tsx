@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { Cellar } from '@/types/cellar.type';
-import PopoverAddCellar from '@/components/cellar/opoverAddCellar';
+import PopoverAddCellar from '@/components/cellar/popoverAddCellar';
 import DisplayCellar from './displayCellar';
 import { Button } from '@/components/ui/button';
 import {
