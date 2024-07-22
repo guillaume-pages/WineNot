@@ -9,7 +9,7 @@ import calendar from '@/public/images/icons/calendar.png';
 import quantity from '@/public/images/icons/quantity.png';
 import flip from '@/public/images/icons/flip.png';
 
-import { ConfidentialityDisplay } from './confidentialityDisplay';
+import { ConfidentialityDisplay } from './confidentiality-display';
 
 export const InfoBlockTwo = ({
   bottle,

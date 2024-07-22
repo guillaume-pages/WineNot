@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import type { Cellar } from '@/types/cellar.type';
-import DisplayBottle from '../bottle/displayBottle/displayBottle';
+import DisplayBottle from '../bottle/displayBottle/display-bottle';
 
 export default function DisplayCellar({ cellar }: { cellar: Cellar }) {
   const [bottles, setBottles] = useState(cellar.cellars.bottles || []);

@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 import { RiAccountCircleLine } from 'react-icons/ri';
 
-import DisconnectButton from '@/components/navbar/disconnectButton';
+import DisconnectButton from '@/components/navbar/disconnect-button';
 
 import { handleDisconnect } from '@/app/lib/utils';
 import { UserContext } from '@/app/context/UserContext';

@@ -11,7 +11,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-import { BoxChoosingTheme } from '@/components/boxChoosingTheme';
+import { BoxChoosingTheme } from '@/components/box-choosing-theme';
 import { Security } from '@/components/account/security/security';
 import { Profile } from '@/components/account/profile/profile';
 

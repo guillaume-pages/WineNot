@@ -1,6 +1,6 @@
 'use client';
 
-import { BoxChoosingTheme } from '@/components/boxChoosingTheme';
+import { BoxChoosingTheme } from '@/components/box-choosing-theme';
 
 export default function PagePreference() {
   return (

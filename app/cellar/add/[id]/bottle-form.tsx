@@ -6,16 +6,16 @@ import { BottleContext } from '@/app/context/BottleContext';
 import { createBottle } from '@/app/lib/bottle/bottle.create';
 
 import { Accompaniment } from '@/components/bottle/accompaniment';
-import { AddGrapeVarieties } from '@/components/bottle/addGrapeVarieties';
-import { AddNoseDescription } from '@/components/bottle/noseDescription';
-import { BottlePrice } from '@/components/bottle/bottlePrice';
-import { DatesBottle } from '@/components/bottle/datesBottle';
-import { FormSlider } from '@/components/bottle/formSlider';
-import { GlobalVisibility } from '@/components/bottle/globalVisibility';
+import { AddGrapeVarieties } from '@/components/bottle/add-grape-varieties';
+import { AddNoseDescription } from '@/components/bottle/nose-description';
+import { BottlePrice } from '@/components/bottle/bottle-price';
+import { DatesBottle } from '@/components/bottle/dates-bottle';
+import { FormSlider } from '@/components/bottle/form-slider';
+import { GlobalVisibility } from '@/components/bottle/global-visibility';
 import { Reset } from '@/components/bottle/reset';
-import { SelectMillesime } from '@/components/bottle/selectMillesime';
-import { SelectSizeWine } from '@/components/bottle/selectSizeWine';
-import { SelectTypeWine } from '@/components/bottle/selectTypeWine';
+import { SelectMillesime } from '@/components/bottle/select-millesime';
+import { SelectSizeWine } from '@/components/bottle/select-size-wine';
+import { SelectTypeWine } from '@/components/bottle/select-type-wine';
 import { Service } from '@/components/bottle/service';
 
 import { Button } from '@/components/ui/button';
