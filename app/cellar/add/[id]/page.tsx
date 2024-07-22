@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 
-import BottleForm from './bottleForm';
+import BottleForm from './bottle-form';
 
 import { BottleProvider } from '@/app/context/BottleContext';
 

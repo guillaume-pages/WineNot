@@ -6,7 +6,7 @@ import Link from 'next/link';
 import bottles from '@/app/bottles.jpg';
 import logoPetit from '@/app/logo-petit.png';
 
-import RegisterForm from './RegisterForm';
+import RegisterForm from './register-form';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 
 export default function Register() {

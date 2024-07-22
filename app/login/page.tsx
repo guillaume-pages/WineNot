@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import bottles from '@/app/bottles.jpg';
 import logoPetit from '@/app/logo-petit.png';
-import { LoginForm } from './loginForm';
+import { LoginForm } from './login-form';
 import { Suspense } from 'react';
 
 import { FaArrowLeftLong } from 'react-icons/fa6';
