@@ -14,9 +14,8 @@ import { UserContext } from '@/app/context/UserContext';
 import { modifNames } from '@/app/lib/user/user.put.name';
 
 export const ModifNames = () => {
-  
   const { data: session } = useSession();
-  const user = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -42,11 +41,11 @@ export const ModifNames = () => {
 
       await modifNames(userId, firstName, lastName);
 
+      setUser({ ...user, firstname: firstName, lastname: lastName });
+
       toast.success('Noms modifié avec succès');
     } catch (error: any) {
-      toast.error(
-        error.message || 'Erreur lors de la modification des noms',
-      );
+      toast.error(error.message || 'Erreur lors de la modification des noms');
     } finally {
       setLoading(false);
     }
@@ -57,8 +56,8 @@ export const ModifNames = () => {
       <div className="space-y-4">
         <h2 className="text-lg">Changement de noms</h2>
 
-        <div className="px-2 space-y-2">
-        <Label htmlFor="oldMail">Remplacez votre prénom</Label>
+        <div className="space-y-2 px-2">
+          <Label htmlFor="oldMail">Remplacez votre prénom</Label>
           <Input
             type="text"
             id="firstName"
@@ -68,8 +67,8 @@ export const ModifNames = () => {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
-        <div className="px-2 space-y-2">
-        <Label htmlFor="newMail">Remplacez votre nom</Label>
+        <div className="space-y-2 px-2">
+          <Label htmlFor="newMail">Remplacez votre nom</Label>
           <Input
             type="text"
             placeholder="Saisissez votre nouveau nom"
@@ -78,9 +77,9 @@ export const ModifNames = () => {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
-        <Button onClick={handleNewNames} disabled={loading} size="sm">
-          {loading ? 'Modification...' : 'Modifier vos noms'}
-        </Button>
+          <Button onClick={handleNewNames} disabled={loading} size="sm" variant="secondary">
+            {loading ? 'Modification...' : 'Modifier vos noms'}
+          </Button>
         </div>
       </div>
     </div>

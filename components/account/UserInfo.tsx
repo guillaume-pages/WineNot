@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Image from 'next/image';
 
@@ -12,7 +12,8 @@ import { handleDisconnect } from '@/app/lib/utils';
 import { UserContext } from '@/app/context/UserContext';
 
 export default function UserInfoDisplay() {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  console.log('User:', user);
 
   const fullName = `${user?.firstname} ${user?.lastname}`;
 

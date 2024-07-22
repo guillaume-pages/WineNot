@@ -118,7 +118,7 @@ export const ModifPassword = () => {
               {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </div>
-          <Button onClick={handleNewPassword} disabled={loading} size="sm">
+          <Button onClick={handleNewPassword} disabled={loading} size="sm" variant="secondary">
             {loading ? 'Modification...' : 'Modifier le mot de passe'}
           </Button>
         </div>

@@ -83,7 +83,7 @@ export const ModifMail = () => {
             value={confirmMail}
             onChange={(e) => setConfirmMail(e.target.value)}
           />
-        <Button onClick={handleNewMail} disabled={loading} size="sm">
+        <Button onClick={handleNewMail} disabled={loading} size="sm" variant="secondary">
           {loading ? 'Modification...' : 'Modifier le mail'}
         </Button>
         </div>

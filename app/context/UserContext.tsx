@@ -1,8 +1,6 @@
-import React, { createContext, useState, useEffect, ReactNode, FC } from 'react';
+import React, { createContext, useState, useEffect, ReactNode, FC, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
-
 import type { User } from '@/types/user.type';
-
 import { getUser } from '@/app/lib/user/user.get';
 
 const defaultValues: User = {
@@ -18,7 +16,13 @@ const defaultValues: User = {
   email_verified_at: '',
 };
 
-export const UserContext = createContext<User>(defaultValues);
+export const UserContext = createContext<{
+  user: User;
+  setUser: (user: User) => void;
+}>({
+  user: defaultValues,
+  setUser: () => {},
+});
 
 interface UserProviderProps {
   children: ReactNode;
@@ -28,20 +32,25 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
   const { data } = useSession();
   const [user, setUser] = useState<User>(defaultValues);
 
+  const updateUserContext = useCallback(async (userId: string) => {
+    try {
+      const fetchedUser = await getUser(userId);
+      setUser(fetchedUser);
+    } catch (error) {
+      console.error('Error fetching user:', error);
+    }
+  }, []);
+
   useEffect(() => {
     if (data?.user?.id) {
-      getUser(data.user.id)
-        .then((fetchedUser) => {
-          setUser(fetchedUser);
-        })
-        .catch((error) => {
-          console.error('Error fetching user:', error);
-        });
+      updateUserContext(data.user.id);
     }
-  }, [data?.user?.id]);
+  }, [data?.user?.id, updateUserContext]);
+
+  console.log('UserContext:', user);
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

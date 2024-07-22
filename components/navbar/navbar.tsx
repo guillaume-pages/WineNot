@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 
 import logoPetit from '@/app/logo-petit.png';
 import AvatarDisplay from '@/components/account/DisplayAvatar';
-import { ChoosingTheme } from '@/components/choosing-theme';
+import { BoxChoosingTheme } from '@/components/BoxChoosingTheme';
 import { Button } from '@/components/ui/button';
 
 // // TODO: affichage de tableau de bord si le user est un professionnel
@@ -98,7 +98,7 @@ export default function Navbar() {
                   </Link>
                 </>
               )}
-              <ChoosingTheme />
+              <BoxChoosingTheme />
             </div>
           </div>
         </div>
