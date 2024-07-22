@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
-import { modifPassword } from '@/app/lib/user/user.password';
+import { modifPassword } from '@/app/lib/user/user.put.password';
 
 export const ModifPassword = () => {
   const { data: session } = useSession();
@@ -118,7 +118,7 @@ export const ModifPassword = () => {
               {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </div>
-          <Button onClick={handleNewPassword} disabled={loading}>
+          <Button onClick={handleNewPassword} disabled={loading} size="sm">
             {loading ? 'Modification...' : 'Modifier le mot de passe'}
           </Button>
         </div>

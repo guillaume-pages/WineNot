@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-import { modifMail } from '@/app/lib/user/user.mail';
+import { modifMail } from '@/app/lib/user/user.put.mail';
 
 export const ModifMail = () => {
   const { data: session } = useSession();
@@ -43,11 +43,6 @@ export const ModifMail = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const [isMailVisible, setIsMailVisible] = useState(false);
-  const toggleMailVisibility = () => {
-    setIsMailVisible(!isMailVisible);
   };
 
   return (
@@ -88,7 +83,7 @@ export const ModifMail = () => {
             value={confirmMail}
             onChange={(e) => setConfirmMail(e.target.value)}
           />
-        <Button onClick={handleNewMail} disabled={loading}>
+        <Button onClick={handleNewMail} disabled={loading} size="sm">
           {loading ? 'Modification...' : 'Modifier le mail'}
         </Button>
         </div>

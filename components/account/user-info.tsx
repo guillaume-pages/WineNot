@@ -1,13 +1,21 @@
 'use client';
+
+import { useContext } from 'react';
+
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
+
 import { RiAccountCircleLine } from 'react-icons/ri';
+
+import DisconnectButton from '@/components/navbar/disconnect-button';
+
 import { handleDisconnect } from '@/app/lib/utils';
-import DisconnectButton from '../navbar/disconnect-button';
+import { UserContext } from '@/app/context/UserContext';
 
 export default function UserInfoDisplay() {
-  const { data: session } = useSession();
-  const user = session?.user;
+  const user = useContext(UserContext);
+
+  const fullName = `${user?.firstname} ${user?.lastname}`;
 
   return (
     <>
@@ -22,7 +30,7 @@ export default function UserInfoDisplay() {
             />
           </div>
         </div>
-        <h1 className="pt-4 text-2xl">{user?.name}</h1>
+        <h1 className="pt-4 text-2xl">{fullName}</h1>
         <div className="flex items-center gap-4 pt-4">
           <RiAccountCircleLine className="text-2xl" />
           <h3 className="text-lg font-semibold">Mon compte</h3>
