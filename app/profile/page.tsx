@@ -1,6 +1,6 @@
 'use client';
 import MenuDisplay from '@/components/account/menu-display';
-import UserInfoDisplay from '@/components/account/userInfo';
+import UserInfoDisplay from '@/components/account/user-info';
 
 import { UserProvider } from '@/app/context/UserContext';
 

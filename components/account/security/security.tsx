@@ -1,4 +1,4 @@
-import { ModifPassword } from '@/components/account/security/modifPassword';
+import { ModifPassword } from '@/components/account/security/modif-password';
 
 export const Security = () => {
   return (
