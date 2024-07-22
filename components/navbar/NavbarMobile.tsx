@@ -10,7 +10,7 @@ import { PiHouseLineLight } from 'react-icons/pi';
 import { PiChartLineUpThin } from 'react-icons/pi';
 import { CiLogin } from 'react-icons/ci';
 import LogoPetit from '@/app/logo-petit.png';
-import AvatarDisplay from '@/components/account/display-avatar';
+import AvatarDisplay from '@/components/account/DisplayAvatar';
 
 export default function NavbarMobile() {
   const pathname = usePathname();

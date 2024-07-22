@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import logoPetit from '@/app/logo-petit.png';
-import AvatarDisplay from '@/components/account/display-avatar';
+import AvatarDisplay from '@/components/account/DisplayAvatar';
 import { ChoosingTheme } from '@/components/choosing-theme';
 import { Button } from '@/components/ui/button';
 

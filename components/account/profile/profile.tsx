@@ -1,5 +1,5 @@
-import { ModifMail } from '@/components/account/profile/modif-mail';
-import { ModifNames } from '@/components/account/profile/modif-names';
+import { ModifMail } from '@/components/account/profile/ModifMail';
+import { ModifNames } from '@/components/account/profile/ModifNames';
 
 export const Profile = () => {
   return (

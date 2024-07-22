@@ -1,4 +1,4 @@
-import CellarDashboard from '../../components/cellar/cellar-dashboard';
+import CellarDashboard from '../../components/cellar/CellarDashboard';
 
 import { getCellars } from '../lib/cellar/cellar.get';
 import { Suspense } from 'react';

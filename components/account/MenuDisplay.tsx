@@ -12,8 +12,8 @@ import {
 } from '@/components/ui/accordion';
 
 import { ChoosingTheme } from '@/components/choosing-theme';
-import { Security } from '@/components/account/security/security';
-import { Profile } from '@/components/account/profile/profile';
+import { Security } from '@/components/account/security/Security';
+import { Profile } from '@/components/account/profile/Profile';
 
 export default function MenuDisplay() {
   return (

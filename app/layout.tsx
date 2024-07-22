@@ -5,9 +5,9 @@ import { SessionProvider } from 'next-auth/react';
 
 import '@/app/ui/global.css';
 import { k2d } from '@/components/fonts';
-import Navbar from '@/components/navbar/navbar';
-import NavbarMobile from '@/components/navbar/navbar-mobile';
-import { ThemeProvider } from '@/components/theme-provider';
+import Navbar from '@/components/navbar/Navbar';
+import NavbarMobile from '@/components/navbar/NavbarMobile';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 export const metadata: Metadata = {
   title: {
