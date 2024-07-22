@@ -11,7 +11,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-import { ChoosingTheme } from '@/components/choosing-theme';
+import { BoxChoosingTheme } from '@/components/box-choosing-theme';
 import { Security } from '@/components/account/security/security';
 import { Profile } from '@/components/account/profile/profile';
 
@@ -30,7 +30,7 @@ export default function MenuDisplay() {
             <AccordionContent>
               <div className="flex items-center space-x-2">
                 <p>Choisissez le thème de l&apos;application : </p>
-                <ChoosingTheme />
+                <BoxChoosingTheme />
               </div>
             </AccordionContent>
           </AccordionItem>
