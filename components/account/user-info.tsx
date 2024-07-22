@@ -5,7 +5,7 @@ import { RiAccountCircleLine } from 'react-icons/ri';
 import { handleDisconnect } from '@/app/lib/utils';
 import DisconnectButton from '../navbar/disconnect-button';
 
-export default function UserInfoDisplayPhone() {
+export default function UserInfoDisplay() {
   const { data: session } = useSession();
   const user = session?.user;
 

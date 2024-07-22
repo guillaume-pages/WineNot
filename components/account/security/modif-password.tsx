@@ -2,12 +2,15 @@
 
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+
+import toast from 'react-hot-toast';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import toast from 'react-hot-toast';
-import { modifPassword } from '@/app/lib/user/user.password';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+
+import { modifPassword } from '@/app/lib/user/user.password';
 
 export const ModifPassword = () => {
   const { data: session } = useSession();
@@ -53,66 +56,72 @@ export const ModifPassword = () => {
       <div className="space-y-3">
         <h2 className="text-lg">Changement de mot de passe</h2>
 
-        <Label htmlFor="oldPassword">Ancien mot de passe</Label>
-        <div className="relative">
-          <Input
-            type={isPasswordVisible ? 'text' : 'password'}
-            id="oldPassword"
-            placeholder="Saisissez votre mot de passe actuel"
-            className="Input Input-bordered w-full"
-            value={oldPassword}
-            onChange={(e) => setOldPassword(e.target.value)}
-          />
-          <button
-            type="button"
-            onClick={togglePasswordVisibility}
-            className="absolute inset-y-0 right-0 px-3 py-2"
-          >
-            {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
-          </button>
+        <div className="space-y-2 px-2">
+          <Label htmlFor="oldPassword">Ancien mot de passe</Label>
+          <div className="relative">
+            <Input
+              type={isPasswordVisible ? 'text' : 'password'}
+              id="oldPassword"
+              placeholder="Saisissez votre mot de passe actuel"
+              className="Input Input-bordered w-full"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-0 right-0 px-3 py-2"
+            >
+              {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+            </button>
+          </div>
         </div>
-        <Label htmlFor="newPassword">Nouveau mot de passe</Label>
-        <div className="relative">
-          <Input
-            type={isPasswordVisible ? 'text' : 'password'}
-            placeholder="Saisissez votre nouveau mot de passe"
-            className="Input Input-bordered w-full"
-            id="newPassword"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-          <button
-            type="button"
-            onClick={togglePasswordVisibility}
-            className="absolute inset-y-0 right-0 px-3 py-2"
-          >
-            {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
-          </button>
+        <div className="space-y-2 px-2">
+          <Label htmlFor="newPassword">Nouveau mot de passe</Label>
+          <div className="relative">
+            <Input
+              type={isPasswordVisible ? 'text' : 'password'}
+              placeholder="Saisissez votre nouveau mot de passe"
+              className="Input Input-bordered w-full"
+              id="newPassword"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-0 right-0 px-3 py-2"
+            >
+              {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+            </button>
+          </div>
         </div>
 
-        <Label htmlFor="confirmPassword">
-          Confirmer le nouveau mot de passe
-        </Label>
-        <div className="relative">
-          <Input
-            type={isPasswordVisible ? 'text' : 'password'}
-            placeholder="Confirmez votre nouveau mot de passe"
-            className="Input Input-bordered w-full"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <button
-            type="button"
-            onClick={togglePasswordVisibility}
-            className="absolute inset-y-0 right-0 px-3 py-2"
-          >
-            {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
-          </button>
+        <div className="space-y-2 px-2">
+          <Label htmlFor="confirmPassword">
+            Confirmer le nouveau mot de passe
+          </Label>
+          <div className="relative">
+            <Input
+              type={isPasswordVisible ? 'text' : 'password'}
+              placeholder="Confirmez votre nouveau mot de passe"
+              className="Input Input-bordered w-full"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-0 right-0 px-3 py-2"
+            >
+              {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+            </button>
+          </div>
+          <Button onClick={handleNewPassword} disabled={loading}>
+            {loading ? 'Modification...' : 'Modifier le mot de passe'}
+          </Button>
         </div>
-        <Button onClick={handleNewPassword} disabled={loading}>
-          {loading ? 'Modification...' : 'Modifier le mot de passe'}
-        </Button>
       </div>
     </div>
   );

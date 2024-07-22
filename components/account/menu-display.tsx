@@ -3,7 +3,6 @@ import { CiEdit } from 'react-icons/ci';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 import { HiOutlinePaintBrush } from 'react-icons/hi2';
-import { ChoosingTheme } from '@/components/choosing-theme';
 
 import {
   Accordion,
@@ -11,12 +10,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Security } from '@/components/account/security/security';
 
-export default function MenuDisplayPhone() {
+import { ChoosingTheme } from '@/components/choosing-theme';
+import { Security } from '@/components/account/security/security';
+import { Profile } from '@/components/account/profile/profile';
+
+export default function MenuDisplay() {
   return (
     <>
-      <div className="p-6">
+      <div className="px-4 pb-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-left">
@@ -26,7 +28,7 @@ export default function MenuDisplayPhone() {
               </div>
             </AccordionTrigger>
             <AccordionContent>
-              <div className="flex items-center justify-center space-x-2">
+              <div className="flex items-center space-x-2">
                 <p>Choisissez le thème de l&apos;application : </p>
                 <ChoosingTheme />
               </div>
@@ -42,7 +44,9 @@ export default function MenuDisplayPhone() {
                 <h3 className="text-lg font-semibold">Modifier mon profil</h3>
               </div>
             </AccordionTrigger>
-            <AccordionContent></AccordionContent>
+            <AccordionContent>
+              <Profile />
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
 
