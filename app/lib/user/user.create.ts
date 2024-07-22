@@ -2,10 +2,7 @@
 
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
-import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
-import { useRouter } from 'next/router';
 
 const prisma = new PrismaClient();
 

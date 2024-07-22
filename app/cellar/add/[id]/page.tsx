@@ -11,7 +11,7 @@ export default function AddBottle() {
   const cellarId = params.id;
 
   return (
-    <section className='sm:max-w-5xl sm:rounded-md lg:border sm:mx-auto'>
+    <section className='mt-6 sm:max-w-5xl sm:rounded-md lg:border sm:mx-auto'>
       <h1 className="pt-4 text-center text-2xl font-bold">
         Création d&apos;une bouteille
       </h1>
