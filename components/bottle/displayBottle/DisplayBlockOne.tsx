@@ -11,7 +11,7 @@ import flip from '@/public/images/icons/flip.png';
 
 import { Badge } from '@/components/ui/badge';
 
-import { DisplayMouth } from './DisplayMouth';
+import { DisplayMouth } from './displayMouth';
 
 export const InfoBlockOne = ({
   bottle,

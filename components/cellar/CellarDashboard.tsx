@@ -2,8 +2,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { Cellar } from '@/types/cellar.type';
-import PopoverAddCellar from '@/components/cellar/PopoverAddCellar';
-import DisplayCellar from './DisplayCellar';
+import PopoverAddCellar from '@/components/cellar/opoverAddCellar';
+import DisplayCellar from './displayCellar';
 import { Button } from '@/components/ui/button';
 import {
   Select,

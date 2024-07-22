@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Statistics } from '@/components/home/section/Statistics';
+import { Statistics } from '@/components/home/section/statistics';
 import logo from '@/app/logo-petit.png';
 
 export const About = () => {

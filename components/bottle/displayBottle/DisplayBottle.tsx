@@ -10,9 +10,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { DisplayWineType } from './DisplayWineType';
-import { InfoBlockOne } from './DisplayBlockOne';
-import { InfoBlockTwo } from './DisplayBlockTwo';
+import { DisplayWineType } from './displayWineType';
+import { InfoBlockOne } from './displayBlockOne';
+import { InfoBlockTwo } from './displayBlockTwo';
 import { IoTrashOutline } from 'react-icons/io5';
 import { Button } from '@/components/ui/button';
 import { deleteBottle } from '@/app/lib/bottle/bottle.delete';

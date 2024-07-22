@@ -6,17 +6,17 @@ import { BottleContext } from '@/app/context/BottleContext';
 import { createBottle } from '@/app/lib/bottle/bottle.create';
 
 import { Accompaniment } from '@/components/bottle/accompaniment';
-import { AddGrapeVarieties } from '@/components/bottle/AddGrapeVarieties';
-import { AddNoseDescription } from '@/components/bottle/NoseDescription';
-import { BottlePrice } from '@/components/bottle/BottlePrice';
-import { DatesBottle } from '@/components/bottle/DatesBottle';
-import { FormSlider } from '@/components/bottle/FormSlider';
-import { GlobalVisibility } from '@/components/bottle/GlobalVisibility';
-import { Reset } from '@/components/bottle/Reset';
-import { SelectMillesime } from '@/components/bottle/SelectMillesime';
-import { SelectSizeWine } from '@/components/bottle/SelectSizeWine';
-import { SelectTypeWine } from '@/components/bottle/SelectTypeWine';
-import { Service } from '@/components/bottle/Service';
+import { AddGrapeVarieties } from '@/components/bottle/addGrapeVarieties';
+import { AddNoseDescription } from '@/components/bottle/noseDescription';
+import { BottlePrice } from '@/components/bottle/bottlePrice';
+import { DatesBottle } from '@/components/bottle/datesBottle';
+import { FormSlider } from '@/components/bottle/formSlider';
+import { GlobalVisibility } from '@/components/bottle/globalVisibility';
+import { Reset } from '@/components/bottle/reset';
+import { SelectMillesime } from '@/components/bottle/selectMillesime';
+import { SelectSizeWine } from '@/components/bottle/selectSizeWine';
+import { SelectTypeWine } from '@/components/bottle/selectTypeWine';
+import { Service } from '@/components/bottle/service';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

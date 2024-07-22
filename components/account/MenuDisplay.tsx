@@ -11,9 +11,9 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-import { BoxChoosingTheme } from '@/components/BoxChoosingTheme';
-import { Security } from '@/components/account/security/Security';
-import { Profile } from '@/components/account/profile/Profile';
+import { BoxChoosingTheme } from '@/components/boxChoosingTheme';
+import { Security } from '@/components/account/security/security';
+import { Profile } from '@/components/account/profile/profile';
 
 export default function MenuDisplay() {
   return (

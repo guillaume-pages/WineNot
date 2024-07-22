@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import logoPetit from '@/app/logo-petit.png';
-import AvatarDisplay from '@/components/account/DisplayAvatar';
-import { BoxChoosingTheme } from '@/components/BoxChoosingTheme';
+import AvatarDisplay from '@/components/account/displayAvatar';
+import { BoxChoosingTheme } from '@/components/boxChoosingTheme';
 import { Button } from '@/components/ui/button';
 
 // // TODO: affichage de tableau de bord si le user est un professionnel
