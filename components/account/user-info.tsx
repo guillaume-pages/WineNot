@@ -42,7 +42,9 @@ export default function UserInfoDisplay({ component }: { component?: string }) {
 
   const avatar = user?.image;
 
-  const avatarImage = avatarMap[avatar as keyof typeof avatarMap];
+  const avatarKey = user?.image && avatarMap[avatar as keyof typeof avatarMap] ? user.image : 'Ellipse1';
+  const avatarImage = avatarMap[avatarKey as keyof typeof avatarMap];
+
 
   const fullName = `${user?.firstname} ${user?.lastname}`;
 

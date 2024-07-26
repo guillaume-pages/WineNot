@@ -34,7 +34,8 @@ export default function AvatarDisplay() {
   console.log('user', user);
 
   const avatar = user?.image;
-  const avatarImage = avatarMap[avatar as keyof typeof avatarMap];
+  const avatarKey = user?.image && avatarMap[avatar as keyof typeof avatarMap] ? user.image : 'Ellipse1';
+  const avatarImage = avatarMap[avatarKey as keyof typeof avatarMap];  
   const fallback = `${user?.firstname} ${user?.lastname}`;
 
   return (
