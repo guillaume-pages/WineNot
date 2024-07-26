@@ -163,7 +163,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
             />
           </div>
           <GlobalVisibility />
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="picture">
               Picture
             </Label>
@@ -173,7 +173,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
               value={bottleMedia}
               onChange={(e) => setBottleMedia(e.target.value)}
             />
-          </div>
+          </div> */}
           <div className="flex flex-col pb-4 pt-2">
             <Button size="default" onClick={handleAddBottle} disabled={loading}>
               Ajouter

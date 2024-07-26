@@ -9,8 +9,9 @@ import { PiWineThin } from 'react-icons/pi';
 import { PiHouseLineLight } from 'react-icons/pi';
 import { PiChartLineUpThin } from 'react-icons/pi';
 import { CiLogin } from 'react-icons/ci';
+import { VscAccount } from 'react-icons/vsc';
+
 import LogoPetit from '@/app/logo-petit.png';
-import AvatarDisplay from '@/components/account/display-avatar';
 
 export default function NavbarMobile() {
   const pathname = usePathname();
@@ -43,7 +44,7 @@ export default function NavbarMobile() {
         {isConnected ? (
           <>
             <Link href="/profile">
-              <AvatarDisplay />
+              <VscAccount size={36} />
             </Link>
           </>
         ) : (
