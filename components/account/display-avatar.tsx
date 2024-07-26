@@ -31,7 +31,6 @@ const avatarMap = {
 export default function AvatarDisplay() {
   const { user } = useContext(UserContext);
 
-  console.log('user', user);
 
   const avatar = user?.image;
   const avatarKey = user?.image && avatarMap[avatar as keyof typeof avatarMap] ? user.image : 'Ellipse1';

@@ -37,7 +37,6 @@ const avatarMap = {
 };
 
 export default function UserInfoDisplay({ component }: { component?: string }) {
-  console.log('component', component);
   const { user } = useContext(UserContext);
 
   const avatar = user?.image;
