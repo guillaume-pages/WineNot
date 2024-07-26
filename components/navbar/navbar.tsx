@@ -6,11 +6,10 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import logoPetit from '@/app/logo-petit.png';
-import AvatarDisplay from '@/components/account/display-avatar';
 import { BoxChoosingTheme } from '@/components/box-choosing-theme';
 import { Button } from '@/components/ui/button';
-import { UserProvider } from '@/app/context/UserContext';
-import UserInfoDisplay from '@/components/account/user-info';
+import { VscAccount } from "react-icons/vsc";
+
 
 // // TODO: affichage de tableau de bord si le user est un professionnel
 
@@ -27,7 +26,6 @@ export default function Navbar() {
   }
 
   return (
-    <UserProvider>
       <header className="hidden sm:block">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
@@ -97,8 +95,7 @@ export default function Navbar() {
                 {user && (
                   <>
                     <Link href="/profile">
-                      {/* <AvatarDisplay /> */}
-                      <UserInfoDisplay component='navbar' />
+                      <VscAccount className='text-2xl'/>
                     </Link>
                   </>
                 )}
@@ -108,6 +105,5 @@ export default function Navbar() {
           </div>
         </div>
       </header>
-    </UserProvider>
   );
 }

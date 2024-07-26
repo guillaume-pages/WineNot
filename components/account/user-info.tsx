@@ -48,7 +48,7 @@ export default function UserInfoDisplay({ component }: { component?: string }) {
 
   return (
     <>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center pt-6">
         <div className="avatar">
           <div
             className={clsx('rounded-full ring-2 ring-black dark:ring-white', {

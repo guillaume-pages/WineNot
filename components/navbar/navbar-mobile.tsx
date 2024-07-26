@@ -9,10 +9,9 @@ import { PiWineThin } from 'react-icons/pi';
 import { PiHouseLineLight } from 'react-icons/pi';
 import { PiChartLineUpThin } from 'react-icons/pi';
 import { CiLogin } from 'react-icons/ci';
+import { VscAccount } from 'react-icons/vsc';
+
 import LogoPetit from '@/app/logo-petit.png';
-import AvatarDisplay from '@/components/account/display-avatar';
-import { UserProvider } from '@/app/context/UserContext';
-import UserInfoDisplay from '../account/user-info';
 
 export default function NavbarMobile() {
   const pathname = usePathname();
@@ -29,36 +28,33 @@ export default function NavbarMobile() {
 
   return (
     <>
-      <UserProvider>
-        <div className="fixed bottom-0 z-10 flex h-12 w-full justify-center space-x-6 border-t-[1px] border-accent-foreground bg-accent py-1 sm:hidden">
-          <Link href="/">
-            <Image src={LogoPetit} height={36} width={46} alt="Compagny logo" />
-          </Link>
-          <Link href="/cellar">
-            <PiWineThin size={36} />
-          </Link>
-          <Link href="/feed">
-            <PiHouseLineLight size={36} />
-          </Link>
-          {/* <Link href="/dashboard">
+      <div className="fixed bottom-0 z-10 flex h-12 w-full justify-center space-x-6 border-t-[1px] border-accent-foreground bg-accent py-1 sm:hidden">
+        <Link href="/">
+          <Image src={LogoPetit} height={36} width={46} alt="Compagny logo" />
+        </Link>
+        <Link href="/cellar">
+          <PiWineThin size={36} />
+        </Link>
+        <Link href="/feed">
+          <PiHouseLineLight size={36} />
+        </Link>
+        {/* <Link href="/dashboard">
           <PiChartLineUpThin size={36} />
         </Link> */}
-          {isConnected ? (
-            <>
-              <Link href="/profile">
-                {/* <AvatarDisplay /> */}
-                <UserInfoDisplay component="navbar" />
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link href="/login">
-                <CiLogin size={36} />
-              </Link>
-            </>
-          )}
-        </div>
-      </UserProvider>
+        {isConnected ? (
+          <>
+            <Link href="/profile">
+              <VscAccount size={36} />
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link href="/login">
+              <CiLogin size={36} />
+            </Link>
+          </>
+        )}
+      </div>
     </>
   );
 }
