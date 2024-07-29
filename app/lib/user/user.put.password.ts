@@ -8,6 +8,8 @@ const prisma = new PrismaClient();
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$/;
 
 export async function modifPassword(userId: string, oldPassword: string, newPassword: string) {
+  const updatetedDate = new Date().toISOString();
+
   try {
     if (!newPassword.match(passwordRegex)) {
       throw new Error('Le nouveau mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial');
@@ -43,6 +45,7 @@ export async function modifPassword(userId: string, oldPassword: string, newPass
       },
       data: {
         password: hashedNewPassword,
+        updatedAt: updatetedDate,
       },
     });
 

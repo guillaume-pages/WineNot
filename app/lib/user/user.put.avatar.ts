@@ -5,6 +5,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function modifAvatar(userId: string, newAvatar: string) {
+  const updatetedDate = new Date().toISOString();
   try {
     const user = await prisma.users.update({
       where: {
@@ -12,6 +13,7 @@ export async function modifAvatar(userId: string, newAvatar: string) {
       },
       data: {
         image: newAvatar,
+        updatedAt: updatetedDate,
       },
     });
 

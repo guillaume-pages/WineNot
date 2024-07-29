@@ -13,8 +13,9 @@ import {
 
 import { BoxChoosingTheme } from '@/components/box-choosing-theme';
 import { DeleteAccount } from '@/components/account/delete-account';
-import { Security } from '@/components/account/security/security';
+import { Help } from '@/components/account/help/help';
 import { Profile } from '@/components/account/profile/profile';
+import { Security } from '@/components/account/security/security';
 
 export default function MenuDisplay() {
   return (
@@ -73,7 +74,9 @@ export default function MenuDisplay() {
                 <h3 className="text-lg font-semibold">Aide</h3>
               </div>
             </AccordionTrigger>
-            <AccordionContent></AccordionContent>
+            <AccordionContent>
+              <Help />
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
         <DeleteAccount />

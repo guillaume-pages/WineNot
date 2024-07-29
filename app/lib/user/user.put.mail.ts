@@ -8,6 +8,8 @@ const prisma = new PrismaClient();
 const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export async function modifMail(userId: string, oldMail: string, newMail: string) {
+  const updatetedDate = new Date().toISOString();
+
   try {
     if (!newMail.match(mailRegex)) {
       throw new Error('Le nouveau mail n\'est pas valide');
@@ -45,6 +47,7 @@ export async function modifMail(userId: string, oldMail: string, newMail: string
       },
       data: {
         email: newMail,
+        updatedAt: updatetedDate,
       },
     });
 
