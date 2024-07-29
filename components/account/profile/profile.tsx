@@ -4,7 +4,7 @@ import { ModifAvatar } from './modif-avatar';
 
 export const Profile = () => {
   return (
-    <div>
+    <div className='space-y-4'>
       <ModifAvatar />
       <ModifNames />
       <ModifMail />
