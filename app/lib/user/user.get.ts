@@ -28,5 +28,7 @@ export async function getUser (userId: string) {
   } catch (error) {
     console.error('Erreur lors de la récupération de l\'utilisateur:', error);
     throw error;
+  } finally {
+    await prisma.$disconnect();
   }
 };

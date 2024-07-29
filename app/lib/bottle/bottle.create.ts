@@ -62,5 +62,7 @@ export const createBottle = async (data: any) => {
   } catch (error) {
     console.error(error);
     throw new Error('Il y a un problème avec les champs du formulaire. Veuillez vérifier et réessayer.');
+  } finally {
+    await prisma.$disconnect();
   }
 };

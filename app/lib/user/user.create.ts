@@ -83,5 +83,7 @@ export async function createUser(prevState: State, formData: FormData) {
     return {
       message: 'Erreur lors de la création du compte utilisateur. Veuillez réessayer.',
     };
+  } finally {
+    await prisma.$disconnect();
   }
 }

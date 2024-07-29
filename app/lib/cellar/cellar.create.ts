@@ -8,53 +8,43 @@ const prisma = new PrismaClient();
 
 type State = {
   message?: string | null;
-}
+};
 
 const FormDataSchema = z.object({
   cellar_name: z.string().min(4),
   user_id: z.string(),
 });
 
-export const createCellar = async (prevState: State, formData: FormData ) => {
-  const cellarName = formData.get('cellar_name') as string;
-  const user_id = formData.get('user_id') as string;
+export const createCellar = async (cellarName: string, user_id: string) => {
+  if (cellarName.length <= 4) {
+    throw new Error('Le nom de la cave doit contenir au moins 4 caractères.');
+  }
 
-  const validationResult = FormDataSchema.safeParse({
-    cellar_name: cellarName,
-    user_id: user_id,
-  });
-  
-  if (validationResult.success) {
-    const { cellar_name, user_id } = validationResult.data;
-    
-    try {    
-      const newCellar = await prisma.cellars.create({
-        data: {
-          cellar_name: cellar_name,
-          created_at: new Date(),
-        },
-      });
-  
-      await prisma.users_cellars.create({
-        data: {
-          user_id: user_id,
-          cellar_id: newCellar.cellar_id,
-        },
-      });
+  try {
+    const newCellar = await prisma.cellars.create({
+      data: {
+        cellar_name: cellarName,
+        created_at: new Date(),
+      },
+    });
 
-      revalidatePath('/cellar');
-  
-      return {
-        message: 'Votre cave a été créée avec succès.',
-      };
-    } catch (error) {
-      return {
-        message: 'Erreur lors de la création de la cave. Veuillez réessayer.',
-      };
-    }
-  } else {
+    await prisma.users_cellars.create({
+      data: {
+        user_id: user_id,
+        cellar_id: newCellar.cellar_id,
+      },
+    });
+
+    revalidatePath('/cellar');
+
     return {
-      message: 'Données de formulaire invalides. Veuillez vérifier vos entrées.',
+      message: 'Votre cave a été créée avec succès.',
     };
+  } catch (error) {
+    throw new Error(
+      'Erreur lors de la création de la cave. Veuillez réessayer.',
+    );
+  } finally {
+    await prisma.$disconnect();
   }
 };
