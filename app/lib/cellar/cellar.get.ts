@@ -90,5 +90,7 @@ export const getCellars = async () => {
   } catch (error) {
     console.error(error);
     return [];
+  } finally {
+    await prisma.$disconnect();
   }
 };

@@ -19,5 +19,7 @@ export const deleteBottle = async (bottle_id: string) => {
   } catch (error) {
     console.error(error);
     throw new Error('Une erreur inattendue est survenue.');
+  } finally {
+    await prisma.$disconnect();
   }
 };
