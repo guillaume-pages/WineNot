@@ -52,7 +52,7 @@ export const ModifNames = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="space-y-4">
         <h2 className="text-lg">Changement de noms</h2>
 
@@ -82,6 +82,6 @@ export const ModifNames = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 };

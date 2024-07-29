@@ -5,6 +5,8 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function modifNames(userId: string, newFirstname: string, newLastname: string) {
+  const updatetedDate = new Date().toISOString();
+
   try {
     const user = await prisma.users.findUnique({
       where: {
@@ -23,6 +25,7 @@ export async function modifNames(userId: string, newFirstname: string, newLastna
       data: {
         firstname: newFirstname,
         lastname: newLastname,
+        updatedAt: updatetedDate,
       },
     });
 

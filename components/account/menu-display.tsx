@@ -12,13 +12,15 @@ import {
 } from '@/components/ui/accordion';
 
 import { BoxChoosingTheme } from '@/components/box-choosing-theme';
-import { Security } from '@/components/account/security/security';
+import { DeleteAccount } from '@/components/account/delete-account';
+import { Help } from '@/components/account/help/help';
 import { Profile } from '@/components/account/profile/profile';
+import { Security } from '@/components/account/security/security';
 
 export default function MenuDisplay() {
   return (
     <>
-      <div className="px-4 pb-6">
+      <div className="px-4 pb-6 mb-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-left">
@@ -72,9 +74,12 @@ export default function MenuDisplay() {
                 <h3 className="text-lg font-semibold">Aide</h3>
               </div>
             </AccordionTrigger>
-            <AccordionContent></AccordionContent>
+            <AccordionContent>
+              <Help />
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
+        <DeleteAccount />
       </div>
     </>
   );
