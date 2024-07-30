@@ -111,7 +111,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
   };
 
   return (
-    <section className="mx-auto mt-6 flex max-w-5xl flex-col md:max-w-4xl lg:rounded-md lg:border">
+    <section className="mx-auto my-6 flex max-w-5xl flex-col md:max-w-4xl lg:rounded-md lg:border lg:shadow-2xl">
       <div className="flex space-x-4 px-4 pb-2 pt-6 lg:border-b">
         <Select onValueChange={handleValueChange}>
           <SelectTrigger className="w-[220px]">
@@ -201,7 +201,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
         {activeCellarData && (
           <>
             <div className="pb-6">
-              <Button>
+              <Button size="sm">
                 <Link
                   href={`/cellar/add/${activeCellarData.cellars.cellar_id}`}
                 >

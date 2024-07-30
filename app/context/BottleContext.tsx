@@ -107,8 +107,8 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   const [bottleGlobalDescription, setBottleGlobalDescription] = useState('');
 
   // Value for entry date and potential date
-  const [bottleEntryDate, setBottleEntryDate] = useState<Date>(new Date());
-  const [bottlePotentialDate, setBottlePotentialDate] = useState<Date>(new Date());
+  const [bottleEntryDate, setBottleEntryDate] = useState<Date | string>('');
+  const [bottlePotentialDate, setBottlePotentialDate] = useState<Date | string>('');
 
   // Value for bottle quantity
   const [bottleQuantity, setBottleQuantity] = useState<number>(6);
@@ -150,6 +150,8 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   global_visibility: globalVisibility,
   cellar_id: '',
 };
+
+console.log('bottleData', bottleData);
 
 const resetBottleData = () => {
   setBottleName('');

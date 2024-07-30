@@ -45,10 +45,10 @@ export const Accompaniment = () => {
         <Button onClick={handleAddAccompaniment}>Ajouter</Button>
       </div>
       <div className="flex flex-wrap items-center gap-2 pt-2">
-        {accompaniments.map((nose, index) => (
+        {accompaniments.map((accompaniment, index) => (
           <Badge key={index}>
-            {nose}
-            <Button size="nothing" onClick={() => handleRemoveAccompaniment(nose)}>
+            {accompaniment}
+            <Button size="nothing" onClick={() => handleRemoveAccompaniment(accompaniment)}>
               <RxCross2 />
             </Button>
           </Badge>

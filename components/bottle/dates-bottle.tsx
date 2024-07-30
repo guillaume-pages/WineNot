@@ -1,21 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
-import { fr } from 'date-fns/locale';
 
 import { BottleContext } from '@/app/context/BottleContext';
 
 import { Label } from '@/components/ui/label';
-import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
-
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { Input } from '@/components/ui/input';
 
 export const DatesBottle = () => {
   const {
@@ -25,74 +14,40 @@ export const DatesBottle = () => {
     setBottlePotentialDate,
   } = useContext(BottleContext);
 
+  useEffect(() => {
+    setBottleEntryDate('')
+    setBottlePotentialDate('')
+    
+    if (typeof bottleEntryDate === 'string' && bottleEntryDate.length === 10) {
+      setBottleEntryDate(bottleEntryDate);
+    }
+    if (typeof bottlePotentialDate === 'string' && bottlePotentialDate.length === 10) {
+      setBottlePotentialDate(bottlePotentialDate);
+    }
+  }, [bottleEntryDate, bottlePotentialDate, setBottleEntryDate, setBottlePotentialDate]);
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col">
-        <Label className="pb-4 pt-2" htmlFor="dates">
-          Date d&apos;entrée dans la cave
-        </Label>
-        <div className="flex w-full items-center gap-2">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant={'outline'}
-                className={cn(
-                  'w-full justify-start text-left font-normal',
-                  !bottleEntryDate && 'text-muted-foreground',
-                )}
-              >
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                {bottleEntryDate ? (
-                  format(bottleEntryDate, 'dd MMMM yyyy', { locale: fr })
-                ) : (
-                  <span>Choisissez une date</span>
-                )}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0">
-              <Calendar
-                mode="single"
-                locale={fr}
-                selected={bottleEntryDate || new Date()}
-                onSelect={(date) => setBottleEntryDate(date || new Date())}
-                initialFocus
-              />
-            </PopoverContent>
-          </Popover>
+        <div>
+          <Label>Date d&apos;entrée dans la cave</Label>
+          <Input
+            type="date"
+            id="entry_date"
+            value={bottleEntryDate as unknown as string}
+            onChange={(e) => setBottleEntryDate(e.target.value)}
+            placeholder="JJ/MM/AAAA"
+          />
         </div>
-      </div>
-      <div className="flex flex-col">
-        <Label className="pb-4 pt-2" htmlFor="dates">
-          Date de potentiel de garde
-        </Label>
-        <div className="flex w-full items-center gap-2">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant={'outline'}
-                className={cn(
-                  'w-full justify-start text-left font-normal',
-                  !bottlePotentialDate && 'text-muted-foreground',
-                )}
-              >
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                {bottlePotentialDate ? (
-                  format(bottlePotentialDate, 'dd MMMM yyyy', { locale: fr })
-                ) : (
-                  <span>Choisissez une date</span>
-                )}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0">
-              <Calendar
-                mode="single"
-                locale={fr}
-                selected={bottlePotentialDate || new Date()}
-                onSelect={(date) => setBottlePotentialDate(date || new Date())}
-                initialFocus
-              />
-            </PopoverContent>
-          </Popover>
+        <div>
+          <Label>Date d&apos;entrée dans la cave</Label>
+          <Input
+            type="date"
+            id="potential_date"
+            value={bottlePotentialDate as unknown as string}
+            onChange={(e) => setBottlePotentialDate(e.target.value)}
+            placeholder="JJ/MM/AAAA"
+          />
         </div>
       </div>
     </div>

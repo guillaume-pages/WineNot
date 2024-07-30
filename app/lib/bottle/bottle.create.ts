@@ -33,6 +33,11 @@ const CreateBottleSchema = z.object({
 });
 
 export const createBottle = async (data: any) => {
+  const formatedEntryDate = new Date(data.entry_date);
+  const formatedPotentialDate = data.potential_date ? new Date(data.potential_date) : null;
+
+  data.entry_date = formatedEntryDate;
+  data.potential_date = formatedPotentialDate;
 
   try {
     const validatedData = CreateBottleSchema.parse(data);
