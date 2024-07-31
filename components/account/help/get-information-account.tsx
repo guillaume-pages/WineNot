@@ -16,7 +16,7 @@ export const GetInformationAccount = () => {
     try {
       setLoading(true);
       const informations = await getUserInformation(user?.user_id as string);
-      downloadJSON(informations, 'informations_personnelles.json');
+      downloadJSON(informations, 'informations_personnelles_wine_not.json');
     } catch (error) {
       console.error('Erreur lors de la récupération des informations:', error);
     } finally {

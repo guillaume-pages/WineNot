@@ -124,15 +124,15 @@ export default function DisplayBottle({
                       </div>
                     </PopoverContent>
                   </Popover>
-                  <Button
-                    variant="secondary"
-                    size="littleIcon"
-                    disabled={loading}
-                  >
-                    <Link href={`/cellar/edit/${bottle.bottle_id}`}>
+                  <Link href={`/cellar/edit/${bottle.bottle_id}`}>
+                    <Button
+                      variant="secondary"
+                      size="littleIcon"
+                      disabled={loading}
+                    >
                       <MdOutlineDriveFileRenameOutline />
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
