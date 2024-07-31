@@ -130,6 +130,21 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
     cellar_id: '',
   });
 
+  const [entryInputValue, setEntryInputValue] = useState('');
+  const [potentialInputValue, setPotentialInputValue] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const [inputValue, setInputValue] = useState('');
+
+  const slidersConfig = [
+    { label: 'Puissance', index: 0 },
+    { label: 'Complexité', index: 1 },
+    { label: 'Epicé', index: 2 },
+    { label: 'Fruité', index: 3 },
+    { label: 'Boisé', index: 4 },
+    { label: 'Tannique', index: 5 },
+  ];
+
   useEffect(() => {
     const fetchBottle = async () => {
       const res = await getOneBottle(bottleId);
@@ -142,10 +157,6 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
   }, [bottleId]);
 
   console.log(bottle);
-
-  const [loading, setLoading] = useState(false);
-
-  const [inputValue, setInputValue] = useState('');
 
   const handleAddGrapeVarietie = () => {
     if (
@@ -219,15 +230,6 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
     }));
   };
 
-  const slidersConfig = [
-    { label: 'Puissance', index: 0 },
-    { label: 'Complexité', index: 1 },
-    { label: 'Epicé', index: 2 },
-    { label: 'Fruité', index: 3 },
-    { label: 'Boisé', index: 4 },
-    { label: 'Tannique', index: 5 },
-  ];
-
   const handleSliderChange = (index: number, value: number[]) => {
     setBottle((prevBottle) => {
       const updatedMouthDescription = [...(prevBottle.mouth_description ?? [])];
@@ -239,17 +241,15 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
     });
   };
 
-  const [entryInputValue, setEntryInputValue] = useState('');
-  const [potentialInputValue, setPotentialInputValue] = useState('');
-
   useEffect(() => {
-    if (typeof entryInputValue && entryInputValue.length === 10) {
-      setBottle({ ...bottle, entry_date: entryInputValue });
+    if (typeof entryInputValue === 'string' && entryInputValue.length === 10 && bottle.entry_date !== entryInputValue) {
+      setBottle((prevBottle) => ({ ...prevBottle, entry_date: entryInputValue }));
     }
-    if (typeof potentialInputValue && potentialInputValue.length === 10) {
-      setBottle({ ...bottle, potential_date: potentialInputValue });
+    if (typeof potentialInputValue === 'string' && potentialInputValue.length === 10 && bottle.potential_date !== potentialInputValue) {
+      setBottle((prevBottle) => ({ ...prevBottle, potential_date: potentialInputValue }));
     }
-  }, [entryInputValue, bottle, potentialInputValue]);
+  }, [bottle.entry_date, bottle.potential_date, entryInputValue, potentialInputValue]);
+  
 
   const handleUpdateBottle = async () => {
     setLoading(true);
@@ -671,7 +671,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               />
             </div>
             <div>
-              <Label>Date d&apos;entrée dans la cave</Label>
+              <Label>Date de potentiel de garde</Label>
               <Input
                 type="date"
                 id="potential_date"

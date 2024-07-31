@@ -7,15 +7,10 @@ import { formatDate } from '@/app/lib/utils';
 import bottleSize from '@/public/images/icons/bottle-size.png';
 import calendar from '@/public/images/icons/calendar.png';
 import quantity from '@/public/images/icons/quantity.png';
-import flip from '@/public/images/icons/flip.png';
 
 import { ConfidentialityDisplay } from './confidentiality-display';
 
-export const InfoBlockTwo = ({
-  bottle,
-}: {
-  bottle: Bottle;
-}) => (
+export const InfoBlockTwo = ({ bottle }: { bottle: Bottle }) => (
   <div className="space-y-3">
     <div className="flex items-center justify-between">
       <h2 className="text-base">Côté cave</h2>
@@ -23,7 +18,7 @@ export const InfoBlockTwo = ({
     <div className="flex space-x-3">
       <Image src={calendar} alt="calendar icon" height={30} width={30} />
       <div>
-        <p>Date d&apos;entrée : {formatDate(bottle.entry_date.toString())}</p>
+        <p>Date d&apos;entrée : {formatDate(bottle.entry_date.toString())}</p>{' '}
         <p>
           {bottle.potential_date
             ? `Potentiel de garde : ${formatDate(

@@ -1,5 +1,3 @@
-// types.ts
-
 export interface Bottle {
   bottle_id?: string;
   bottle_name: string;
@@ -19,8 +17,8 @@ export interface Bottle {
   price?: number;
   price_visibility?: number;
   global_description?: string;
-  entry_date: Date;
-  potential_date?: Date;
+  entry_date: Date | string;
+  potential_date?: Date | string;
   quantity: number;
   global_visibility: number;
   cellar_id: string;
@@ -69,10 +67,10 @@ export interface BottleContextType {
   setVisibilityPrice: (value: number) => void;
   bottleGlobalDescription: string;
   setBottleGlobalDescription: (value: string) => void;
-  bottleEntryDate: Date;
-  setBottleEntryDate: (value: Date) => void;
-  bottlePotentialDate: Date;
-  setBottlePotentialDate: (value: Date) => void;
+  bottleEntryDate: Date | string;
+  setBottleEntryDate: (value: Date | string) => void;
+  bottlePotentialDate: Date | string;
+  setBottlePotentialDate: (value: Date | string) => void;
   bottleQuantity: number;
   setBottleQuantity: (value: number) => void;
   globalVisibility: number;
