@@ -43,7 +43,7 @@ export default function Navbar() {
             <div className="sm:flex sm:items-center md:gap-12">
               <nav aria-label="Global" className="hidden sm:flex">
                 <ul className="flex items-center gap-6 text-sm">
-                  <li>
+                  {/* <li>
                     <Link
                       className="transition hover:text-gray-500/75"
                       href="/feed"
@@ -51,7 +51,7 @@ export default function Navbar() {
                       {' '}
                       ACCUEIL{' '}
                     </Link>
-                  </li>
+                  </li> */}
                   {user && (
                     <>
                       <li>
