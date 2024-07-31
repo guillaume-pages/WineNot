@@ -40,18 +40,18 @@ model bottles {
   millesime          Int
   type_of_wine       String    @db.VarChar
   size               String    @db.VarChar
-  grape_varieties    Json      @db.Json
+  grape_varieties    Json?      @db.Json
   region             String    @db.VarChar
   eye_description    String?
   nose_description   Json?     @db.Json
   mouth_description  Json?     @db.Json
   carafage           Int?
   temperature        Int?
-  degree             Float?
+  degree             Float
   accompaniment      Json?     @db.Json
   media              String?
-  price              Float?
-  price_visibility   Int?
+  price              Float
+  price_visibility   Int
   global_description String?
   entry_date         DateTime  @db.Timestamp(6)
   potential_date     DateTime? @db.Timestamp(6)
