@@ -43,8 +43,7 @@ export const BenefitsSection = () => {
       <div className="grid place-items-center lg:grid-cols-2 lg:gap-24">
         <div>
           <h2 className="mb-2 text-lg tracking-wider text-primary">
-            Avantage, à-côté, atout, bénéfice, bien, bienfait, faveur, fruit,
-            intérêt, profit, utilité
+            Avantage
           </h2>
 
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">

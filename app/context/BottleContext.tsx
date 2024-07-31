@@ -155,8 +155,6 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
     cellar_id: '',
   };
 
-  console.log('bottleData', bottleData);
-
   const resetBottleData = () => {
     setBottleName('');
     setBottleMillesime(2024);
