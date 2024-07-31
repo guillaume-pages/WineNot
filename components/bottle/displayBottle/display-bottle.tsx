@@ -2,23 +2,34 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+
 import { Bottle } from '@/types/bottle.type';
+import { deleteBottle } from '@/app/lib/bottle/bottle.delete';
+
+import { DisplayWineType } from './display-wine-type';
+import { InfoBlockOne } from './display-block-one';
+import { InfoBlockTwo } from './display-block-two';
 import termometer from '@/public/images/icons/termometer.png';
+import { IoTrashOutline } from 'react-icons/io5';
+import { MdOutlineDriveFileRenameOutline } from 'react-icons/md';
+
+import { Button } from '@/components/ui/button';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { DisplayWineType } from './display-wine-type';
-import { InfoBlockOne } from './display-block-one';
-import { InfoBlockTwo } from './display-block-two';
-import { IoTrashOutline } from 'react-icons/io5';
-import { Button } from '@/components/ui/button';
-import { deleteBottle } from '@/app/lib/bottle/bottle.delete';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-export default function DisplayBottle({ bottle, onDelete }: { bottle: Bottle, onDelete: (id: string) => void }) {
-  const [showSecondBlock, setShowSecondBlock] = useState(false);
+export default function DisplayBottle({
+  bottle,
+  onDelete,
+}: {
+  bottle: Bottle;
+  onDelete: (id: string) => void;
+}) {
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {
@@ -58,7 +69,7 @@ export default function DisplayBottle({ bottle, onDelete }: { bottle: Bottle, on
                     <p>Carafage {bottle.carafage} min</p>
                   </div>
                 </div>
-                <div className="flex items-center">
+                <div className="flex flex-col items-center space-y-2">
                   <Button
                     variant="destructive"
                     size="littleIcon"
@@ -67,32 +78,34 @@ export default function DisplayBottle({ bottle, onDelete }: { bottle: Bottle, on
                   >
                     <IoTrashOutline />
                   </Button>
+                  <Button
+                    variant="secondary"
+                    size="littleIcon"
+                    disabled={loading}
+                  >
+                    <Link href={`/cellar/edit/${bottle.bottle_id}`}>
+                      <MdOutlineDriveFileRenameOutline />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
 
             <div className="mt-4 md:flex md:gap-4">
-              <div
-                className={`transition-all duration-300 ease-in-out md:w-1/2
-                ${showSecondBlock ? 'hidden md:block' : 'block'}`}
-              >
-                <InfoBlockOne
-                  bottle={bottle}
-                  flipped={showSecondBlock}
-                  flipFunction={setShowSecondBlock}
-                />
-              </div>
-
-              <div
-                className={`transition-all duration-300 ease-in-out md:w-1/2
-                ${showSecondBlock ? 'block' : 'hidden md:block'}`}
-              >
-                <InfoBlockTwo
-                  bottle={bottle}
-                  flipped={showSecondBlock}
-                  flipFunction={setShowSecondBlock}
-                />
-              </div>
+              <Tabs defaultValue="degustation" className="w-auto">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="degustation">
+                    Côté dégustation
+                  </TabsTrigger>
+                  <TabsTrigger value="cave">Côté cave</TabsTrigger>
+                </TabsList>
+                <TabsContent value="degustation">
+                  <InfoBlockOne bottle={bottle} />
+                </TabsContent>
+                <TabsContent value="cave">
+                  <InfoBlockTwo bottle={bottle} />
+                </TabsContent>
+              </Tabs>
             </div>
           </AccordionContent>
         </AccordionItem>

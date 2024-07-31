@@ -32,43 +32,27 @@ const CreateBottleSchema = z.object({
   cellar_id: z.string({ required_error: "L'ID de la cave est requis." }),
 });
 
-export const createBottle = async (data: any) => {
-  console.log('data', data);
+export const updateBottle = async (data: any) => {
   const formatedEntryDate = new Date(data.entry_date);
   const formatedPotentialDate = data.potential_date ? new Date(data.potential_date) : null;
 
-  console.log('formatedEntryDate', formatedEntryDate);
-  console.log('formatedPotentialDate', formatedPotentialDate);
-
   data.entry_date = formatedEntryDate;
   data.potential_date = formatedPotentialDate;
-
-  console.log('data', data);
 
   try {
     const validatedData = CreateBottleSchema.parse(data);
 
     const { cellar_id, grape_varieties, ...bottleData } = validatedData;
 
-    const newBottle = await prisma.bottles.create({
+    await prisma.bottles.update({
+      where: { bottle_id: data.bottle_id },
       data: {
         ...bottleData,
-        grape_varieties: grape_varieties || [],
-        cellar_id: cellar_id,
-      },
-    });
-
-    await prisma.cellars.update({
-      where: { cellar_id: cellar_id },
-      data: {
-        bottles: {
-          push: newBottle.bottle_id,
-        },
       },
     });
 
     return {
-      message: 'Bouteille ajoutée avec succès à la cave.',
+      message: 'Bouteille modifiée avec succès.',
     };
   } catch (error) {
     console.error(error);

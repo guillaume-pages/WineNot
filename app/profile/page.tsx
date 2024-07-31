@@ -7,7 +7,7 @@ import { UserProvider } from '@/app/context/UserContext';
 export default function ProfilePage() {
   return (
     <UserProvider>
-      <section className="mx-auto my-6 flex max-w-5xl flex-col md:max-w-4xl lg:rounded-md lg:border">
+      <section className="mx-auto my-6 flex max-w-5xl flex-col md:max-w-4xl lg:rounded-md lg:border lg:shadow-2xl">
         {/* AVATAR */}
         <UserInfoDisplay />
         {/* MENU SETTINGS */}

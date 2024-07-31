@@ -15,32 +15,12 @@ import { DisplayMouth } from './display-mouth';
 
 export const InfoBlockOne = ({
   bottle,
-  flipped,
-  flipFunction,
 }: {
   bottle: Bottle;
-  flipped: boolean;
-  flipFunction: Function;
 }) => (
   <div className="space-y-3">
     <div className="flex items-center justify-between">
       <h2 className="text-base">Côté dégustation</h2>
-      <div className="md:hidden">
-        <button
-          type="button"
-          onClick={() => flipFunction(!flipped)}
-          className="rounded-full p-2 transition-transform duration-300 ease-in-out"
-        >
-          <Image
-            src={flip}
-            alt="flip icon"
-            height={25}
-            width={25}
-            className={`transform transition-transform duration-300 ease-in-out 
-          ${flipped ? 'rotate-180' : '-rotate-180'}`}
-          />
-        </button>
-      </div>
     </div>
     <div className="flex space-x-3">
       <Image src={eyes} alt="eyes icon" height={30} width={30} />

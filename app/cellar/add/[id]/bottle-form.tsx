@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import { BottleContext } from '@/app/context/BottleContext';
 
@@ -81,7 +81,6 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
 
   return (
     <div className="flex flex-col">
-      <Toaster />
       <Reset />
       <div className="sm:mx-auto sm:flex sm:space-x-20 md:space-x-6">
         <div className="sm:flex sm:flex-col">
