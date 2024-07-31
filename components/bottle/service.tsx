@@ -70,7 +70,7 @@ export const Service = () => {
   return (
     <div className="flex flex-col">
       <Label className="pb-4 pt-2" htmlFor="service">
-        Service
+        Service (optionnel)
       </Label>
       <div className="flex space-x-2">
         <div className="flex space-x-2">

@@ -33,7 +33,7 @@ export const Accompaniment = () => {
   return (
     <div className="flex flex-col">
       <Label className="pb-4 pt-2" htmlFor="accompaniment">
-        Accompagnements
+        Accompagnements (optionnel)
       </Label>
       <div className="flex w-full items-center gap-2">
         <Input

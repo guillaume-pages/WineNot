@@ -83,7 +83,7 @@ export const FormSlider = () => {
   return (
     <>
       <Label className="pb-4 pt-2" htmlFor="mouth_description">
-        Description gustative
+        Description gustative (optionnel)
       </Label>
       <div className="space-y-2">
         {slidersConfig.map((slider, index) => (

@@ -33,7 +33,7 @@ export const AddNoseDescription = () => {
   return (
     <div className="flex flex-col">
       <Label className="pb-4 pt-2" htmlFor="grape_varieties">
-        Description olfactive
+        Description olfactive (optionnel)
       </Label>
       <div className="flex w-full items-center gap-2">
         <Input
