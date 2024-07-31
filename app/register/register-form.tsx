@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import toast, { Toaster } from 'react-hot-toast';
@@ -38,6 +39,8 @@ export default function RegisterForm() {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+  const router = useRouter();
+
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
@@ -47,11 +50,14 @@ export default function RegisterForm() {
       let msg = state.message;
       if (msg.includes('succès')) {
         notifySucces(msg);
+        setTimeout(() => {
+          router.push('/login');
+        }, 2000);
       } else {
         notifyError(msg);
       }
     }
-  }, [state.message]);
+  }, [router, state.message]);
 
   return (
     <>
