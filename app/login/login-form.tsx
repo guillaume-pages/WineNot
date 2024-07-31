@@ -50,7 +50,7 @@ export const LoginForm = () => {
 
       const res = await signIn('credentials', {
         redirect: false,
-        email: values.email,
+        email: values.email.toLowerCase(),
         password: values.password,
         redirectTo: callbackUrl,
       });

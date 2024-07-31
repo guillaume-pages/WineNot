@@ -103,7 +103,7 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
 
   // Value for bottle price
   const [bottlePrice, setBottlePrice] = useState<number>(5);
-  const [visibilityPrice, setVisibilityPrice] = useState<number>(0);
+  const [visibilityPrice, setVisibilityPrice] = useState<number>(2);
 
   // Value for global description
   const [bottleGlobalDescription, setBottleGlobalDescription] = useState('');
@@ -118,7 +118,7 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   const [bottleQuantity, setBottleQuantity] = useState<number>(6);
 
   // Value for global visibility
-  const [globalVisibility, setGlobalVisibility] = useState<number>(0);
+  const [globalVisibility, setGlobalVisibility] = useState<number>(2);
 
   // Value for bottle media
   const [bottleMedia, setBottleMedia] = useState<string>('');
@@ -158,8 +158,8 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
   const resetBottleData = () => {
     setBottleName('');
     setBottleMillesime(2024);
-    setWineType('');
-    setBottleSize('');
+    setWineType('Rouge');
+    setBottleSize('Standard 75 cl');
     setBottleDegree(10);
     setGrapeVarieties([]);
     setBottleRegion('');
@@ -175,12 +175,12 @@ export const BottleProvider: FC<BottleProviderProps> = ({ children }) => {
     setTemperature(10);
     setAccompaniment([]);
     setBottlePrice(5);
-    setVisibilityPrice(0);
+    setVisibilityPrice(2);
     setBottleGlobalDescription('');
     setBottleEntryDate(new Date());
     setBottlePotentialDate(new Date());
     setBottleQuantity(6);
-    setGlobalVisibility(0);
+    setGlobalVisibility(2);
     setBottleMedia('');
   };
 
