@@ -68,7 +68,7 @@ export async function createUser(prevState: State, formData: FormData) {
       data: {
         firstname: firstname,
         lastname: lastname,
-        email: email,
+        email: email.toLowerCase(),
         password: hashedPassword,
         phone: phone,
         status: status,
