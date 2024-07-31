@@ -40,7 +40,7 @@ export const DatesBottle = () => {
           />
         </div>
         <div>
-          <Label>Date d&apos;entrée dans la cave (optionnel)</Label>
+          <Label>Date de potentiel de garde (optionnel)</Label>
           <Input
             type="date"
             id="potential_date"
