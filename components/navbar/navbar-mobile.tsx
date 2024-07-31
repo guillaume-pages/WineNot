@@ -35,9 +35,9 @@ export default function NavbarMobile() {
         <Link href="/cellar">
           <PiWineThin size={36} />
         </Link>
-        <Link href="/feed">
+        {/* <Link href="/feed">
           <PiHouseLineLight size={36} />
-        </Link>
+        </Link> */}
         {/* <Link href="/dashboard">
           <PiChartLineUpThin size={36} />
         </Link> */}

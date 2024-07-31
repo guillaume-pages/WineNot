@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 import { Bottle } from '@/types/bottle.type';
 import { deleteBottle } from '@/app/lib/bottle/bottle.delete';
@@ -21,7 +22,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { set } from 'lodash';
 
 export default function DisplayBottle({
   bottle,
@@ -31,12 +38,26 @@ export default function DisplayBottle({
   onDelete: (id: string) => void;
 }) {
   const [loading, setLoading] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const handleDelete = async () => {
-    setLoading(true);
-    await deleteBottle(bottle.bottle_id!);
-    setLoading(false);
-    onDelete(bottle.bottle_id!);
+    try {
+      setLoading(true);
+      await deleteBottle(bottle.bottle_id!);
+      onDelete(bottle.bottle_id!);
+      toast.success('Bouteille supprimée avec succès');
+      setIsPopoverOpen(false);
+    } catch (error) {
+      toast.error(
+        'Une erreur est survénue lors de la suppression de la bouteille',
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancel = () => {
+    setIsPopoverOpen(false);
   };
 
   return (
@@ -70,14 +91,39 @@ export default function DisplayBottle({
                   </div>
                 </div>
                 <div className="flex flex-col items-center space-y-2">
-                  <Button
-                    variant="destructive"
-                    size="littleIcon"
-                    onClick={handleDelete}
-                    disabled={loading}
-                  >
-                    <IoTrashOutline />
-                  </Button>
+                  <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+                    <PopoverTrigger>
+                      <Button
+                        variant="secondary"
+                        size="littleIcon"
+                        onClick={() => setIsPopoverOpen(true)}
+                      >
+                        <IoTrashOutline />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <h3 className="pb-3 text-center text-base font-bold">
+                        Êtes-vous sûr de vouloir supprimer cette cave ?
+                      </h3>
+                      <div className="flex justify-center space-x-4">
+                        <Button
+                          variant="destructive"
+                          onClick={handleDelete}
+                          disabled={loading}
+                          size="sm"
+                        >
+                          Oui
+                        </Button>
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          onClick={handleCancel}
+                        >
+                          Non
+                        </Button>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
                   <Button
                     variant="secondary"
                     size="littleIcon"

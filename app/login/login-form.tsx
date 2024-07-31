@@ -31,7 +31,7 @@ export const LoginForm = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('/') || '/feed';
+  const callbackUrl = searchParams.get('/') || '/cellar';
 
   const methods = useForm<LoginUserInput>({
     resolver: zodResolver(loginUserSchema),

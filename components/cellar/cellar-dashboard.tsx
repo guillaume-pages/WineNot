@@ -12,6 +12,7 @@ import PopoverAddCellar from '@/components/cellar/popover-add-cellar';
 import DisplayCellar from '@/components/cellar/display-cellar';
 
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -37,6 +38,7 @@ interface SelectCellarProps {
 export default function CellarDashboard({ cellars }: SelectCellarProps) {
   const [loading, setLoading] = useState(false);
   const [newCellarName, setNewCellarName] = useState('');
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const defaultCellar =
     cellars.length > 0
@@ -89,6 +91,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
       setLoading(true);
       await deleteCellar(cellarId as string);
       toast.success('La cave a été supprimée avec succès');
+      setIsPopoverOpen(false);
     } catch (error) {
       toast.error(
         'Erreur lors de la suppression de la cave. Veuillez réessayer.',
@@ -108,6 +111,10 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCancel = () => {
+    setIsPopoverOpen(false);
   };
 
   return (
@@ -141,9 +148,9 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
           <div className="flex py-2">
             Vous consultez la cave : {activeCellarData?.cellars.cellar_name}
             <div className="ml-2 flex items-center space-x-2">
-              <Popover>
+              <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                 <PopoverTrigger>
-                  <Button variant="secondary" size="littleIcon">
+                  <Button variant="secondary" size="littleIcon" onClick={() => setIsPopoverOpen(true)}>
                     <IoTrashOutline />
                   </Button>
                 </PopoverTrigger>
@@ -160,6 +167,9 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
                     >
                       Oui
                     </Button>
+                    <Button variant="secondary" size="sm" onClick={handleCancel}>
+                      Non
+                    </Button>
                   </div>
                 </PopoverContent>
               </Popover>
@@ -174,7 +184,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
                     Veuillez entrer un nouveau nom pour votre cave{' '}
                     <span className="text-sm">(minimum 4 caractères)</span>
                   </h3>
-                  <input
+                  <Input
                     type="text"
                     placeholder="Nom de la cave"
                     name="cellar_name"
