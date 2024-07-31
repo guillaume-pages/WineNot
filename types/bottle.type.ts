@@ -11,11 +11,11 @@ export interface Bottle {
   mouth_description?: number[];
   carafage?: number;
   temperature?: number;
-  degree?: number;
+  degree: number;
   accompaniment?: string[];
   media?: string;
-  price?: number;
-  price_visibility?: number;
+  price: number;
+  price_visibility: number;
   global_description?: string;
   entry_date: Date | string;
   potential_date?: Date | string;
@@ -61,8 +61,8 @@ export interface BottleContextType {
   setTemperature: (value: number) => void;
   accompaniments: string[];
   setAccompaniment: (value: string[]) => void;
-  bottlePrice: number | undefined;
-  setBottlePrice: (value: number | undefined) => void;
+  bottlePrice: number;
+  setBottlePrice: (value: number) => void;
   visibilityPrice: number;
   setVisibilityPrice: (value: number) => void;
   bottleGlobalDescription: string;
