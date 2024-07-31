@@ -31,7 +31,7 @@ export const AddGrapeVarieties = () => {
   return (
     <div className="flex flex-col">
       <Label className="pb-4 pt-2" htmlFor="grape_varieties">
-        Cépages
+        Cépages (optionnel)
       </Label>
       <div className="flex w-full items-center gap-2">
         <Input

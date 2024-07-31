@@ -291,7 +291,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
       <div className="sm:mx-auto sm:flex sm:space-x-20 md:space-x-6">
         <div className="sm:flex sm:flex-col">
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Nom de la bouteille</Label>
+            <Label className="pb-4 pt-2">Nom de la bouteille </Label>
             <Input
               value={bottle.bottle_name}
               onChange={(e) =>
@@ -301,7 +301,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             />
           </div>
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Millesime</Label>
+            <Label className="pb-4 pt-2">Millesime </Label>
             <Select
               onValueChange={(value) =>
                 setBottle({ ...bottle, millesime: parseInt(value) })
@@ -322,7 +322,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             </Select>
           </div>
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Type de vin</Label>
+            <Label className="pb-4 pt-2">Type de vin </Label>
             <Select
               onValueChange={(value) =>
                 setBottle({ ...bottle, type_of_wine: value })
@@ -344,7 +344,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             </Select>
           </div>
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Degrés d&apos;alcool</Label>
+            <Label className="pb-4 pt-2">Degrés d&apos;alcool </Label>
             <Input
               type="number"
               value={bottle.degree}
@@ -361,7 +361,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           <div className="flex flex-col">
             <div className="flex flex-col">
               <Label className="pb-4 pt-2" htmlFor="size_bottle">
-                Taille de la bouteille
+                Taille de la bouteille 
               </Label>
             </div>
             <Select
@@ -395,7 +395,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           </div>
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="grape_varieties">
-              Cépages
+              Cépages (optionnel)
             </Label>
             <div className="flex w-full items-center gap-2">
               <Input
@@ -423,7 +423,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             </div>
           </div>
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Provenance</Label>
+            <Label className="pb-4 pt-2">Provenance </Label>
             <Input
               value={bottle.region}
               onChange={(e) => setBottle({ ...bottle, region: e.target.value })}
@@ -432,7 +432,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           </div>
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="eye_description">
-              Description visuelle
+              Description visuelle (optionnel)
             </Label>
             <Textarea
               id="eye_description"
@@ -447,7 +447,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           </div>
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="mouth_description">
-              Description gustative
+              Description gustative (optionnel)
             </Label>
             <div className="space-y-2">
               {slidersConfig.map((slider, index) => (
@@ -468,7 +468,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
         <div className="sm:flex sm:flex-col">
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="grape_varieties">
-              Description olfactive
+              Description olfactive (optionnel)
             </Label>
             <div className="flex w-full items-center gap-2">
               <Input
@@ -496,7 +496,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           </div>
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="service">
-              Service
+              Service (optionnel)
             </Label>
             <div className="flex space-x-2">
               <div className="flex space-x-2">
@@ -549,7 +549,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           </div>
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="accompaniment">
-              Accompagnements
+              Accompagnements (optionnel)
             </Label>
             <div className="flex w-full items-center gap-2">
               <Input
@@ -579,7 +579,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             <div className="flex space-x-8">
               <div>
                 <Label className="pb-4 pt-2" htmlFor="price">
-                  Prix
+                  Prix 
                 </Label>
                 <div className="w-20">
                   <Input
@@ -601,7 +601,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               </div>
               <div className="flex flex-col">
                 <Label className="pb-4 pt-2" htmlFor="price">
-                  Visibilité du prix
+                  Visibilité du prix 
                 </Label>
                 <div>
                   <Button
@@ -646,7 +646,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           </div>
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="global_description">
-              Description globale
+              Description globale (optionnel)
             </Label>
             <Textarea
               id="eye_description"
@@ -661,7 +661,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           </div>
           <div className="flex flex-col">
             <div>
-              <Label>Date d&apos;entrée dans la cave</Label>
+              <Label>Date d&apos;entrée dans la cave </Label>
               <Input
                 type="date"
                 id="entry_date"
@@ -671,7 +671,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               />
             </div>
             <div>
-              <Label>Date de potentiel de garde</Label>
+              <Label>Date de potentiel de garde (optionnel)</Label>
               <Input
                 type="date"
                 id="potential_date"
@@ -682,7 +682,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             </div>
           </div>
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Quantitée de bouteilles</Label>
+            <Label className="pb-4 pt-2">Quantitée de bouteilles </Label>
             <Input
               type="number"
               value={bottle.quantity}
@@ -694,7 +694,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           </div>
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="price">
-              Visibilité la bouteille
+              Visibilité la bouteille 
             </Label>
             <div>
               <Button

@@ -85,7 +85,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
       <div className="sm:mx-auto sm:flex sm:space-x-20 md:space-x-6">
         <div className="sm:flex sm:flex-col">
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Nom de la bouteille</Label>
+            <Label className="pb-4 pt-2">Nom de la bouteille </Label>
             <Input
               value={bottleName}
               onChange={(e) => setBottleName(e.target.value)}
@@ -95,7 +95,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
           <SelectMillesime />
           <SelectTypeWine />
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Degrés d&apos;alcool</Label>
+            <Label className="pb-4 pt-2">Degrés d&apos;alcool </Label>
             <Input
               type="number"
               value={bottleDegree}
@@ -112,7 +112,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
           <SelectSizeWine />
           <AddGrapeVarieties />
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Provenance</Label>
+            <Label className="pb-4 pt-2">Provenance </Label>
             <Input
               value={bottleRegion}
               onChange={(e) => setBottleRegion(e.target.value)}
@@ -121,7 +121,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
           </div>
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="eye_description">
-              Description visuelle
+              Description visuelle (optionnel)
             </Label>
             <Textarea
               id="eye_description"
@@ -141,7 +141,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
           <BottlePrice />
           <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="global_description">
-              Description globale
+              Description globale (optionnel)
             </Label>
             <Textarea
               id="eye_description"
@@ -153,7 +153,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
           </div>
           <DatesBottle />
           <div className="flex flex-col">
-            <Label className="pb-4 pt-2">Quantitée de bouteilles</Label>
+            <Label className="pb-4 pt-2">Quantitée de bouteilles </Label>
             <Input
               type="number"
               value={bottleQuantity}
