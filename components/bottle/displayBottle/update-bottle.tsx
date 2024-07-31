@@ -156,8 +156,6 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
     fetchBottle();
   }, [bottleId]);
 
-  console.log(bottle);
-
   const handleAddGrapeVarietie = () => {
     if (
       inputValue.trim() &&

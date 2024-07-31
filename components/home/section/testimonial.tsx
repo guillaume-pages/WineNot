@@ -1,20 +1,28 @@
-"use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+'use client';
+
+import Ellipse1 from '@/public/images/Ellipse-1.png';
+import Ellipse2 from '@/public/images/Ellipse-2.png';
+import Ellipse3 from '@/public/images/Ellipse-3.png';
+import Ellipse4 from '@/public/images/Ellipse-4.png';
+import Ellipse5 from '@/public/images/Ellipse-5.png';
+import Ellipse6 from '@/public/images/Ellipse-6.png';
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Star } from "lucide-react";
+} from '@/components/ui/carousel';
+import { Star } from 'lucide-react';
 
 interface ReviewProps {
   image: string;
@@ -26,52 +34,51 @@ interface ReviewProps {
 
 const reviewList: ReviewProps[] = [
   {
-    image: "https://github.com/shadcn.png",
-    name: "John Doe",
-    userName: "Product Manager",
+    image: 'https://github.com/shadcn.png',
+    name: 'Jean Dupont',
+    userName: 'Commercial',
     comment:
-      "Wow NextJs + Shadcn is awesome!. This template lets me change colors, fonts and images to match my brand identity. ",
+      'Wine Not est une application formidable ! Elle me permet de gérer ma cave à vin facilement et de suivre mes dégustations. Un must pour tout amateur de vin.',
     rating: 5.0,
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Sophia Collins",
-    userName: "Cybersecurity Analyst",
+    image: 'https://github.com/shadcn.png',
+    name: 'Sophie Martin',
+    userName: 'Étudiante',
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna. ",
+      "Cette application est super pratique pour suivre les vins que j'aime. L'interface est intuitive et les fonctionnalités sont parfaites pour les débutants.",
     rating: 4.8,
   },
-
   {
-    image: "https://github.com/shadcn.png",
-    name: "Adam Johnson",
-    userName: "Chief Technology Officer",
+    image: 'https://github.com/shadcn.png',
+    name: 'Mathieu Leroy',
+    userName: 'Caviste',
     comment:
-      "Lorem ipsum dolor sit amet,exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "En tant que caviste, Wine Not m'aide à organiser ma collection personnelle et à découvrir de nouveaux vins. Je recommande vivement.",
     rating: 4.9,
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Ethan Parker",
-    userName: "Data Scientist",
+    image: 'https://github.com/shadcn.png',
+    name: 'Étienne Durand',
+    userName: 'Vigneron',
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod labore et dolore magna aliqua. Ut enim ad minim veniam.",
+      'Wine Not est un outil génial pour suivre mes propres vins et comparer mes millésimes. Une application indispensable pour les professionnels du vin.',
     rating: 5.0,
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Ava Mitchell",
-    userName: "IT Project Manager",
+    image: 'https://github.com/shadcn.png',
+    name: 'Claire Lefèvre',
+    userName: 'Infirmière',
     comment:
-      "Lorem ipsum dolor sit amet, tempor incididunt  aliqua. Ut enim ad minim veniam, quis nostrud incididunt consectetur adipiscing elit.",
+      "J'adore utiliser Wine Not pour gérer ma petite cave à vin à la maison. C'est simple d'utilisation et vraiment utile pour suivre mes préférences.",
     rating: 5.0,
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Isabella Reed",
-    userName: "DevOps Engineer",
+    image: 'https://github.com/shadcn.png',
+    name: 'Isabelle Petit',
+    userName: 'Informaticienne',
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Wine Not me permet de garder une trace des vins que j'ai aimés et ceux que je veux essayer. L'application est claire et agréable à utiliser.",
     rating: 4.9,
   },
 ];
@@ -79,36 +86,40 @@ const reviewList: ReviewProps[] = [
 export const TestimonialSection = () => {
   return (
     <section id="testimonials" className="container py-24 sm:py-32">
-      <div className="text-center mb-8">
-        <h2 className="text-lg text-primary text-center mb-2 tracking-wider">
-          Testimonials
+      <div className="mb-8 text-center">
+        <h2 className="mb-2 text-center text-lg tracking-wider text-primary">
+          Avis
         </h2>
 
-        <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
-          Hear What Our 1000+ Clients Say
+        <h2 className="mb-4 text-center text-3xl font-bold md:text-4xl">
+          Ce que l&apos;on dit de nous
         </h2>
       </div>
 
       <Carousel
         opts={{
-          align: "start",
+          align: 'start',
         }}
-        className="relative w-[80%] sm:w-[90%] lg:max-w-screen-xl mx-auto"
+        className="relative mx-auto w-[80%] sm:w-[90%] lg:max-w-screen-xl"
       >
         <CarouselContent>
-          {reviewList.map((review) => (
+          {reviewList.map((review, index) => (
             <CarouselItem
               key={review.name}
               className="md:basis-1/2 lg:basis-1/3"
             >
               <Card className="bg-muted/50 dark:bg-card">
-                <CardContent className="pt-6 pb-0">
+                <CardContent className="pb-0 pt-6">
                   <div className="flex gap-1 pb-6">
                     <Star className="size-4 fill-primary text-primary" />
                     <Star className="size-4 fill-primary text-primary" />
                     <Star className="size-4 fill-primary text-primary" />
                     <Star className="size-4 fill-primary text-primary" />
-                    <Star className="size-4 fill-primary text-primary" />
+                    {index === 2 || index === 3 ? (
+                      <Star className="size-4 fill-secondary text-secondary" />
+                    ) : (
+                      <Star className="size-4 fill-primary text-primary" />
+                    )}
                   </div>
                   {`"${review.comment}"`}
                 </CardContent>

@@ -9,7 +9,7 @@ export default function Page() {
     <main>
       <HeroSection />
       <About />
-      <BenefitsSection />
+      {/* <BenefitsSection /> */}
       <TestimonialSection />
     </main>
   );

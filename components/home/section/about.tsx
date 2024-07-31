@@ -23,13 +23,15 @@ export const About = () => {
                 de nous
               </h2>
               <p className="mt-4 text-xl text-muted-foreground">
-                Wine Not est une application qui vient d&apos;un constat personnel. Il est difficile de 
-                gérer sa cave à vin et de savoir ce que l&apos;on a en stock. Wine Not vous permet de
-                gérer votre cave à vin et de suivre les caves de vos amis et de votre caviste préféré.
+                Wine Not est une application qui vient d&apos;un constat
+                personnel. Il est difficile de gérer sa cave à vin et de savoir
+                ce que l&apos;on a en stock. Wine Not vous permet de gérer votre
+                cave à vin et de suivre vos bouteilles, 
+                cela vous permettra de choisir la bonne bouteille pour le bon évènement.
               </p>
             </div>
 
-            <Statistics />
+            {/* <Statistics /> */}
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ export default async function PageCellar() {
         <Suspense
           fallback={
             <div
-              className={`${shimmer} relative h-9 w-[220px] overflow-hidden rounded-md border bg-gray-100 shadow-sm`}
+              className={`${shimmer} relative h-[800px] w-4xl overflow-hidden rounded-md border bg-gray-100 shadow-sm mx-auto my-6 flex max-w-5xl flex-col md:max-w-4xl lg:rounded-md lg:border lg:shadow-2xl`}
             ></div>
           }
         >

@@ -11,7 +11,6 @@ import HeroDesktopView from '@/public/desktop-view.png';
 import HeroMobileView from '@/public/smartphone-view.png';
 
 export const HeroSection = () => {
-  const { theme } = useTheme();
   return (
     <section className="container w-full">
       <div className="mx-auto grid place-items-center gap-8 py-20 md:py-32 lg:max-w-screen-xl">
@@ -27,9 +26,8 @@ export const HeroSection = () => {
           </div>
 
           <p className="mx-auto max-w-screen-sm text-xl text-muted-foreground">
-            {`Wine not est plus qu'un outil, c'est une communauté de passionnés.
-            Avec Wine Not, vous pourrez non seulement suivre votre cave mais aussi
-            celle de vos amis et de votre caviste ou vigneron préféré.`}
+            {`Wine not, c'est votre nouvel outil qui vous permettra de savoir exactement ce que vous avez dans votre cave ! 
+            Vous pourrez ainsi avoir votre cave dans votre poche ou depuis votre ordinateur.`}
           </p>
 
           <div className="space-y-4 md:space-x-4 md:space-y-0">
