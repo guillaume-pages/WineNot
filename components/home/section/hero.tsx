@@ -26,7 +26,7 @@ export const HeroSection = () => {
           </div>
 
           <p className="mx-auto max-w-screen-sm text-xl text-muted-foreground">
-            {`Wine not, c'est votre nouvel outil qui vous permettra de savoir exactement ce que vous avez dans votre cave ! 
+            {`Wine not, c'est votre nouvel outil qui vous permettra de savoir exactement ce que vous avez dans votre cave à vin ! 
             Vous pourrez ainsi avoir votre cave dans votre poche ou depuis votre ordinateur.`}
           </p>
 
