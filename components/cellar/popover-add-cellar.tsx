@@ -22,10 +22,13 @@ export default function ModalAddCellar() {
   const handleCreateCellar = async () => {
     const userId = user?.id;
     try {
+      setLoading(true);
       const response = await createCellar(cellarName, userId as string);
       toast.success(response.message);
     } catch (error) {
       toast.error('Erreur lors de la création de la cave. Veuillez réessayer.');
+    } finally {
+      setLoading(false);
     }
   };
 
