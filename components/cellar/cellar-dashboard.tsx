@@ -40,6 +40,13 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
   const [newCellarName, setNewCellarName] = useState('');
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
+  useEffect(() => {
+    if (cellars.length === 1) {
+      setActiveCellar(cellars[0].cellars.cellar_name);
+      setCellarId(cellars[0].cellars.cellar_id);
+    }
+  }, [cellars]);
+
   const defaultCellar =
     cellars.length > 0
       ? cellars[0]

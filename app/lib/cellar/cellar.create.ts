@@ -16,7 +16,7 @@ const FormDataSchema = z.object({
 });
 
 export const createCellar = async (cellarName: string, user_id: string) => {
-  if (cellarName.length <= 4) {
+  if (cellarName.length < 4) {
     throw new Error('Le nom de la cave doit contenir au moins 4 caractères.');
   }
 
