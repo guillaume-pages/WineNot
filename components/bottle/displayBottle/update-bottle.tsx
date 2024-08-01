@@ -1,13 +1,9 @@
-import { use, useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 
-import { BottleContext } from '@/app/context/BottleContext';
-
 import { getOneBottle } from '@/app/lib/bottle/bottle.getone';
-import { createBottle } from '@/app/lib/bottle/bottle.create';
 import { updateBottle } from '@/app/lib/bottle/bottle.put';
-import { formatDate } from '@/app/lib/utils';
 
 import { RxCross2 } from 'react-icons/rx';
 
@@ -25,7 +21,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -588,7 +583,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                       const value = parseFloat(e.target.value);
                       setBottle({
                         ...bottle,
-                        price: isNaN(value) ? 10 : value,
+                        price: value,
                       });
                     }}
                     step="0.1"

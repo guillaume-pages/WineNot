@@ -24,7 +24,7 @@ export const BottlePrice = () => {
               value={bottlePrice}
               onChange={(e) => {
                 const value = parseFloat(e.target.value);
-                setBottlePrice(isNaN(value) ? 10 : value);
+                setBottlePrice(value);
               }}
               step="0.1"
               min="0"
