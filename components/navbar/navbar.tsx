@@ -4,8 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 import logoPetit from '@/app/logo-petit.png';
+import logoPetitDark from '@/app/logo-petit-dark.png';
 import { BoxChoosingTheme } from '@/components/box-choosing-theme';
 import { Button } from '@/components/ui/button';
 import { VscAccount } from "react-icons/vsc";
@@ -18,8 +21,19 @@ import { VscAccount } from "react-icons/vsc";
 export default function Navbar() {
   const pathname = usePathname();
   const { data } = useSession();
+  const { resolvedTheme } = useTheme();
+  const [logo, setLogo] = useState(logoPetit);
   const user = data?.user;
   const isSigninOrLogin = pathname === '/login' || pathname === '/register';
+
+  useEffect(() => {
+    if (resolvedTheme === 'dark') {
+      setLogo(logoPetitDark);
+    } else {
+      setLogo(logoPetit);
+    }
+  }
+  , [resolvedTheme]);
 
   if (isSigninOrLogin) {
     return null;
@@ -32,7 +46,7 @@ export default function Navbar() {
             <div className="flex-1 md:flex md:items-center md:gap-12">
               <Link href="/">
                 <Image
-                  src={logoPetit}
+                  src={logo}
                   alt="Logo entreprise Cavavin"
                   width={64}
                   height={64}
