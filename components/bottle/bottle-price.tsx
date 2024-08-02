@@ -31,7 +31,7 @@ export const BottlePrice = () => {
               max="10000000"
             />
           </div>
-        </div>
+        {/* </div>
         <div className="flex flex-col">
           <Label className="pb-4 pt-2" htmlFor="price">
             Visibilité du prix
@@ -61,7 +61,7 @@ export const BottlePrice = () => {
             >
               Public
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

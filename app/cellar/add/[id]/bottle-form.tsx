@@ -161,7 +161,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
               placeholder="eg: 3"
             />
           </div>
-          <GlobalVisibility />
+          {/* <GlobalVisibility /> */}
           {/* <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="picture">
               Picture
