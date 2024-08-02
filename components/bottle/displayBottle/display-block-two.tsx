@@ -36,7 +36,7 @@ export const InfoBlockTwo = ({ bottle }: { bottle: Bottle }) => (
       <Image src={quantity} alt="quantity icon" height={30} width={30} />
       <p className="my-auto">Quantité : {bottle.quantity}</p>
     </div>
-    <div className="pl-4">
+    {/* <div className="pl-4">
       <ConfidentialityDisplay
         text="Confidentialité du prix"
         visibility={bottle.price_visibility}
@@ -45,10 +45,13 @@ export const InfoBlockTwo = ({ bottle }: { bottle: Bottle }) => (
         text="Confidentialité de la bouteille"
         visibility={bottle.global_visibility}
       />
-    </div>
+    </div> */}
     <div className="space-y-2 pl-4">
-      <h2>Description globale</h2>
-      <p>Description globale : {bottle.global_description}</p>
+      {bottle.global_description && bottle.global_description?.length > 1 ? (
+        <p>Description globale : {bottle.global_description}</p>
+      ) : (
+        ''
+      )}
     </div>
     <div>
       <p>{bottle.media ? bottle.media : ''}</p>

@@ -27,20 +27,20 @@ export const InfoBlockOne = ({
       <p>
         {bottle.eye_description && bottle.eye_description?.length > 1
           ? bottle.eye_description
-          : 'Pas de description'}
+          : 'Pas de description pour le visuel.'}
       </p>
     </div>
     <div className="flex space-x-3">
       <Image src={nose} alt="nose icon" height={30} width={30} />
       <div className="my-auto space-x-2">
-        {bottle.nose_description ? (
+        {bottle.nose_description && bottle.nose_description.length > 0 ? (
           bottle.nose_description.map((nose, index) => (
             <Badge className="h-6" key={index}>
               {nose}
             </Badge>
           ))
         ) : (
-          <p>Pas de description pour le nez</p>
+          <p>Pas de description pour le nez.</p>
         )}
       </div>
     </div>
@@ -58,7 +58,7 @@ export const InfoBlockOne = ({
         width={30}
       />
       <div className="my-auto space-x-2">
-        {bottle.accompaniment ? (
+        {bottle.accompaniment && bottle.accompaniment.length > 0 ? (
           bottle.accompaniment.map((accompaniment, index) => (
             <Badge className="h-6" key={index}>
               {accompaniment}
@@ -72,7 +72,7 @@ export const InfoBlockOne = ({
     <div className="flex space-x-3">
       <Image src={cepages} alt="cepages icon" height={30} width={30} />
       <div className="my-auto space-x-2">
-        {bottle.grape_varieties ? (
+        {bottle.grape_varieties && bottle.grape_varieties.length > 0 ? (
           bottle.grape_varieties.map((grape, index) => (
             <Badge className="h-6" key={index}>
               {grape}

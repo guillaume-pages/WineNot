@@ -2,6 +2,7 @@
 
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
+import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 
@@ -50,6 +51,8 @@ export const updateBottle = async (data: any) => {
         ...bottleData,
       },
     });
+
+    revalidatePath('/cellar')
 
     return {
       message: 'Bouteille modifiée avec succès.',

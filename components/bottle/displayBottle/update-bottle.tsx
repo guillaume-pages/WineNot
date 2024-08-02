@@ -235,14 +235,32 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
   };
 
   useEffect(() => {
-    if (typeof entryInputValue === 'string' && entryInputValue.length === 10 && bottle.entry_date !== entryInputValue) {
-      setBottle((prevBottle) => ({ ...prevBottle, entry_date: entryInputValue }));
+    if (
+      typeof entryInputValue === 'string' &&
+      entryInputValue.length === 10 &&
+      bottle.entry_date !== entryInputValue
+    ) {
+      setBottle((prevBottle) => ({
+        ...prevBottle,
+        entry_date: entryInputValue,
+      }));
     }
-    if (typeof potentialInputValue === 'string' && potentialInputValue.length === 10 && bottle.potential_date !== potentialInputValue) {
-      setBottle((prevBottle) => ({ ...prevBottle, potential_date: potentialInputValue }));
+    if (
+      typeof potentialInputValue === 'string' &&
+      potentialInputValue.length === 10 &&
+      bottle.potential_date !== potentialInputValue
+    ) {
+      setBottle((prevBottle) => ({
+        ...prevBottle,
+        potential_date: potentialInputValue,
+      }));
     }
-  }, [bottle.entry_date, bottle.potential_date, entryInputValue, potentialInputValue]);
-  
+  }, [
+    bottle.entry_date,
+    bottle.potential_date,
+    entryInputValue,
+    potentialInputValue,
+  ]);
 
   const handleUpdateBottle = async () => {
     setLoading(true);
@@ -354,7 +372,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
           <div className="flex flex-col">
             <div className="flex flex-col">
               <Label className="pb-4 pt-2" htmlFor="size_bottle">
-                Taille de la bouteille 
+                Taille de la bouteille
               </Label>
             </div>
             <Select
@@ -572,7 +590,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             <div className="flex space-x-8">
               <div>
                 <Label className="pb-4 pt-2" htmlFor="price">
-                  Prix 
+                  Prix
                 </Label>
                 <div className="w-20">
                   <Input
@@ -592,7 +610,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                   />
                 </div>
               </div>
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <Label className="pb-4 pt-2" htmlFor="price">
                   Visibilité du prix 
                 </Label>
@@ -634,7 +652,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                     Public
                   </Button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="flex flex-col">
@@ -647,9 +665,12 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               placeholder="eg: Ce type de vin est idéal pour les amateurs de rouges corsés..."
               className="w-full rounded-md text-base shadow-sm"
               value={bottle.global_description}
-              onChange={(e) =>
-                setBottle({ ...bottle, global_description: e.target.value })
-              }
+              onChange={(e) => {
+                if (e.target.value.length < 1) {
+                  setBottle({ ...bottle, global_description: '' });
+                }
+                setBottle({ ...bottle, global_description: e.target.value });
+              }}
             />
           </div>
           <div className="flex flex-col">
@@ -685,9 +706,9 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               placeholder="eg: 3"
             />
           </div>
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="price">
-              Visibilité la bouteille 
+              Visibilité la bouteille
             </Label>
             <div>
               <Button
@@ -721,7 +742,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                 Public
               </Button>
             </div>
-          </div>
+          </div> */}
           {/* <div className="flex flex-col">
             <Label className="pb-4 pt-2" htmlFor="picture">
               Picture
