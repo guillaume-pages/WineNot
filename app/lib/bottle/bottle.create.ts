@@ -40,6 +40,14 @@ export const createBottle = async (data: any) => {
   data.entry_date = formatedEntryDate;
   data.potential_date = formatedPotentialDate;
 
+  if (data.type_of_wine.length < 1) {
+    throw new Error('Le type de vin est requis.');
+  }
+
+  if (data.size.length < 1) {
+    throw new Error('La taille de la bouteille est requise.');
+  }
+
   try {
     const validatedData = CreateBottleSchema.parse(data);
 
