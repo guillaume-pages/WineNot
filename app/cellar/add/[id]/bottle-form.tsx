@@ -11,7 +11,7 @@ import { AddNoseDescription } from '@/components/bottle/nose-description';
 import { BottlePrice } from '@/components/bottle/bottle-price';
 import { DatesBottle } from '@/components/bottle/dates-bottle';
 import { FormSlider } from '@/components/bottle/form-slider';
-import { GlobalVisibility } from '@/components/bottle/global-visibility';
+// import { GlobalVisibility } from '@/components/bottle/global-visibility';
 import { Reset } from '@/components/bottle/reset';
 import { SelectMillesime } from '@/components/bottle/select-millesime';
 import { SelectSizeWine } from '@/components/bottle/select-size-wine';
@@ -49,35 +49,46 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
       ...bottleData,
       cellar_id: cellarId,
     };
+
     try {
       const res = await createBottle(data);
-      setLoading(false);
-      toast.success(res.message, {
-        duration: 4000,
-        position: 'top-right',
-      });
 
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    } catch (error) {
-      console.error(error);
       setLoading(false);
+
+      if (res.errors) {
+        toast.error(res.errors, {
+          duration: 4000,
+          position: 'top-right',
+        });
+      } else {
+        toast.success(res.message || 'Bouteille ajoutée avec succès à la cave', {
+          duration: 4000,
+          position: 'top-right',
+        });
+
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+
       if (error instanceof Error) {
         toast.error(error.message, {
           duration: 4000,
           position: 'top-right',
         });
       } else {
-        // Handle cases where the error is not an instance of Error
-        toast.error('An unexpected error occurred', {
+        toast.error('Une erreur inattendue est survenue. Veuillez réessayer.', {
           duration: 4000,
           position: 'top-right',
         });
       }
     }
-  };
+};
+
 
   return (
     <div className="flex flex-col">
