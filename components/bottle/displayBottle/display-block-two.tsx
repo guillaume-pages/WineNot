@@ -46,7 +46,7 @@ export const InfoBlockTwo = ({ bottle }: { bottle: Bottle }) => (
         visibility={bottle.global_visibility}
       />
     </div> */}
-    <div className="space-y-2 pl-4">
+    <div className="space-y-2 pl-4 max-w-xs">
       {bottle.global_description && bottle.global_description?.length > 1 ? (
         <p>Description globale : {bottle.global_description}</p>
       ) : (

@@ -53,7 +53,6 @@
     --success: 108, 100%, 50%
     --success-foreground: 108, 100%, 30%
   }
-}
 
   @layer base {
     * {
@@ -63,3 +62,4 @@
       @apply bg-background text-foreground;
     }
   }
+}
