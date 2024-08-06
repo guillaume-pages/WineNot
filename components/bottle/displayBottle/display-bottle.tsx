@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { useTheme } from 'next-themes';
 
 import { Bottle } from '@/types/bottle.type';
 import { deleteBottle } from '@/app/lib/bottle/bottle.delete';
@@ -39,6 +40,7 @@ export default function DisplayBottle({
 }) {
   const [loading, setLoading] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   const handleDelete = async () => {
     try {
@@ -139,11 +141,11 @@ export default function DisplayBottle({
 
             <div className="mt-4 md:flex md:gap-4">
               <Tabs defaultValue="degustation" className="w-auto">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="degustation">
+                <TabsList className="grid w-full grid-cols-2 bg-primary/50">
+                  <TabsTrigger value="degustation" className='text-black dark:text-white'>
                     Côté dégustation
                   </TabsTrigger>
-                  <TabsTrigger value="cave">Côté cave</TabsTrigger>
+                  <TabsTrigger value="cave" className='text-black dark:text-white'>Côté cave</TabsTrigger>
                 </TabsList>
                 <TabsContent value="degustation">
                   <InfoBlockOne bottle={bottle} />
