@@ -1,5 +1,8 @@
+'use client';
+
 import { useContext } from 'react';
 import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 import { BottleContext } from '@/app/context/BottleContext';
 
@@ -12,12 +15,15 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 
-import carafe from '@/public/images/carafe.png';
-import thermometer from '@/public/images/thermometer.png';
+import carafeBlack from '@/public/images/carafe-black.png';
+import carafeWhite from '@/public/images/carafe-white.png';
+import thermometerBlack from '@/public/images/thermometer-black.png';
+import thermometerWhite from '@/public/images/thermometer-white.png';
 
 export const Service = () => {
   const { carafage, setCarafage, temperature, setTemperature } =
     useContext(BottleContext);
+  const { resolvedTheme } = useTheme();
 
   const minutes = [
     '0',
@@ -74,7 +80,7 @@ export const Service = () => {
       </Label>
       <div className="flex space-x-2">
         <div className="flex space-x-2">
-          <Image src={carafe} alt="Carafe" />
+          <Image src={resolvedTheme === 'light' ? carafeBlack : carafeWhite} alt="Carafe" />
           <div className="self-end">
             <Select onValueChange={(value) => setCarafage(parseInt(value))}>
               <SelectTrigger>
@@ -91,7 +97,7 @@ export const Service = () => {
           </div>
         </div>
         <div className="flex space-x-2">
-          <Image src={thermometer} alt="thermomètre" />
+          <Image src={resolvedTheme === 'light' ? thermometerBlack : thermometerWhite} alt="thermomètre" />
           <div className="self-end">
             <Select onValueChange={(value) => setTemperature(parseInt(value))}>
               <SelectTrigger>
