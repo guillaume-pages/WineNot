@@ -125,14 +125,14 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
   };
 
   return (
-    <section className="mx-auto my-6 flex max-w-5xl flex-col md:max-w-4xl lg:rounded-md lg:border lg:shadow-2xl">
+    <section className="mx-auto my-6 flex max-w-5xl flex-col md:max-w-2xl lg:max-w-4xl md:rounded-md md:border md:shadow-2xl">
       <div className="flex space-x-4 px-4 pb-2 pt-6 lg:border-b">
         <Select onValueChange={handleValueChange}>
           <SelectTrigger className="w-[220px]">
             <SelectValue
               placeholder={
                 cellars.length >= 1
-                  ? 'Sélectionnez une cave'
+                  ? activeCellarData?.cellars.cellar_name
                   : 'Veuillez créer une cave'
               }
             />
