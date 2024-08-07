@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input';
 export default function ModalAddCellar() {
   const [loading, setLoading] = useState(false);
   const [cellarName, setCellarName] = useState('');
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const { data: session } = useSession();
   const user = session?.user;
 
@@ -25,6 +26,7 @@ export default function ModalAddCellar() {
       setLoading(true);
       const response = await createCellar(cellarName, userId as string);
       toast.success(response.message);
+      setIsPopoverOpen(false);
     } catch (error) {
       toast.error('Erreur lors de la création de la cave. Veuillez réessayer.');
     } finally {
@@ -34,7 +36,7 @@ export default function ModalAddCellar() {
 
   return (
     <>
-      <Popover>
+      <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger>Ajouter une cave</PopoverTrigger>
         <PopoverContent>
           <h3 className="pb-3 text-center text-base font-bold">
