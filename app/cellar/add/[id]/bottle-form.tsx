@@ -73,7 +73,6 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
       }
     } catch (error) {
       setLoading(false);
-      console.error(error);
 
       if (error instanceof Error) {
         toast.error(error.message, {

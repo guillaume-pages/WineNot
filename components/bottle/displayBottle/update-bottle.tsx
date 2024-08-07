@@ -271,7 +271,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
     try {
       const res = await updateBottle(data);
       setLoading(false);
-      toast.success(res.message, {
+      toast.success(res.message || 'Bouteille ajoutée avec succès à la cave', {
         duration: 4000,
         position: 'top-right',
       });
@@ -281,7 +281,6 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
         behavior: 'smooth',
       });
     } catch (error) {
-      console.error(error);
       setLoading(false);
       if (error instanceof Error) {
         toast.error(error.message, {

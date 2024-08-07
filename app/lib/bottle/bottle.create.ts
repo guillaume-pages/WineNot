@@ -11,11 +11,11 @@ const CreateBottleSchema = z.object({
     required_error: 'Le nom de la bouteille est requis.',
   }).min(1, { message: 'Le nom de la bouteille ne doit pas être vide.' }),
   millesime: z.number({ required_error: 'Le millesime est requis.' }).min(3),
-  type_of_wine: z.string({ required_error: 'Le type de vin est requis.' }),
-  size: z.string({ required_error: 'La taille de la bouteille est requise.' }),
+  type_of_wine: z.string({ required_error: 'Le type de vin est requis.' }).min(1, { message: 'Le type de vin est requis.' }),
+  size: z.string({ required_error: 'La taille de la bouteille est requise.' }).min(1, { message: 'La taille de la bouteille est requise.' }),
   grape_varieties: z.array(z.string()).optional(),
-  region: z.string({ required_error: 'La région est requise.' }),
-  eye_description: z.string().max(300, { message: 'La description doit comporter au maximum 300 caractères.' }).optional(),
+  region: z.string({ required_error: 'La région est requise.' }).min(1, { message: 'La région est requise.' }),
+  eye_description: z.string().max(500, { message: 'La description doit comporter au maximum 500 caractères.' }).optional(),
   nose_description: z.array(z.string()).optional(),
   mouth_description: z.array(z.number()).optional(),
   carafage: z.number().optional(),
@@ -34,11 +34,17 @@ const CreateBottleSchema = z.object({
 });
 
 export const createBottle = async (data: any) => {
+  if (!data.entry_date) {
+    throw new Error('La date d\'entrée est requise.');
+  }
+
   const formatedEntryDate = new Date(data.entry_date);
   const formatedPotentialDate = data.potential_date ? new Date(data.potential_date) : undefined;
 
   data.entry_date = formatedEntryDate;
   data.potential_date = formatedPotentialDate;
+
+  
 
   try {
     const validatedData = CreateBottleSchema.parse(data);
@@ -72,7 +78,6 @@ export const createBottle = async (data: any) => {
       const errorMessages = error.errors.map(err => err.message).join(' ');
       return { errors: errorMessages };
     } else {
-      console.error(error);
       return { errors: 'Une erreur inattendue est survenue. Veuillez réessayer.' };
     }
   } finally {
