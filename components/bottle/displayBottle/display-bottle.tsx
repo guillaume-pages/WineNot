@@ -94,13 +94,13 @@ export default function DisplayBottle({
                 </div>
                 <div className="flex flex-col items-center space-y-2">
                   <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                    <PopoverTrigger>
+                    <PopoverTrigger aria-label='Bouton pour ouvrir le panneau de confirmation de suppression de bouteille'>
                       <Button
                         variant="secondary"
                         size="littleIcon"
                         onClick={() => setIsPopoverOpen(true)}
                       >
-                        <IoTrashOutline />
+                        <IoTrashOutline aria-label='Bouton pour supprimer la bouteille' />
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
@@ -132,7 +132,7 @@ export default function DisplayBottle({
                       size="littleIcon"
                       disabled={loading}
                     >
-                      <MdOutlineDriveFileRenameOutline />
+                      <MdOutlineDriveFileRenameOutline aria-label="Bouton pour aller sur la page d'édition de la bouteille"/>
                     </Button>
                   </Link>
                 </div>

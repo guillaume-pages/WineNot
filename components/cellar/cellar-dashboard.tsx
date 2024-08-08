@@ -128,9 +128,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
     <section className="mx-auto my-6 flex max-w-5xl flex-col md:max-w-2xl md:rounded-md md:border md:shadow-2xl lg:max-w-4xl">
       <div className="flex space-x-4 px-4 pb-2 pt-6 lg:border-b">
         <Select onValueChange={handleValueChange}>
-          <SelectTrigger className="w-[220px]"
-            aria-label="Selecteur de cave"
-          >
+          <SelectTrigger className="w-[220px]" aria-label="Selecteur de cave">
             <SelectValue
               placeholder={
                 cellars.length >= 1
@@ -158,13 +156,13 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
             Vous consultez la cave : {activeCellarData?.cellars.cellar_name}
             <div className="ml-2 flex items-center space-x-2">
               <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                <PopoverTrigger>
+                <PopoverTrigger aria-label="Bouton pour ouvrir le panneau de confirmation suppression de cave">
                   <Button
                     variant="secondary"
                     size="littleIcon"
                     onClick={() => setIsPopoverOpen(true)}
                   >
-                    <IoTrashOutline />
+                    <IoTrashOutline aria-label="Bouton pour supprimer" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent>
@@ -173,6 +171,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
                   </h3>
                   <div className="flex justify-center space-x-4">
                     <Button
+                      aria-label="Bouton oui pour supprimer la cave"
                       variant="destructive"
                       onClick={handleDelete}
                       disabled={loading}
@@ -181,6 +180,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
                       Oui
                     </Button>
                     <Button
+                      aria-label="Bouton non pour annuler la suppression de la cave"
                       variant="secondary"
                       size="sm"
                       onClick={handleCancel}
@@ -191,9 +191,9 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
                 </PopoverContent>
               </Popover>
               <Popover>
-                <PopoverTrigger>
+                <PopoverTrigger aria-label="Bouton pour ouvrir le panneau afin de renommer sa cave">
                   <Button variant="secondary" size="littleIcon">
-                    <BiRename />
+                    <BiRename aria-label="Bouton pour renomer la cave" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent>
@@ -209,6 +209,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
                     onChange={(e) => setNewCellarName(e.target.value)}
                   />
                   <Button
+                    aria-label="Bouton pour renommer la cave"
                     variant="default"
                     className="mt-2 w-64 rounded-md p-2"
                     onClick={handleRename}
@@ -228,13 +229,9 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
         {activeCellarData && (
           <>
             <div className="pb-6">
-              <Button size="sm">
-                <Link
-                  href={`/cellar/add/${activeCellarData.cellars.cellar_id}`}
-                >
-                  Ajouter une bouteille
-                </Link>
-              </Button>
+              <Link href={`/cellar/add/${activeCellarData.cellars.cellar_id}`}>
+                <Button size="sm" variant="primary" className='text-black'>Ajouter une bouteille</Button>
+              </Link>
             </div>
             <DisplayCellar cellar={activeCellarData} />
           </>

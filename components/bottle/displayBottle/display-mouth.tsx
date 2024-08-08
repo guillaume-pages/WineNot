@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress"
 
 const SliderItem = ({ label, value }: { label: string; value: number }) => (
   <div className="flex items-center space-x-2">
-    <Progress className='w-40' value={value} />
+    <Progress className='w-40' value={value} aria-label={`Barre de progression du label ${label}`}/>
     <Label className="text-xs">{label}</Label>
     <span className="w-[40px] text-xs">{`${value} %`}</span>
   </div>

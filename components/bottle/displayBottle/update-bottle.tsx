@@ -278,7 +278,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
       const res = await updateBottle(data);
       setLoading(false);
       toast.success(res.message || 'Bouteille ajoutée avec succès à la cave', {
-        duration: 4000,
+        duration: 2000,
         position: 'top-right',
       });
 
