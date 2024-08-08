@@ -22,7 +22,7 @@ export const InfoBlockOne = ({
     <div className="flex items-center justify-between">
       <h2 className="text-base">Côté dégustation</h2>
     </div>
-    <div className="flex space-x-3">
+    <div className="flex space-x-3 max-w-xs">
       <Image src={eyes} alt="eyes icon" height={30} width={30} />
       <p>
         {bottle.eye_description && bottle.eye_description?.length > 1

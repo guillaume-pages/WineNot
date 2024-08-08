@@ -108,7 +108,7 @@ export default function Navbar() {
                 )}
                 {user && (
                   <>
-                    <Link href="/profile">
+                    <Link href="/profile" aria-label='Profile'>
                       <VscAccount className='text-2xl'/>
                     </Link>
                   </>

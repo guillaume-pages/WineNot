@@ -5,10 +5,11 @@ import prisma from './prisma/prisma';
 // import google from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
+import { delay } from 'lodash';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.NEXT_PUBLIC_SECRET,
-  session: { strategy: 'jwt' },
+  session: { strategy: 'jwt', maxAge: 7 * 24 * 60 * 60 },
   adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/login",
@@ -38,10 +39,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           },
         });
 
+        const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
         if (
           !user ||
           !(await bcrypt.compare(String(credentials.password), user.password!))
         ) {
+          await delay(1000);
           return null;
         }
 
