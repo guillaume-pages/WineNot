@@ -57,12 +57,12 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
 
       if (res.errors) {
         toast.error(res.errors, {
-          duration: 4000,
+          duration: 3000,
           position: 'top-right',
         });
       } else {
         toast.success(res.message || 'Bouteille ajoutée avec succès à la cave', {
-          duration: 4000,
+          duration: 2000,
           position: 'top-right',
         });
 
@@ -76,12 +76,12 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
 
       if (error instanceof Error) {
         toast.error(error.message, {
-          duration: 4000,
+          duration: 3000,
           position: 'top-right',
         });
       } else {
         toast.error('Une erreur inattendue est survenue. Veuillez réessayer.', {
-          duration: 4000,
+          duration: 3000,
           position: 'top-right',
         });
       }
