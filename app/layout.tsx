@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     default: 'Wine Not',
   },
   description:
-    'Venez créer votre cave à vin, échangez avec des passionnés et retrouvez votre caviste préféré au même endroit',
-  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+    'Venez créer votre cave à vin sur Wine Not et gérez vos bouteilles de vin simplement',
+  metadataBase: new URL('https://winenot.vercel.app/'),
 };
 
 export default function RootLayout({

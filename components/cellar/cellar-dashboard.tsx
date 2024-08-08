@@ -125,10 +125,12 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
   };
 
   return (
-    <section className="mx-auto my-6 flex max-w-5xl flex-col md:max-w-2xl lg:max-w-4xl md:rounded-md md:border md:shadow-2xl">
+    <section className="mx-auto my-6 flex max-w-5xl flex-col md:max-w-2xl md:rounded-md md:border md:shadow-2xl lg:max-w-4xl">
       <div className="flex space-x-4 px-4 pb-2 pt-6 lg:border-b">
         <Select onValueChange={handleValueChange}>
-          <SelectTrigger className="w-[220px]">
+          <SelectTrigger className="w-[220px]"
+            aria-label="Selecteur de cave"
+          >
             <SelectValue
               placeholder={
                 cellars.length >= 1
@@ -157,7 +159,11 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
             <div className="ml-2 flex items-center space-x-2">
               <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                 <PopoverTrigger>
-                  <Button variant="secondary" size="littleIcon" onClick={() => setIsPopoverOpen(true)}>
+                  <Button
+                    variant="secondary"
+                    size="littleIcon"
+                    onClick={() => setIsPopoverOpen(true)}
+                  >
                     <IoTrashOutline />
                   </Button>
                 </PopoverTrigger>
@@ -174,7 +180,11 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
                     >
                       Oui
                     </Button>
-                    <Button variant="secondary" size="sm" onClick={handleCancel}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={handleCancel}
+                    >
                       Non
                     </Button>
                   </div>
