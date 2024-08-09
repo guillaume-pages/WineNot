@@ -5,9 +5,11 @@ import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 
+const cellarNameRegex = /^[a-zA-Z0-9\s'-]{4,50}$/;
+
 export const createCellar = async (cellarName: string, userId: string) => {
-  if (cellarName.length < 4) {
-    throw new Error('Le nom de la cave doit contenir au moins 4 caractères.');
+  if (!cellarNameRegex.test(cellarName)) {
+    throw new Error('Le nom de la cave est invalide. Il doit contenir entre 4 et 50 caractères et ne peut contenir que des lettres, chiffres, espaces, apostrophes ou tirets.');
   }
 
   try {
