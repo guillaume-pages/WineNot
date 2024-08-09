@@ -136,6 +136,9 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
   const { resolvedTheme } = useTheme();
 
   const [inputValue, setInputValue] = useState('');
+  const [inputValueGrape, setInputValueGrape] = useState('');
+  const [inputValueNose, setInputValueNose] = useState('');
+  const [inputValueAccompaniment, setInputValueAccompaniment] = useState('');
 
   const slidersConfig = [
     { label: 'Puissance', index: 0 },
@@ -159,17 +162,17 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
 
   const handleAddGrapeVarietie = () => {
     if (
-      inputValue.trim() &&
-      !bottle.grape_varieties?.includes(inputValue.trim())
+      inputValueGrape.trim() &&
+      !bottle.grape_varieties?.includes(inputValueGrape.trim())
     ) {
       setBottle((prevBottle) => ({
         ...prevBottle,
         grape_varieties: [
           ...(prevBottle.grape_varieties ?? []),
-          inputValue.trim(),
+          inputValueGrape.trim(),
         ],
       }));
-      setInputValue('');
+      setInputValueGrape('');
     }
   };
 
@@ -184,17 +187,17 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
 
   const handleAddNose = () => {
     if (
-      inputValue.trim() &&
-      !bottle.nose_description?.includes(inputValue.trim())
+      inputValueNose.trim() &&
+      !bottle.nose_description?.includes(inputValueNose.trim())
     ) {
       setBottle((prevBottle) => ({
         ...prevBottle,
         nose_description: [
           ...(prevBottle.nose_description ?? []),
-          inputValue.trim(),
+          inputValueNose.trim(),
         ],
       }));
-      setInputValue('');
+      setInputValueNose('');
     }
   };
 
@@ -209,14 +212,14 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
 
   const handleAddAccompaniment = () => {
     if (
-      inputValue.trim() &&
-      !bottle.accompaniment?.includes(inputValue.trim())
+      inputValueAccompaniment.trim() &&
+      !bottle.accompaniment?.includes(inputValueAccompaniment.trim())
     ) {
       setBottle((prevBottle) => ({
         ...prevBottle,
-        accompaniment: [...(prevBottle.accompaniment ?? []), inputValue.trim()],
+        accompaniment: [...(prevBottle.accompaniment ?? []), inputValueAccompaniment.trim()],
       }));
-      setInputValue('');
+      setInputValueAccompaniment('');
     }
   };
 
@@ -274,6 +277,8 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
     const data = {
       ...bottle,
     };
+
+    console.log('data', data);
     try {
       const res = await updateBottle(data);
       setLoading(false);
@@ -417,8 +422,8 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               <Input
                 className="flex-1"
                 placeholder="eg: Syrah, Grenache..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValueGrape}
+                onChange={(e) => setInputValueGrape(e.target.value)}
               />
               <Button onClick={handleAddGrapeVarietie}>Ajouter</Button>
             </div>
@@ -490,8 +495,8 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               <Input
                 className="flex-1"
                 placeholder="eg: Fruits rouges, épices..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValueNose}
+                onChange={(e) => setInputValueNose(e.target.value)}
               />
               <Button onClick={handleAddNose}>Ajouter</Button>
             </div>
@@ -571,8 +576,8 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               <Input
                 className="flex-1"
                 placeholder="eg: Fromage, viande..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValueAccompaniment}
+                onChange={(e) => setInputValueAccompaniment(e.target.value)}
               />
               <Button onClick={handleAddAccompaniment}>Ajouter</Button>
             </div>

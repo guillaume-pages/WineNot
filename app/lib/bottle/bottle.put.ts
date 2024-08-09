@@ -43,7 +43,7 @@ export const updateBottle = async (data: any) => {
   try {
     const validatedData = UpdateBottleSchema.parse(data);
 
-    const { cellar_id, grape_varieties, ...bottleData } = validatedData;
+    const bottleData  = validatedData;
 
     await prisma.bottles.update({
       where: { bottle_id: data.bottle_id },
