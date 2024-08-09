@@ -50,10 +50,7 @@ export const getUserInformation = async (id: string) => {
       };
     });
     
-    informations.cellars = cellarsWithBottles;
-    
-    console.log(informations);
-    
+    informations.cellars = cellarsWithBottles;    
 
     return informations;
   } catch (error) {
