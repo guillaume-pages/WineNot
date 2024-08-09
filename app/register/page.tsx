@@ -25,7 +25,7 @@ export default function Register() {
           </section>
 
           <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
-            <Link href="/" className="absolute left-4 top-4">
+            <Link href="/" className="absolute left-4 top-4" aria-label="Retour vers winenot.vercel.app">
               <FaArrowLeftLong className="text-3xl text-slate-200" />
             </Link>
             <div className="max-w-xl lg:max-w-3xl">

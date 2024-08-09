@@ -130,7 +130,7 @@ export default function RegisterForm() {
               onClick={togglePasswordVisibility}
               className="absolute inset-y-0 right-0 px-3 py-2 text-gray-500"
             >
-              {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+              {isPasswordVisible ? <FaRegEyeSlash aria-label="Icone oeil masqué" /> : <FaRegEye aria-label="Icone oeil ouvert" />}
             </button>
           </div>
         </div>
@@ -158,8 +158,8 @@ export default function RegisterForm() {
               onClick={togglePasswordVisibility}
               className="absolute inset-y-0 right-0 px-3 py-2 text-gray-500"
             >
-              {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
-            </button>
+              {isPasswordVisible ? <FaRegEyeSlash aria-label="Icone oeil masqué" /> : <FaRegEye aria-label="Icone oeil ouvert" />}
+              </button>
           </div>
         </div>
 
@@ -185,6 +185,7 @@ export default function RegisterForm() {
             <SelectTrigger
               className="mt-1 w-full rounded-md text-base shadow-sm"
               id="Status"
+              aria-label="Sélectionnez votre statut"
             >
               <SelectValue placeholder="Choisissez votre statut" />
             </SelectTrigger>
@@ -237,7 +238,7 @@ export default function RegisterForm() {
           </Button>
           <p className="mt-4 text-base sm:mt-0">
             Vous avez déjà un compte ?{' '}
-            <Link href="/login" className="ml-1 font-bold text-primary">
+            <Link href="/login" className="ml-1 font-bold text-primary" aria-label="Lien vers la page de connexion">
               Se connecter
             </Link>
           </p>
