@@ -20,7 +20,7 @@ export const BottlePrice = () => {
           <div className="w-20">
             <Input
               type="number"
-              placeholder="eg: 10 €"
+              placeholder="ex: 10 €"
               value={bottlePrice}
               onChange={(e) => {
                 const value = parseFloat(e.target.value);
@@ -31,7 +31,7 @@ export const BottlePrice = () => {
               max="10000000"
             />
           </div>
-        {/* </div>
+          {/* </div>
         <div className="flex flex-col">
           <Label className="pb-4 pt-2" htmlFor="price">
             Visibilité du prix

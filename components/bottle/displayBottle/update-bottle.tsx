@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -217,7 +217,10 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
     ) {
       setBottle((prevBottle) => ({
         ...prevBottle,
-        accompaniment: [...(prevBottle.accompaniment ?? []), inputValueAccompaniment.trim()],
+        accompaniment: [
+          ...(prevBottle.accompaniment ?? []),
+          inputValueAccompaniment.trim(),
+        ],
       }));
       setInputValueAccompaniment('');
     }
@@ -278,29 +281,42 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
       ...bottle,
     };
 
-    console.log('data', data);
     try {
       const res = await updateBottle(data);
-      setLoading(false);
-      toast.success(res.message || 'Bouteille ajoutée avec succès à la cave', {
-        duration: 2000,
-        position: 'top-right',
-      });
+      console.log(res);
 
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    } catch (error) {
       setLoading(false);
-      if (error instanceof Error) {
-        toast.error(error.message, {
-          duration: 4000,
+
+      if (res.errors) {
+        toast.error(res.errors, {
+          duration: 3000,
           position: 'top-right',
         });
       } else {
-        toast.error('An unexpected error occurred', {
-          duration: 4000,
+        toast.success(
+          res.message || 'Bouteille ajoutée avec succès à la cave',
+          {
+            duration: 2000,
+            position: 'top-right',
+          },
+        );
+
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+
+      if (error instanceof Error) {
+        toast.error(error.message, {
+          duration: 3000,
+          position: 'top-right',
+        });
+      } else {
+        toast.error('Une erreur inattendue est survenue. Veuillez réessayer.', {
+          duration: 3000,
           position: 'top-right',
         });
       }
@@ -318,7 +334,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               onChange={(e) =>
                 setBottle({ ...bottle, bottle_name: e.target.value })
               }
-              placeholder="eg: Château Margaux 2010..."
+              placeholder="ex: Château Margaux 2010..."
             />
           </div>
           <div className="flex flex-col">
@@ -328,7 +344,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                 setBottle({ ...bottle, millesime: parseInt(value) })
               }
             >
-              <SelectTrigger>
+              <SelectTrigger aria-label="Selecteur millésime">
                 <SelectValue placeholder="2024" />
               </SelectTrigger>
               <SelectContent>
@@ -349,7 +365,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                 setBottle({ ...bottle, type_of_wine: value })
               }
             >
-              <SelectTrigger>
+              <SelectTrigger aria-label="Sélecteur type de vin (rouge, blanc, etc)">
                 <SelectValue placeholder="Rouge, Blanc...">
                   {bottle.type_of_wine}
                 </SelectValue>
@@ -388,7 +404,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             <Select
               onValueChange={(value) => setBottle({ ...bottle, size: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger aria-label="Selecteur taille de la bouteille">
                 <SelectValue placeholder="Standard, Magnum...">
                   {bottle.size}
                 </SelectValue>
@@ -421,7 +437,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             <div className="flex w-full items-center gap-2">
               <Input
                 className="flex-1"
-                placeholder="eg: Syrah, Grenache..."
+                placeholder="ex: Syrah, Grenache..."
                 value={inputValueGrape}
                 onChange={(e) => setInputValueGrape(e.target.value)}
               />
@@ -437,7 +453,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                       size="nothing"
                       onClick={() => handleRemoveGrapeVarietie(grapeVarietie)}
                     >
-                      <RxCross2 />
+                      <RxCross2 aria-label="Icone pour supprimer un cépage"/>
                     </Button>
                   </Badge>
                 ))}
@@ -448,7 +464,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             <Input
               value={bottle.region}
               onChange={(e) => setBottle({ ...bottle, region: e.target.value })}
-              placeholder="eg: Bordeaux"
+              placeholder="ex: Bordeaux"
             />
           </div>
           <div className="flex flex-col">
@@ -458,7 +474,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             <Textarea
               id="eye_description"
               name="eye_description"
-              placeholder="eg: Robe rubis intense..."
+              placeholder="ex: Robe rubis intense..."
               className="w-full rounded-md text-base shadow-sm"
               value={bottle.eye_description}
               onChange={(e) =>
@@ -494,7 +510,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             <div className="flex w-full items-center gap-2">
               <Input
                 className="flex-1"
-                placeholder="eg: Fruits rouges, épices..."
+                placeholder="ex: Fruits rouges, épices..."
                 value={inputValueNose}
                 onChange={(e) => setInputValueNose(e.target.value)}
               />
@@ -509,7 +525,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                       size="nothing"
                       onClick={() => handleRemoveNose(nose)}
                     >
-                      <RxCross2 />
+                      <RxCross2 aria-label="Icone pour supprimer une description olfactive"/>
                     </Button>
                   </Badge>
                 ))}
@@ -521,14 +537,17 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             </Label>
             <div className="flex space-x-2">
               <div className="flex space-x-2">
-                <Image src={resolvedTheme === 'light' ? carafeBlack : carafeWhite} alt="Carafe" />
+                <Image
+                  src={resolvedTheme === 'light' ? carafeBlack : carafeWhite}
+                  alt="Carafe"
+                />
                 <div className="self-end">
                   <Select
                     onValueChange={(value) =>
                       setBottle({ ...bottle, carafage: parseInt(value) })
                     }
                   >
-                    <SelectTrigger>
+                    <SelectTrigger aria-label="Selecteur temps de carafage">
                       <SelectValue placeholder="... min">
                         {bottle.carafage} min
                       </SelectValue>
@@ -544,14 +563,21 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                 </div>
               </div>
               <div className="flex space-x-2">
-                <Image src={resolvedTheme === 'light' ? thermometerBlack : thermometerWhite} alt="thermomètre"/>
+                <Image
+                  src={
+                    resolvedTheme === 'light'
+                      ? thermometerBlack
+                      : thermometerWhite
+                  }
+                  alt="thermomètre"
+                />
                 <div className="self-end">
                   <Select
                     onValueChange={(value) =>
                       setBottle({ ...bottle, temperature: parseInt(value) })
                     }
                   >
-                    <SelectTrigger>
+                    <SelectTrigger aria-label="Selecteur température de service">
                       <SelectValue placeholder="... °C">
                         {bottle.temperature} °C
                       </SelectValue>
@@ -575,7 +601,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             <div className="flex w-full items-center gap-2">
               <Input
                 className="flex-1"
-                placeholder="eg: Fromage, viande..."
+                placeholder="ex: Fromage, viande..."
                 value={inputValueAccompaniment}
                 onChange={(e) => setInputValueAccompaniment(e.target.value)}
               />
@@ -590,7 +616,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                       size="nothing"
                       onClick={() => handleRemoveAccompaniment(accompaniment)}
                     >
-                      <RxCross2 />
+                      <RxCross2 aria-label="Icone pour supprimer un accompagnement"/>
                     </Button>
                   </Badge>
                 ))}
@@ -605,7 +631,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
                 <div className="w-20">
                   <Input
                     type="number"
-                    placeholder="eg: 10 €"
+                    placeholder="ex: 10 €"
                     value={bottle.price}
                     onChange={(e) => {
                       const value = parseFloat(e.target.value);
@@ -672,7 +698,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
             <Textarea
               id="eye_description"
               name="eye_description"
-              placeholder="eg: Ce type de vin est idéal pour les amateurs de rouges corsés..."
+              placeholder="ex: Ce type de vin est idéal pour les amateurs de rouges corsés..."
               className="w-full rounded-md text-base shadow-sm"
               value={bottle.global_description}
               onChange={(e) => {
@@ -713,7 +739,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               onChange={(e) =>
                 setBottle({ ...bottle, quantity: parseInt(e.target.value) })
               }
-              placeholder="eg: 3"
+              placeholder="ex: 3"
             />
           </div>
           {/* <div className="flex flex-col">
@@ -770,7 +796,7 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
               onClick={handleUpdateBottle}
               disabled={loading}
             >
-              Ajouter
+              Modifier
             </Button>
           </div>
         </div>

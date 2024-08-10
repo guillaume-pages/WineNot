@@ -21,6 +21,7 @@ export const SliderItem = ({ label, value, onChange }: SliderItemProps) => (
       defaultValue={value}
       max={100}
       step={1}
+      aria-label={`Valeur de ${label}`}
     />
     <Label className="text-xs">{label}</Label>
     <span className="w-[40px] text-xs">{`${value} %`}</span>
@@ -92,6 +93,7 @@ export const FormSlider = () => {
             label={slider.label}
             value={slider.value}
             onChange={slider.onChange}
+            aria-label={`Valeur de ${slider.label}`}
           />
         ))}
       </div>

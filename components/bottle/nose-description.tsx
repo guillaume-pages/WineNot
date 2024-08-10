@@ -38,7 +38,7 @@ export const AddNoseDescription = () => {
       <div className="flex w-full items-center gap-2">
         <Input
           className="flex-1"
-          placeholder="eg: Fruits rouges, épices..."
+          placeholder="ex: Fruits rouges, épices..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
@@ -49,7 +49,7 @@ export const AddNoseDescription = () => {
           <Badge key={index}>
             {nose}
             <Button size="nothing" onClick={() => handleRemoveNose(nose)}>
-              <RxCross2 />
+              <RxCross2 aria-label="Icone pour supprimer une description olfactive"/>
             </Button>
           </Badge>
         ))}

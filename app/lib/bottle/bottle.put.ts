@@ -6,16 +6,56 @@ import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 
+const regex = /^[a-zA-Z0-9\s%'\u00C0-\u017F]+$/;
+
 const UpdateBottleSchema = z.object({
-  bottle_name: z.string({
-    required_error: 'Le nom de la bouteille est requis.',
-  }).min(1, { message: 'Le nom de la bouteille ne doit pas être vide.' }),
+  bottle_name: z
+    .string({
+      required_error: 'Le nom de la bouteille est requis.',
+    })
+    .min(1, { message: 'Le nom de la bouteille ne doit pas être vide.' })
+    .regex(/^[a-zA-Z0-9\s]+$/, {
+      message:
+        'Le nom de la bouteille ne peut contenir que des lettres, des chiffres et des espaces.',
+    }),
   millesime: z.number({ required_error: 'Le millesime est requis.' }).min(3),
-  type_of_wine: z.string({ required_error: 'Le type de vin est requis.' }).min(1, { message: 'Le type de vin est requis.' }),
-  size: z.string({ required_error: 'La taille de la bouteille est requise.' }),
+  type_of_wine: z
+    .string({
+      required_error: 'Le type de vin est requis.',
+    })
+    .min(1, { message: 'Le type de vin est requis.' })
+    .regex(/^[a-zA-Z\s]+$/, {
+      message:
+        'Le type de vin ne peut contenir que des lettres et des espaces.',
+    }),
+  size: z
+    .string({
+      required_error: 'La taille de la bouteille est requise.',
+    })
+    .min(1, { message: 'La taille de la bouteille est requise.' })
+    .regex(/^[a-zA-Z0-9\s]+$/, {
+      message:
+        'La taille de la bouteille ne peut contenir que des lettres, des chiffres et des espaces.',
+    }),
   grape_varieties: z.array(z.string()).optional(),
-  region: z.string({ required_error: 'La région est requise.' }),
-  eye_description: z.string().max(500, { message: 'La description doit comporter au maximum 500 caractères.' }).optional(),
+  region: z
+    .string({
+      required_error: 'La région est requise.',
+    })
+    .min(1, { message: 'La région est requise.' })
+    .regex(/^[a-zA-Z\s,-]+$/, {
+      message: 'La région ne peut contenir que des lettres et des espaces.',
+    }),
+  eye_description: z
+    .string()
+    .max(500, {
+      message: 'La description doit comporter au maximum 500 caractères.',
+    })
+    .refine((val) => val === '' || /^[a-zA-Z0-9\s\-\/,'\.:]+$/.test(val), {
+      message:
+        'La description visuelle ne peut contenir que des lettres, des espaces et des chiffres.',
+    })    
+    .optional(),
   nose_description: z.array(z.string()).optional(),
   mouth_description: z.array(z.number()).optional(),
   carafage: z.number().optional(),
@@ -24,8 +64,19 @@ const UpdateBottleSchema = z.object({
   accompaniment: z.array(z.string()).optional(),
   media: z.string().optional(),
   price: z.number({ required_error: 'Le prix est requis.' }),
-  price_visibility: z.number({ required_error: 'La visibilité du prix est requise.' }),
-  global_description: z.string().max(400, { message: 'La description doit comporter au maximum 400 caractères.' }).optional(),
+  price_visibility: z.number({
+    required_error: 'La visibilité du prix est requise.',
+  }),
+  global_description: z
+    .string()
+    .max(500, {
+      message: 'La description doit comporter au maximum 500 caractères.',
+    })
+    .refine((val) => val === '' || /^[a-zA-Z0-9\s\-\/,'\.:]+$/.test(val), {
+      message:
+        'La description globale ne peut contenir que des lettres, des espaces et des chiffres.',
+    })
+    .optional(),
   entry_date: z.date({ required_error: "La date d'entrée est requise." }),
   potential_date: z.date().optional(),
   quantity: z.number({ required_error: 'La quantité est requise.' }),
@@ -33,17 +84,55 @@ const UpdateBottleSchema = z.object({
   cellar_id: z.string({ required_error: "L'ID de la cave est requis." }),
 });
 
+const isValid = (array: any, regex: any) => {
+  console.log(
+    'test de la regex',
+    array.every((element: any) => regex.test(element)),
+    array,
+    regex,
+  );
+  return array.every((element: any) => regex.test(element));
+};
+
 export const updateBottle = async (data: any) => {
   const formatedEntryDate = new Date(data.entry_date);
-  const formatedPotentialDate = data.potential_date ? new Date(data.potential_date) : undefined;
+  const formatedPotentialDate = data.potential_date
+    ? new Date(data.potential_date)
+    : undefined;
 
   data.entry_date = formatedEntryDate;
   data.potential_date = formatedPotentialDate;
 
+  if (data.grape_varieties && !isValid(data.grape_varieties, regex)) {
+    console.log('Validation failed for grape_varieties, returning error');
+    return {
+      errors:
+        'Les cépages ne peuvent contenir que des lettres, des chiffres, des espaces et le symbole %.',
+    };
+  }
+
+  if (data.accompaniment && !isValid(data.accompaniment, regex)) {
+    console.log('Validation failed for accompaniment, returning error');
+
+    return {
+      errors:
+        'Les accords ne peuvent contenir que des lettres, des chiffres, des espaces et le symbole %.',
+    };
+  }
+
+  if (data.nose_description && !isValid(data.nose_description, regex)) {
+    console.log('Validation failed for nose_description, returning error');
+
+    return {
+      errors:
+        'Les descriptions de nez ne peuvent contenir que des lettres, des chiffres, des espaces et le symbole %.',
+    };
+  }
+
   try {
     const validatedData = UpdateBottleSchema.parse(data);
 
-    const bottleData  = validatedData;
+    const bottleData = validatedData;
 
     await prisma.bottles.update({
       where: { bottle_id: data.bottle_id },
@@ -52,18 +141,21 @@ export const updateBottle = async (data: any) => {
       },
     });
 
-    revalidatePath('/cellar')
+    revalidatePath('/cellar');
 
     return {
       message: 'Bouteille modifiée avec succès.',
     };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const errorMessages = error.errors.map(err => err.message).join(' ');
+      const errorMessages = error.errors.map((err) => err.message).join(' ');
       return { errors: errorMessages };
     } else {
-      return { errors: 'Une erreur inattendue est survenue. Veuillez réessayer.' };
-    }  } finally {
+      return {
+        errors: 'Une erreur inattendue est survenue. Veuillez réessayer.',
+      };
+    }
+  } finally {
     await prisma.$disconnect();
   }
 };
