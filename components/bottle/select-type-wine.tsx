@@ -17,7 +17,7 @@ export const SelectTypeWine = () => {
     <div className="flex flex-col">
       <Label className='pb-4 pt-2'>Type de vin</Label>
       <Select onValueChange={(value) => setWineType(value)}>
-        <SelectTrigger>
+        <SelectTrigger aria-label="Selecteur type de vin (Rouge, blanc, etc)">
           <SelectValue placeholder="Rouge, Blanc...">{wineType}</SelectValue>
         </SelectTrigger>
         <SelectContent>

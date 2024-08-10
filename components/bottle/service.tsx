@@ -83,7 +83,7 @@ export const Service = () => {
           <Image src={resolvedTheme === 'light' ? carafeBlack : carafeWhite} alt="Carafe" />
           <div className="self-end">
             <Select onValueChange={(value) => setCarafage(parseInt(value))}>
-              <SelectTrigger>
+              <SelectTrigger aria-label="Selecteur temps de carafage">
                 <SelectValue placeholder="... min">{carafage} min</SelectValue>
               </SelectTrigger>
               <SelectContent>
@@ -100,7 +100,7 @@ export const Service = () => {
           <Image src={resolvedTheme === 'light' ? thermometerBlack : thermometerWhite} alt="thermomètre" />
           <div className="self-end">
             <Select onValueChange={(value) => setTemperature(parseInt(value))}>
-              <SelectTrigger>
+              <SelectTrigger aria-label="Selecteur température de service">
                 <SelectValue placeholder="... °C">
                   {temperature} °C
                 </SelectValue>

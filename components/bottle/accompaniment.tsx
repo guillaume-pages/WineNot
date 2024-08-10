@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext } from 'react';
 
-import { BottleContext } from "@/app/context/BottleContext";
+import { BottleContext } from '@/app/context/BottleContext';
 
 import { RxCross2 } from 'react-icons/rx';
 
@@ -15,10 +15,7 @@ export const Accompaniment = () => {
   const [inputValue, setInputValue] = useState('');
 
   const handleAddAccompaniment = () => {
-    if (
-      inputValue.trim() &&
-      !accompaniments.includes(inputValue.trim())
-    ) {
+    if (inputValue.trim() && !accompaniments.includes(inputValue.trim())) {
       setAccompaniment([...accompaniments, inputValue.trim()]);
       setInputValue('');
     }
@@ -26,7 +23,9 @@ export const Accompaniment = () => {
 
   const handleRemoveAccompaniment = (accompanimentToRemove: string) => {
     setAccompaniment(
-      accompaniments.filter((accompaniment) => accompaniment !== accompanimentToRemove),
+      accompaniments.filter(
+        (accompaniment) => accompaniment !== accompanimentToRemove,
+      ),
     );
   };
 
@@ -38,7 +37,7 @@ export const Accompaniment = () => {
       <div className="flex w-full items-center gap-2">
         <Input
           className="flex-1"
-          placeholder="eg: Fromage, viande..."
+          placeholder="ex: Fromage, viande..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
@@ -48,12 +47,15 @@ export const Accompaniment = () => {
         {accompaniments.map((accompaniment, index) => (
           <Badge key={index}>
             {accompaniment}
-            <Button size="nothing" onClick={() => handleRemoveAccompaniment(accompaniment)}>
-              <RxCross2 />
+            <Button
+              size="nothing"
+              onClick={() => handleRemoveAccompaniment(accompaniment)}
+            >
+              <RxCross2 aria-label="Icone pour supprimer un accompagnement"/>
             </Button>
           </Badge>
         ))}
       </div>
     </div>
   );
-}
+};

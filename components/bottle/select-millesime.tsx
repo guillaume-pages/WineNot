@@ -24,7 +24,7 @@ export const SelectMillesime = () => {
     <div className="flex flex-col">
       <Label className="pb-4 pt-2">Millesime</Label>
       <Select onValueChange={(value) => setBottleMillesime(parseInt(value))}>
-        <SelectTrigger>
+        <SelectTrigger aria-label="Selecteur millésime">
           <SelectValue placeholder="2024" />
         </SelectTrigger>
         <SelectContent>

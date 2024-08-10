@@ -61,10 +61,13 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
           position: 'top-right',
         });
       } else {
-        toast.success(res.message || 'Bouteille ajoutée avec succès à la cave', {
-          duration: 2000,
-          position: 'top-right',
-        });
+        toast.success(
+          res.message || 'Bouteille ajoutée avec succès à la cave',
+          {
+            duration: 2000,
+            position: 'top-right',
+          },
+        );
 
         window.scrollTo({
           top: 0,
@@ -86,8 +89,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
         });
       }
     }
-};
-
+  };
 
   return (
     <div className="flex flex-col">
@@ -99,7 +101,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
             <Input
               value={bottleName}
               onChange={(e) => setBottleName(e.target.value)}
-              placeholder="eg: Château Margaux 2010..."
+              placeholder="ex: Château Margaux"
             />
           </div>
           <SelectMillesime />
@@ -126,7 +128,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
             <Input
               value={bottleRegion}
               onChange={(e) => setBottleRegion(e.target.value)}
-              placeholder="eg: Bordeaux"
+              placeholder="ex: Bordeaux"
             />
           </div>
           <div className="flex flex-col">
@@ -136,7 +138,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
             <Textarea
               id="eye_description"
               name="eye_description"
-              placeholder="eg: Robe rubis intense..."
+              placeholder="ex: Robe rubis intense..."
               className="w-full rounded-md text-base shadow-sm"
               onChange={(e) => setBottleEyeDescription(e.target.value)}
             />
@@ -156,7 +158,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
             <Textarea
               id="eye_description"
               name="eye_description"
-              placeholder="eg: Ce type de vin est idéal pour les amateurs de rouges corsés..."
+              placeholder="ex: Ce type de vin est idéal pour les amateurs de rouges corsés..."
               className="w-full rounded-md text-base shadow-sm"
               onChange={(e) => setBottleGlobalDescription(e.target.value)}
             />
@@ -168,7 +170,7 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
               type="number"
               value={bottleQuantity}
               onChange={(e) => setBottleQuantity(parseInt(e.target.value))}
-              placeholder="eg: 3"
+              placeholder="ex: 3"
             />
           </div>
           {/* <GlobalVisibility /> */}

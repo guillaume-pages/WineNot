@@ -22,7 +22,7 @@ export const SelectSizeWine = () => {
         </Label>
       </div>
       <Select onValueChange={(value) => setBottleSize(value)}>
-        <SelectTrigger>
+        <SelectTrigger aria-label="Selecteur taille de la bouteille">
           <SelectValue placeholder="Standard, Magnum...">
             {bottleSize}
           </SelectValue>

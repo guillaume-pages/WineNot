@@ -230,7 +230,7 @@ export default function CellarDashboard({ cellars }: SelectCellarProps) {
           <>
             <div className="pb-6">
               <Link href={`/cellar/add/${activeCellarData.cellars.cellar_id}`}>
-                <Button size="sm" variant="primary" className='text-black'>Ajouter une bouteille</Button>
+                <Button size="sm" variant="primary">Ajouter une bouteille</Button>
               </Link>
             </div>
             <DisplayCellar cellar={activeCellarData} />

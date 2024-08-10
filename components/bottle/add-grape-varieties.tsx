@@ -36,7 +36,7 @@ export const AddGrapeVarieties = () => {
       <div className="flex w-full items-center gap-2">
         <Input
           className="flex-1"
-          placeholder="eg: Syrah, Grenache..."
+          placeholder="ex: Syrah, Grenache..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
@@ -50,7 +50,7 @@ export const AddGrapeVarieties = () => {
               size="nothing"
               onClick={() => handleRemoveGrapeVarietie(grapeVarietie)}
             >
-              <RxCross2 />
+              <RxCross2 aria-label="Icone pour supprimer un cépage"/>
             </Button>
           </Badge>
         ))}
