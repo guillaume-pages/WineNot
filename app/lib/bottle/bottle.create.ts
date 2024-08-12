@@ -1,7 +1,7 @@
 'use server';
 
 import { PrismaClient } from '@prisma/client';
-import { array, z } from 'zod';
+import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
