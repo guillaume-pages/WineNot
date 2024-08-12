@@ -69,12 +69,12 @@ export default function UserInfoDisplay({ component }: { component?: string }) {
         {component === 'navbar' ? null : (
           <>
             <h1 className="pt-4 text-2xl">{fullName}</h1>
-            <div className="flex items-center gap-4 pt-4">
+            <div className="flex items-center gap-2 pt-4">
+              <h3 className="text-lg">Mon compte</h3>
               <RiAccountCircleLine className="text-2xl" />
-              <h3 className="text-lg font-semibold">Mon compte</h3>
             </div>
-            <span onClick={handleDisconnect} className="flex items-center">
-              Se déconnecter <DisconnectButton />
+            <span onClick={handleDisconnect} className="flex items-center gap-1">
+              Déconnexion <DisconnectButton />
             </span>
           </>
         )}
