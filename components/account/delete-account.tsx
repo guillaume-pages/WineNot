@@ -36,9 +36,10 @@ export const DeleteAccount = () => {
 
   return (
     <div className="my-6 flex items-center justify-center">
-      <Button variant="destructive" size="sm">
         <Popover>
-          <PopoverTrigger>Supprimer votre compte</PopoverTrigger>
+          <PopoverTrigger className="underline text-lg font-semibold">
+            Supprimer votre compte
+            </PopoverTrigger>
           <PopoverContent className='space-y-4'>
               <Label>Attention, cette action est irreversible, êtes vous sur de vouloir
               supprimer votre compte ? Entrez votre mot de passe pour valider la suppression</Label>
@@ -57,7 +58,6 @@ export const DeleteAccount = () => {
             </Button>
           </PopoverContent>
         </Popover>
-      </Button>
     </div>
   );
 };
