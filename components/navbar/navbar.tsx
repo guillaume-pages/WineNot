@@ -102,7 +102,7 @@ export default function Navbar() {
               )}
               {user && (
                 <>
-                  <Link href="/profile" aria-label="Profile">
+                  <Link href="/account" aria-label="Compte">
                     <VscAccount className="text-2xl" />
                   </Link>
                 </>
