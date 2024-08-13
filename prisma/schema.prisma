@@ -19,8 +19,6 @@ model users {
   user_id       String          @id @default(uuid())
   firstname     String
   lastname      String?
-  accounts      accounts[]
-  sessions      sessions[]
   users_cellars users_cellars[]
 }
 
@@ -66,67 +64,4 @@ model users_cellars {
   cellar_id      String
   cellars        cellars @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
   users          users   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model accounts {
-  user_id             String
-  type                String?
-  provider            String
-  provider_account_id String
-  token_type          String?
-  refresh_token       String?
-  access_token        String?
-  expires_at          Int?
-  scope               String?
-  id_token            String?
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  account_id          String   @id @default(uuid())
-  user                users    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-
-  @@unique([provider, provider_account_id])
-}
-
-model sessions {
-  user_id      String?
-  sessionToken String   @unique @map("session_token")
-  accessToken  String?  @map("access_token")
-  expires      DateTime
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  session_id   String   @id @default(uuid())
-  user         users?   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-}
-
-model verification_request {
-  identifier              String
-  token                   String   @unique
-  expires                 DateTime
-  createdAt               DateTime @default(now())
-  updatedAt               DateTime @updatedAt
-  verification_request_id String   @id @default(uuid())
-
-  @@unique([identifier, token])
-}
-
-model customers {
-  customer_id String     @id @default(uuid())
-  name        String?    @db.VarChar(255)
-  email       String?    @db.VarChar(255)
-  image_url   String?    @db.VarChar(255)
-  invoices    invoices[]
-}
-
-model invoices {
-  invoice_id  String     @id @default(uuid())
-  customer_id String?
-  amount      Int?
-  status      String?    @db.VarChar(255)
-  date        DateTime?  @db.Timestamp(6)
-  customers   customers? @relation(fields: [customer_id], references: [customer_id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model revenue {
-  month   String @id @db.VarChar(20)
-  revenue Int?
 }
