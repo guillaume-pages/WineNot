@@ -7,12 +7,16 @@ const prisma = new PrismaClient();
 
 const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-export async function modifMail(userId: string, oldMail: string, newMail: string) {
+export async function modifMail(
+  userId: string,
+  oldMail: string,
+  newMail: string,
+) {
   const updatetedDate = new Date().toISOString();
 
   try {
     if (!newMail.match(mailRegex)) {
-      throw new Error('Le nouveau mail n\'est pas valide');
+      throw new Error("Le nouveau mail n'est pas valide");
     }
 
     const user = await prisma.users.findUnique({
@@ -26,7 +30,7 @@ export async function modifMail(userId: string, oldMail: string, newMail: string
     }
 
     let isMailValid = false;
-    
+
     if (oldMail === user.email) {
       isMailValid = true;
     }
@@ -38,7 +42,7 @@ export async function modifMail(userId: string, oldMail: string, newMail: string
     const isMailSame = await bcrypt.compare(newMail, user.email);
 
     if (isMailSame) {
-      throw new Error('Le nouveau mail doit être différent de l\'ancien');
+      throw new Error("Le nouveau mail doit être différent de l'ancien");
     }
 
     await prisma.users.update({
@@ -47,7 +51,7 @@ export async function modifMail(userId: string, oldMail: string, newMail: string
       },
       data: {
         email: newMail,
-        updatedAt: updatetedDate,
+        updated_at: updatetedDate,
       },
     });
 

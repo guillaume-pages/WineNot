@@ -1,5 +1,3 @@
-import type { Cellar } from './cellar.type';
-
 export type CreateUser = {
   id: number;
   first_name: string;
@@ -19,10 +17,10 @@ export type User = {
   phone?: string | null | undefined;
   status?: string | null | undefined;
   created_at?: Date | string | undefined;
-  updated_at?: Date | string | undefined;
+  updated_at?: Date | string | undefined | null;
   image?: string | null | undefined;
-  email_verified_at?: Date | string | null | undefined;
-} | null;
+  email_verified_at?: boolean;
+};
 
 export type UserInformation = {
   firstname: string;

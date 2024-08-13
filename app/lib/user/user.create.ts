@@ -72,7 +72,7 @@ export async function createUser(prevState: State, formData: FormData) {
         password: hashedPassword,
         phone: phone,
         status: status,
-        createdAt: date,
+        created_at: date,
       },
     });
 

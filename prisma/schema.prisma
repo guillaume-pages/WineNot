@@ -27,7 +27,6 @@ model cellars {
   cellar_name   String?         @db.VarChar
   created_at    DateTime?       @db.Timestamp(6)
   updated_at    DateTime?       @db.Timestamp(6)
-  deleted_at    DateTime?       @db.Timestamp(6)
   bottles       String[]
   users_cellars users_cellars[]
 }

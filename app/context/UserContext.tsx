@@ -13,7 +13,7 @@ const defaultValues: User = {
   created_at: '',
   updated_at: '',
   image: '',
-  email_verified_at: '',
+  email_verified_at: false,
 };
 
 export const UserContext = createContext<{
