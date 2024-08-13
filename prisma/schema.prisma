@@ -10,10 +10,10 @@ datasource db {
 model users {
   email         String         @unique
   password      String
-  emailVerified DateTime?       @map("email_verified")
+  email_verified Boolean       @default(false)
   image         String?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  created_at     DateTime        @default(now())
+  updated_at     DateTime?        @updatedAt
   phone         String?
   status        String?
   user_id       String          @id @default(uuid())
