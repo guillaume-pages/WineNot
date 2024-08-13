@@ -27,8 +27,8 @@ model cellars {
   cellar_name   String?         @db.VarChar
   created_at    DateTime?       @db.Timestamp(6)
   updated_at    DateTime?       @db.Timestamp(6)
-  bottles       String[]
   users_cellars users_cellars[]
+  bottles_cellars bottles_cellars[]
 }
 
 model bottles {
@@ -54,7 +54,7 @@ model bottles {
   potential_date     DateTime? @db.Timestamp(6)
   quantity           Int
   global_visibility  Int
-  cellar_id          String
+  bottles_cellars    bottles_cellars[]
 }
 
 model users_cellars {
@@ -63,4 +63,12 @@ model users_cellars {
   cellar_id      String
   cellars        cellars @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
   users          users   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model bottles_cellars {
+  bottle_cellar_id String  @id @default(uuid())
+  bottle_id        String
+  cellar_id        String
+  bottles          bottles @relation(fields: [bottle_id], references: [bottle_id], onDelete: NoAction, onUpdate: NoAction)
+  cellars          cellars @relation(fields: [cellar_id], references: [cellar_id], onDelete: NoAction, onUpdate: NoAction)
 }

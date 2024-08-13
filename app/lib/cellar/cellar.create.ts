@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 
-const cellarNameRegex = /^[a-zA-Z0-9\s'-]{4,50}$/;
+const cellarNameRegex = /^[\p{L}\p{N}\s'-]{4,50}$/u;
 
 export const createCellar = async (cellarName: string, userId: string) => {
   if (!cellarNameRegex.test(cellarName)) {
