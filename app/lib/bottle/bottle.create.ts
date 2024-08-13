@@ -33,7 +33,7 @@ const CreateBottleSchema = z.object({
       required_error: 'La taille de la bouteille est requise.',
     })
     .min(1, { message: 'La taille de la bouteille est requise.' })
-    .regex(/^[a-zA-Z0-9\s]+$/, {
+    .regex(/^[a-zA-Z0-9\s.]+$/, {
       message:
         'La taille de la bouteille ne peut contenir que des lettres, des chiffres et des espaces.',
     }),
@@ -72,7 +72,7 @@ const CreateBottleSchema = z.object({
     .max(500, {
       message: 'La description doit comporter au maximum 500 caractères.',
     })
-    .refine((val) => val === '' || /^[a-zA-Z0-9\s\-\/,'\.:]+$/.test(val), {
+    .refine((val) => val === '' || /^[\p{L}\p{N}\s\-\/,'\.:]+$/u.test(val), {
       message:
         'La description globale ne peut contenir que des lettres, des espaces et des chiffres.',
     })
@@ -128,20 +128,17 @@ export const createBottle = async (data: any) => {
     const { cellar_id, ...bottleData } = validatedData;
 
     const newBottle = await prisma.bottles.create({
-      data: {
-        ...bottleData,
-        cellar_id: cellar_id,
-      },
+      data: bottleData,
     });
 
-    await prisma.cellars.update({
-      where: { cellar_id: cellar_id },
-      data: {
-        bottles: {
-          push: newBottle.bottle_id,
+    if (cellar_id) {
+      await prisma.bottles_cellars.create({
+        data: {
+          bottle_id: newBottle.bottle_id,
+          cellar_id: cellar_id,
         },
-      },
-    });
+      });
+    }
 
     revalidatePath('/cellar');
 
