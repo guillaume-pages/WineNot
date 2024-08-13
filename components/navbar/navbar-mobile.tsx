@@ -58,7 +58,7 @@ export default function NavbarMobile() {
         </Link> */}
         {isConnected ? (
           <>
-            <Link href="/profile">
+            <Link href="/account">
               <VscAccount size={36} />
             </Link>
           </>
