@@ -1,5 +1,6 @@
 'use server';
 import { PrismaClient } from '@prisma/client';
+import { update } from 'lodash';
 
 const prisma = new PrismaClient();
 
@@ -18,10 +19,10 @@ export async function getUser (userId: string) {
     email: data?.email,
     phone: data?.phone,
     status: data?.status,
-    created_at: data?.createdAt,
-    updated_at: data?.updatedAt,
+    created_at: data?.created_at,
+    updated_at: data?.updated_at,
     image: data?.image,
-    email_verified_at: data?.emailVerified,
+    email_verified_at: data?.email_verified,
   };
 
   return user;

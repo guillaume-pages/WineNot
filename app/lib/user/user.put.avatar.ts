@@ -13,7 +13,7 @@ export async function modifAvatar(userId: string, newAvatar: string) {
       },
       data: {
         image: newAvatar,
-        updatedAt: updatetedDate,
+        updated_at: updatetedDate,
       },
     });
 

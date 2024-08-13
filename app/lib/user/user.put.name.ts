@@ -25,7 +25,7 @@ export async function modifNames(userId: string, newFirstname: string, newLastna
       data: {
         firstname: newFirstname,
         lastname: newLastname,
-        updatedAt: updatetedDate,
+        updated_at: updatetedDate,
       },
     });
 

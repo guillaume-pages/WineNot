@@ -5,14 +5,21 @@ import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$/;
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$/;
 
-export async function modifPassword(userId: string, oldPassword: string, newPassword: string) {
+export async function modifPassword(
+  userId: string,
+  oldPassword: string,
+  newPassword: string,
+) {
   const updatetedDate = new Date().toISOString();
 
   try {
     if (!newPassword.match(passwordRegex)) {
-      throw new Error('Le nouveau mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial');
+      throw new Error(
+        'Le nouveau mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial',
+      );
     }
 
     const user = await prisma.users.findUnique({
@@ -34,7 +41,9 @@ export async function modifPassword(userId: string, oldPassword: string, newPass
     const isPasswordSame = await bcrypt.compare(newPassword, user.password);
 
     if (isPasswordSame) {
-      throw new Error('Le nouveau mot de passe doit être différent de l\'ancien');
+      throw new Error(
+        "Le nouveau mot de passe doit être différent de l'ancien",
+      );
     }
 
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
@@ -45,7 +54,7 @@ export async function modifPassword(userId: string, oldPassword: string, newPass
       },
       data: {
         password: hashedNewPassword,
-        updatedAt: updatetedDate,
+        updated_at: updatetedDate,
       },
     });
 

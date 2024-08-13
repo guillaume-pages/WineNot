@@ -9,7 +9,6 @@ export type Cellar = {
     cellar_name: string | null;
     created_at: Date | null;
     updated_at: Date | null;
-    deleted_at: Date | null;
     bottles: Bottle[] | null;
   };
 };

@@ -28,8 +28,8 @@ export const getUserInformation = async (id: string) => {
       phone: user?.phone,
       image: user?.image,
       status: user?.status,
-      created_at: user?.createdAt,
-      updated_at: user?.updatedAt,
+      created_at: user?.created_at,
+      updated_at: user?.updated_at,
       cellars: [],
     };
     
