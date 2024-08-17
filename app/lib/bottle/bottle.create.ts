@@ -12,7 +12,7 @@ const CreateBottleSchema = z.object({
       required_error: 'Le nom de la bouteille est requis.',
     })
     .min(1, { message: 'Le nom de la bouteille ne doit pas être vide.' })
-    .regex(/^[a-zA-Z0-9\s]+$/, {
+    .regex(/^[a-zA-Z0-9\s%'\u00C0-\u017F]+$/, {
       message:
         'Le nom de la bouteille ne peut contenir que des lettres, des chiffres et des espaces.',
     }),
@@ -22,7 +22,7 @@ const CreateBottleSchema = z.object({
       required_error: 'Le type de vin est requis.',
     })
     .min(1, { message: 'Le type de vin est requis.' })
-    .regex(/^[a-zA-Z\s]+$/, {
+    .regex(/^[a-zA-Z0-9\s%'\u00C0-\u017F]+$/, {
       message:
         'Le type de vin ne peut contenir que des lettres et des espaces.',
     }),
@@ -31,7 +31,7 @@ const CreateBottleSchema = z.object({
       required_error: 'La taille de la bouteille est requise.',
     })
     .min(1, { message: 'La taille de la bouteille est requise.' })
-    .regex(/^[a-zA-Z0-9\s.]+$/, {
+    .regex(/^[a-zA-Z0-9\s%'\u00C0-\u017F]+$/, {
       message:
         'La taille de la bouteille ne peut contenir que des lettres, des chiffres et des espaces.',
     }),
@@ -41,7 +41,7 @@ const CreateBottleSchema = z.object({
       required_error: 'La région est requise.',
     })
     .min(1, { message: 'La région est requise.' })
-    .regex(/^[a-zA-Z\s,-]+$/, {
+    .regex(/^[a-zA-Z0-9\s%'\u00C0-\u017F]+$/, {
       message: 'La région ne peut contenir que des lettres, des espaces et le symbole -.',
     }),
   eye_description: z
@@ -49,7 +49,7 @@ const CreateBottleSchema = z.object({
     .max(500, {
       message: 'La description doit comporter au maximum 500 caractères.',
     })
-    .refine((val) => val === '' || /^[a-zA-Z0-9\s\-\/,'\.:]+$/.test(val), {
+    .refine((val) => val === '' || /^[a-zA-Z0-9\s\-\/,'\.:\u00C0-\u017F]+$/.test(val), {
       message:
         'La description visuelle ne peut contenir que des lettres, des espaces et des chiffres.',
     })
