@@ -1,10 +1,8 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
-
-const prisma = new PrismaClient();
 
 const regex = /^[a-zA-Z0-9\s%'\u00C0-\u017F]+$/;
 
@@ -54,7 +52,7 @@ const UpdateBottleSchema = z.object({
     .refine((val) => val === '' || /^[a-zA-Z0-9\s\-\/,'\.:]+$/.test(val), {
       message:
         'La description visuelle ne peut contenir que des lettres, des espaces et des chiffres.',
-    })    
+    })
     .optional(),
   nose_description: z.array(z.string()).optional(),
   mouth_description: z.array(z.number()).optional(),
@@ -85,12 +83,6 @@ const UpdateBottleSchema = z.object({
 });
 
 const isValid = (array: any, regex: any) => {
-  console.log(
-    'test de la regex',
-    array.every((element: any) => regex.test(element)),
-    array,
-    regex,
-  );
   return array.every((element: any) => regex.test(element));
 };
 
@@ -104,7 +96,6 @@ export const updateBottle = async (data: any) => {
   data.potential_date = formatedPotentialDate;
 
   if (data.grape_varieties && !isValid(data.grape_varieties, regex)) {
-    console.log('Validation failed for grape_varieties, returning error');
     return {
       errors:
         'Les cépages ne peuvent contenir que des lettres, des chiffres, des espaces et le symbole %.',
@@ -112,8 +103,6 @@ export const updateBottle = async (data: any) => {
   }
 
   if (data.accompaniment && !isValid(data.accompaniment, regex)) {
-    console.log('Validation failed for accompaniment, returning error');
-
     return {
       errors:
         'Les accords ne peuvent contenir que des lettres, des chiffres, des espaces et le symbole %.',
@@ -121,8 +110,6 @@ export const updateBottle = async (data: any) => {
   }
 
   if (data.nose_description && !isValid(data.nose_description, regex)) {
-    console.log('Validation failed for nose_description, returning error');
-
     return {
       errors:
         'Les descriptions de nez ne peuvent contenir que des lettres, des chiffres, des espaces et le symbole %.',
@@ -155,7 +142,5 @@ export const updateBottle = async (data: any) => {
         errors: 'Une erreur inattendue est survenue. Veuillez réessayer.',
       };
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };

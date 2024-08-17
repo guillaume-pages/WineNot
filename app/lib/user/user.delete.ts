@@ -1,9 +1,7 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import bcrypt from 'bcrypt';
-
-const prisma = new PrismaClient();
 
 export async function deleteUser(id: string, password: string) {
   try {
@@ -32,7 +30,5 @@ export async function deleteUser(id: string, password: string) {
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
-    await prisma.$disconnect();
   }
 }

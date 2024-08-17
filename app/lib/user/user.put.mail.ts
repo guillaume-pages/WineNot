@@ -1,9 +1,7 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import bcrypt from 'bcrypt';
-
-const prisma = new PrismaClient();
 
 const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -59,7 +57,5 @@ export async function modifMail(
   } catch (error) {
     console.error('Erreur lors de la modification du mail:', error);
     throw error;
-  } finally {
-    await prisma.$disconnect();
   }
 }

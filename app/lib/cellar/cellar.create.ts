@@ -1,15 +1,15 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import { revalidatePath } from 'next/cache';
-
-const prisma = new PrismaClient();
 
 const cellarNameRegex = /^[\p{L}\p{N}\s'-]{4,50}$/u;
 
 export const createCellar = async (cellarName: string, userId: string) => {
   if (!cellarNameRegex.test(cellarName)) {
-    throw new Error('Le nom de la cave est invalide. Il doit contenir entre 4 et 50 caractères et ne peut contenir que des lettres, chiffres, espaces, apostrophes ou tirets.');
+    throw new Error(
+      'Le nom de la cave est invalide. Il doit contenir entre 4 et 50 caractères et ne peut contenir que des lettres, chiffres, espaces, apostrophes ou tirets.',
+    );
   }
 
   try {
@@ -36,7 +36,5 @@ export const createCellar = async (cellarName: string, userId: string) => {
     throw new Error(
       'Erreur lors de la création de la cave. Veuillez réessayer.',
     );
-  } finally {
-    await prisma.$disconnect();
   }
 };

@@ -1,9 +1,7 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import type { Bottle } from '@/types/bottle.type';
-
-const prisma = new PrismaClient();
 
 export async function getOneBottle(id: string) {
   try {
@@ -17,7 +15,5 @@ export async function getOneBottle(id: string) {
   } catch (error) {
     console.error(error);
     return null;
-  } finally {
-    await prisma.$disconnect();
   }
 }

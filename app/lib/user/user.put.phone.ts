@@ -1,8 +1,6 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '@/prisma/prisma';
 
 export const updatePhone = async (id: string, phone: string) => {
   const updateDate = new Date().toISOString();
@@ -16,7 +14,5 @@ export const updatePhone = async (id: string, phone: string) => {
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
-    await prisma.$disconnect();
   }
 };

@@ -1,10 +1,8 @@
 'use server';
 
-import { PrismaClient } from "@prisma/client";
+import prisma from '@/prisma/prisma';
 
-import { revalidatePath } from "next/cache";
-
-const prisma = new PrismaClient();
+import { revalidatePath } from 'next/cache';
 
 export const deleteCellar = async (cellarId: string) => {
   try {
@@ -20,16 +18,14 @@ export const deleteCellar = async (cellarId: string) => {
       },
     });
 
-    revalidatePath("/cellar");
+    revalidatePath('/cellar');
 
     return {
-      message: "La cave a été supprimée avec succès.",
+      message: 'La cave a été supprimée avec succès.',
     };
   } catch (error) {
     throw new Error(
-      "Erreur lors de la suppression de la cave. Veuillez réessayer."
+      'Erreur lors de la suppression de la cave. Veuillez réessayer.',
     );
-  } finally {
-    await prisma.$disconnect();
   }
 };
