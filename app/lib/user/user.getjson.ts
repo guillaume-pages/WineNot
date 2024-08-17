@@ -1,11 +1,11 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import { UserInformation } from '@/types/user.type';
 
-const prisma = new PrismaClient();
-
-export const getUserInformation = async (id: string): Promise<UserInformation> => {
+export const getUserInformation = async (
+  id: string,
+): Promise<UserInformation> => {
   try {
     const user = await prisma.users.findUnique({
       where: { user_id: id },
@@ -51,7 +51,5 @@ export const getUserInformation = async (id: string): Promise<UserInformation> =
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
-    await prisma.$disconnect();
   }
 };

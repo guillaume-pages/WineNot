@@ -1,76 +1,74 @@
 'use server';
 
 import bcrypt from 'bcrypt';
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import { z } from 'zod';
 
-const prisma = new PrismaClient();
-
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$/;
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$/;
 
 const CreateUserSchema = z.object({
-  id: z.string(),
   firstname: z.string({
-    required_error: 'Votre nom est requis.',
+    required_error: 'Votre prénom est requis.',
   }),
-  lastname: z.string(),
-  email: z.string({
-    required_error: 'Votre adresse email est requise.',
-    invalid_type_error: 'Veuillez entrer une adresse email valide.',
-  }).email(),
-  password: z.string().regex(passwordRegex),
-  confirmPassword: z.string().regex(passwordRegex),
-  phone: z.string(),
+  lastname: z.string().optional(),
+  email: z
+    .string({
+      required_error: 'Votre adresse email est requise.',
+      invalid_type_error: 'Veuillez entrer une adresse email valide.',
+    })
+    .email(),
+  password: z.string().regex(passwordRegex, {
+    message: 'Le mot de passe ne respecte pas les critères de sécurité.',
+  }),
+  confirmPassword: z.string().regex(passwordRegex, {
+    message: 'Le mot de passe ne respecte pas les critères de sécurité.',
+  }),
+  phone: z.string().optional(),
   status: z.string({
     required_error: 'Veuillez sélectionner un statut.',
   }),
-  created_at: z.date(),
 });
 
-const CreateUser = CreateUserSchema.omit({ id: true, created_at: true });
+export async function createUser(data: {
+  firstname: string;
+  lastname?: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone?: string;
+  status: string;
+}) {
 
-export type State = {
-  message?: string | null;
-}
-export async function createUser(prevState: State, formData: FormData) {
-
-  const validatedFields = CreateUser.safeParse({
-    firstname: formData.get('firstname'),
-    lastname: formData.get('lastname'),
-    email: formData.get('email'),
-    password: formData.get('password'),
-    confirmPassword: formData.get('confirmPassword'),
-    phone: formData.get('phone'),
-    status: formData.get('status'),
-  });
+  const validatedFields = CreateUserSchema.safeParse(data);
 
   if (!validatedFields.success) {
     return {
       message: 'Il y a un problème avec les champs du formulaire. Veuillez vérifier.',
-    }
+      errors: validatedFields.error.format(), // Pour retourner des erreurs spécifiques si besoin
+    };
   }
 
-  const { firstname, lastname, email, password, phone, status, confirmPassword } = validatedFields.data;
-  
-  const date = new Date();
+  const { firstname, lastname, email, password, confirmPassword, phone, status } =
+    validatedFields.data;
 
   if (password !== confirmPassword) {
-    console.error('Les mots de passe ne correspondent pas');
     return {
       message: 'Les mots de passe ne correspondent pas.',
     };
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
+  const date = new Date();
 
   try {
     await prisma.users.create({
       data: {
         firstname: firstname,
-        lastname: lastname,
+        lastname: lastname || '',
         email: email.toLowerCase(),
         password: hashedPassword,
-        phone: phone,
+        phone: phone || '',
         status: status,
         created_at: date,
       },
@@ -80,10 +78,9 @@ export async function createUser(prevState: State, formData: FormData) {
       message: 'Compte utilisateur créé avec succès. Vous pouvez vous connecter.',
     };
   } catch (error) {
+    console.error('Erreur lors de la création du compte utilisateur:', error);
     return {
       message: 'Erreur lors de la création du compte utilisateur. Veuillez réessayer.',
     };
-  } finally {
-    await prisma.$disconnect();
   }
 }

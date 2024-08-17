@@ -1,10 +1,8 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
-
-const prisma = new PrismaClient();
 
 const regex = /^[a-zA-Z0-9\s%'\u00C0-\u017F]+$/;
 
@@ -44,7 +42,7 @@ const CreateBottleSchema = z.object({
     })
     .min(1, { message: 'La région est requise.' })
     .regex(/^[a-zA-Z\s,-]+$/, {
-      message: 'La région ne peut contenir que des lettres et des espaces.',
+      message: 'La région ne peut contenir que des lettres, des espaces et le symbole -.',
     }),
   eye_description: z
     .string()
@@ -90,7 +88,9 @@ const isValid = (array: any, regex: any) => {
 
 export const createBottle = async (data: any) => {
   if (!data.entry_date) {
-    throw new Error("La date d'entrée est requise.");
+    return {
+      errors: "La date d'entrée est requise.",
+    };
   }
 
   const formatedEntryDate = new Date(data.entry_date);
@@ -154,7 +154,5 @@ export const createBottle = async (data: any) => {
         errors: 'Une erreur inattendue est survenue. Veuillez réessayer.',
       };
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };

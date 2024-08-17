@@ -1,11 +1,8 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '@/prisma/prisma';
 
 export const deleteBottle = async (bottle_id: string) => {
-
   try {
     await prisma.bottles.delete({
       where: {
@@ -19,7 +16,5 @@ export const deleteBottle = async (bottle_id: string) => {
   } catch (error) {
     console.error(error);
     throw new Error('Une erreur inattendue est survenue.');
-  } finally {
-    await prisma.$disconnect();
   }
 };

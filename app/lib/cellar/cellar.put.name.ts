@@ -1,10 +1,8 @@
 'use server';
 
-import { PrismaClient } from "@prisma/client";
+import prisma from '@/prisma/prisma';
 
-import { revalidatePath } from "next/cache";
-
-const prisma = new PrismaClient();
+import { revalidatePath } from 'next/cache';
 
 export const modifCellarName = async (cellarId: string, cellarName: string) => {
   const updateDate = new Date().toISOString();
@@ -19,16 +17,12 @@ export const modifCellarName = async (cellarId: string, cellarName: string) => {
       },
     });
 
-    revalidatePath("/cellar");
+    revalidatePath('/cellar');
 
     return {
-      message: "La cave a été renommée avec succès.",
+      message: 'La cave a été renommée avec succès.',
     };
   } catch (error) {
-    throw new Error(
-      "Erreur lors du renommage de la cave. Veuillez réessayer."
-    );
-  } finally {
-    await prisma.$disconnect();
+    throw new Error('Erreur lors du renommage de la cave. Veuillez réessayer.');
   }
-}
+};

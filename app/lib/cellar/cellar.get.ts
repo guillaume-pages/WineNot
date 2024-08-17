@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import { auth } from '@/auth';
 import type { Cellar } from '@/types/cellar.type';
 import { Bottle } from '@/types/bottle.type';
-
-const prisma = new PrismaClient();
 
 export const getCellars = async () => {
   const session = await auth();
@@ -39,7 +37,7 @@ export const getCellars = async () => {
       const { cellars, ...userCellarRest } = userCellar;
 
       const bottlesInCellar = cellars.bottles_cellars.map(
-        (bottleCellar) => bottleCellar.bottles
+        (bottleCellar) => bottleCellar.bottles,
       );
 
       return {
@@ -55,7 +53,5 @@ export const getCellars = async () => {
   } catch (error) {
     console.error(error);
     return [];
-  } finally {
-    await prisma.$disconnect();
   }
 };

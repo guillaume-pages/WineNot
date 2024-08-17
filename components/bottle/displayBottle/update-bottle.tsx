@@ -283,8 +283,6 @@ export default function UpdateBottleForm({ bottleId }: { bottleId: string }) {
 
     try {
       const res = await updateBottle(data);
-      console.log(res);
-
       setLoading(false);
 
       if (res.errors) {

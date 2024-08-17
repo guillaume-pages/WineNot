@@ -1,9 +1,7 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import bcrypt from 'bcrypt';
-
-const prisma = new PrismaClient();
 
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,#.])[A-Za-z\d@$!%*?&,#.]{10,}$/;
@@ -62,7 +60,5 @@ export async function modifPassword(
   } catch (error) {
     console.error('Erreur lors de la modification du mot de passe:', error);
     throw error;
-  } finally {
-    await prisma.$disconnect();
   }
 }
