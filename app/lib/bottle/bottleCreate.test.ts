@@ -8,7 +8,7 @@ const mockBottleData = {
   bottle_name: 'Bouteille de test',
   millesime: 2020,
   type_of_wine: 'Rouge',
-  size: 'Magnum 1.5 L',
+  size: 'Standard 75 cl',
   grape_varieties: ['Syrah', 'Grenache'],
   region: 'Bordeaux',
   eye_description: 'Robe rubis intense.',
@@ -84,13 +84,13 @@ describe('createBottle', () => {
     );
   });
 
-  it('Devrait retourner une erreur si la région contient des caractères non autorisés', async () => {
-    const invalidData = { ...mockBottleData, region: 'Invalid%Region' };
+  it('Devrait retourner une erreur si la région est undefined', async () => {
+    const invalidData = { ...mockBottleData, region: undefined };
 
     const response = await createBottle(invalidData);
 
     expect(response.errors).toContain(
-      'La région ne peut contenir que des lettres, des espaces et le symbole -.',
+      'La région est requise.',
     );
   });
 
