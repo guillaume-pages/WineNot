@@ -31,7 +31,7 @@ const CreateBottleSchema = z.object({
       required_error: 'La taille de la bouteille est requise.',
     })
     .min(1, { message: 'La taille de la bouteille est requise.' })
-    .regex(/^[a-zA-Z0-9\s%'\u00C0-\u017F]+$/, {
+    .regex(/^[a-zA-Z0-9\s%'.\u00C0-\u017F]+$/, {
       message:
         'La taille de la bouteille ne peut contenir que des lettres, des chiffres et des espaces.',
     }),

@@ -56,8 +56,15 @@ export default function BottleForm({ cellarId }: { cellarId: string }) {
       setLoading(false);
 
       if (res.errors) {
-        toast.error(res.errors, {
-          duration: 3000,
+        console.log('res.errors', res.errors);
+        
+        const formattedErrors = res.errors
+          .split('.')
+          .filter(error => error.trim() !== '')
+          .map(error => error.trim())
+      
+        toast.error(formattedErrors.join('.\n\n'), {
+          duration: 4000,
           position: 'top-right',
         });
       } else {
