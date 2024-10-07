@@ -105,7 +105,7 @@ export default function DisplayBottle({
                     </PopoverTrigger>
                     <PopoverContent>
                       <h3 className="pb-3 text-center text-base font-bold">
-                        Êtes-vous sûr de vouloir supprimer cette cave ?
+                        Êtes-vous sûr de vouloir supprimer cette bouteille ?
                       </h3>
                       <div className="flex justify-center space-x-4">
                         <Button
